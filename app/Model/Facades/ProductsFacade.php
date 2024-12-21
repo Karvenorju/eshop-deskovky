@@ -99,7 +99,7 @@ class ProductsFacade{
    */
   public function saveProductPhoto(FileUpload $fileUpload, Product &$product):void {
     if ($fileUpload->isOk() && $fileUpload->isImage()){
-      $fileExtension=strtolower($fileUpload->getImageFileExtension());
+      $fileExtension=strtolower($fileUpload->getSuggestedExtension());
       $fileUpload->move(__DIR__.'/../../../www/img/products/'.$product->productId.'.'.$fileExtension);
       $product->photoExtension=$fileExtension;
       $this->saveProduct($product);

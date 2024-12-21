@@ -106,7 +106,7 @@ class ProductEditForm extends Form{
         ->addRule(function(Nette\Forms\Controls\UploadControl $photoUpload){
           $uploadedFile = $photoUpload->value;
           if ($uploadedFile instanceof Nette\Http\FileUpload){
-            $extension=strtolower($uploadedFile->getImageFileExtension());
+            $extension=strtolower($uploadedFile->getSuggestedExtension());
             return in_array($extension,['jpg','jpeg','png']);
           }
           return false;

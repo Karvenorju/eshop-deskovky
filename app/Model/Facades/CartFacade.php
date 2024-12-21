@@ -8,6 +8,7 @@ use App\Model\Entities\User;
 use App\Model\Repositories\CartItemRepository;
 use App\Model\Repositories\CartRepository;
 use Dibi\DateTime;
+use LeanMapper\Exception\InvalidStateException;
 
 class CartFacade{
   private CartRepository $cartRepository;
@@ -81,4 +82,13 @@ class CartFacade{
     $this->cartRepository=$cartRepository;
     $this->cartItemRepository=$cartItemRepository;
   }
+
+    public function deleteCartItem(int $cartItemId)
+    {
+        try {
+            $this->cartItemRepository->delete($this->cartItemRepository->find($cartItemId));
+        } catch (\Exception $e) {
+
+        }
+    }
 }
