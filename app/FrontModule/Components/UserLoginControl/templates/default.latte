@@ -1,11 +1,21 @@
 {snippet}
-  <div {if !empty($class)}class="{$class}"{/if}>
-    {if $user->isLoggedIn()}
-      <strong>{$user->identity->name}</strong>
-      -
-      <a href="{link logout!}">odhlásit se</a>
-    {else}
-      <a href="{link login!}">přihlásit se</a>
-    {/if}
-  </div>
+    <div {if !empty($class)}class="{$class}"{/if}>
+        {if $user->isLoggedIn()}
+            <div class="dropdown show">
+                <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-person-circle"></i> {$user->identity->name}
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="{link profile!}">Uživatelský profil</a>
+                    <a class="dropdown-item" href="{link logout!}">Odhlásit se</a>
+                </div>
+            </div>
+        {else}
+            <a href="{link login!}" class="btn btn-primary">
+                Přihlásit se
+            </a>
+        {/if}
+    </div>
 {/snippet}
