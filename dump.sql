@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 21, 2024 at 07:25 PM
+-- Generation Time: Dec 27, 2024 at 07:35 PM
 -- Server version: 10.5.23-MariaDB-0+deb11u1
 -- PHP Version: 8.1.29
 
@@ -38,16 +38,55 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`cart_id`, `user_id`, `last_modified`) VALUES
-(1, NULL, '2024-12-09 11:24:15'),
-(2, NULL, '2024-12-09 11:24:19'),
-(3, NULL, '2024-12-09 11:24:41'),
-(4, NULL, '2024-12-09 11:24:51'),
-(5, NULL, '2024-12-09 11:24:56'),
-(6, NULL, '2024-12-09 11:24:58'),
-(7, NULL, '2024-12-09 11:25:12'),
-(8, NULL, '2024-12-09 11:26:21'),
-(9, NULL, '2024-12-09 11:27:35'),
-(10, NULL, '2024-12-09 11:29:57');
+(15, NULL, '2024-12-27 13:53:39'),
+(16, NULL, '2024-12-27 13:53:41'),
+(17, NULL, '2024-12-27 13:54:06'),
+(18, NULL, '2024-12-27 13:54:20'),
+(19, NULL, '2024-12-27 13:54:22'),
+(20, NULL, '2024-12-27 13:54:23'),
+(21, NULL, '2024-12-27 14:20:30'),
+(22, NULL, '2024-12-27 14:20:34'),
+(23, NULL, '2024-12-27 14:42:59'),
+(24, NULL, '2024-12-27 15:11:48'),
+(25, NULL, '2024-12-27 15:11:50'),
+(26, NULL, '2024-12-27 15:11:52'),
+(27, NULL, '2024-12-27 15:14:52'),
+(28, NULL, '2024-12-27 15:16:12'),
+(29, NULL, '2024-12-27 15:19:14'),
+(30, NULL, '2024-12-27 15:23:07'),
+(31, NULL, '2024-12-27 15:24:26'),
+(32, NULL, '2024-12-27 15:24:29'),
+(33, NULL, '2024-12-27 15:26:45'),
+(34, NULL, '2024-12-27 15:26:50'),
+(35, NULL, '2024-12-27 15:42:51'),
+(36, NULL, '2024-12-27 15:54:22'),
+(37, NULL, '2024-12-27 15:57:28'),
+(38, NULL, '2024-12-27 15:58:09'),
+(39, NULL, '2024-12-27 15:58:59'),
+(40, NULL, '2024-12-27 15:59:11'),
+(41, NULL, '2024-12-27 15:59:34'),
+(42, NULL, '2024-12-27 16:00:44'),
+(43, NULL, '2024-12-27 16:00:48'),
+(44, NULL, '2024-12-27 16:01:44'),
+(45, NULL, '2024-12-27 16:01:47'),
+(46, NULL, '2024-12-27 16:03:03'),
+(47, NULL, '2024-12-27 16:06:43'),
+(48, NULL, '2024-12-27 16:07:32'),
+(49, NULL, '2024-12-27 16:07:52'),
+(50, NULL, '2024-12-27 16:10:02'),
+(51, NULL, '2024-12-27 16:10:24'),
+(52, NULL, '2024-12-27 16:13:12'),
+(53, NULL, '2024-12-27 16:15:37'),
+(54, NULL, '2024-12-27 16:16:28'),
+(55, NULL, '2024-12-27 18:09:54'),
+(56, NULL, '2024-12-27 18:11:07'),
+(57, NULL, '2024-12-27 18:11:13'),
+(58, NULL, '2024-12-27 18:11:15'),
+(59, NULL, '2024-12-27 18:11:22'),
+(60, NULL, '2024-12-27 18:11:41'),
+(61, NULL, '2024-12-27 18:13:06'),
+(62, NULL, '2024-12-27 18:13:08'),
+(63, NULL, '2024-12-27 18:23:32');
 
 -- --------------------------------------------------------
 
@@ -67,9 +106,8 @@ CREATE TABLE `cart_item` (
 --
 
 INSERT INTO `cart_item` (`cart_item_id`, `product_id`, `cart_id`, `count`) VALUES
-(1, 1, 10, 10),
-(2, 3, 10, 2),
-(3, 6, 10, 4);
+(5, 7, 22, 1),
+(6, 7, 63, 3);
 
 -- --------------------------------------------------------
 
@@ -82,6 +120,111 @@ CREATE TABLE `category` (
   `title` varchar(100) NOT NULL,
   `description` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci COMMENT='Kategorie poznámek';
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`category_id`, `title`, `description`) VALUES
+(2, 'Abstract Strategy', 'temp'),
+(3, 'Action / Dexterity', 'temp'),
+(4, 'Adventure', 'temp'),
+(5, 'Age of Reason', 'temp'),
+(6, 'American Civil War', 'temp'),
+(7, 'American Indian Wars', 'temp'),
+(8, 'American Revolutionary War', 'temp'),
+(9, 'American West', 'temp'),
+(10, 'Ancient', 'temp'),
+(11, 'Animals', 'temp'),
+(12, 'Arabian', 'temp'),
+(13, 'Aviation / Flight', 'temp'),
+(14, 'Bluffing', 'temp'),
+(15, 'Book', 'temp'),
+(16, 'Card Game', 'temp'),
+(17, 'Abstract Strategy', 'temp'),
+(18, 'Action / Dexterity', 'temp'),
+(19, 'Adventure', 'temp'),
+(20, 'Age of Reason', 'temp'),
+(21, 'American Civil War', 'temp'),
+(22, 'American Indian Wars', 'temp'),
+(23, 'American Revolutionary War', 'temp'),
+(24, 'American West', 'temp'),
+(25, 'Ancient', 'temp'),
+(26, 'Animals', 'temp'),
+(27, 'Arabian', 'temp'),
+(28, 'Aviation / Flight', 'temp'),
+(29, 'Bluffing', 'temp'),
+(30, 'Book', 'temp'),
+(31, 'Card Game', 'temp'),
+(32, 'Children\'s Game', 'temp'),
+(33, 'City Building', 'temp'),
+(34, 'Civil War', 'temp'),
+(35, 'Civilization', 'temp'),
+(36, 'Collectible Components', 'temp'),
+(37, 'Comic Book / Strip', 'temp'),
+(38, 'Deduction', 'temp'),
+(39, 'Dice', 'temp'),
+(40, 'Economic', 'temp'),
+(41, 'Educational', 'temp'),
+(42, 'Electronic', 'temp'),
+(43, 'Environmental', 'temp'),
+(44, 'Expansion for Base-game', 'temp'),
+(45, 'Exploration', 'temp'),
+(46, 'Fan Expansion', 'temp'),
+(47, 'Fantasy', 'temp'),
+(48, 'Farming', 'temp'),
+(49, 'Fighting', 'temp'),
+(50, 'Game System', 'temp'),
+(51, 'Horror', 'temp'),
+(52, 'Humor', 'temp'),
+(53, 'Industry / Manufacturing', 'temp'),
+(54, 'Korean War', 'temp'),
+(55, 'Mafia', 'temp'),
+(56, 'Math', 'temp'),
+(57, 'Mature / Adult', 'temp'),
+(58, 'Maze', 'temp'),
+(59, 'Medical', 'temp'),
+(60, 'Medieval', 'temp'),
+(61, 'Memory', 'temp'),
+(62, 'Miniatures', 'temp'),
+(63, 'Modern Warfare', 'temp'),
+(64, 'Movies / TV / Radio theme', 'temp'),
+(65, 'Murder / Mystery', 'temp'),
+(66, 'Music', 'temp'),
+(67, 'Mythology', 'temp'),
+(68, 'Napoleonic', 'temp'),
+(69, 'Nautical', 'temp'),
+(70, 'Negotiation', 'temp'),
+(71, 'Novel-based', 'temp'),
+(72, 'Number', 'temp'),
+(73, 'Party Game', 'temp'),
+(74, 'Pike and Shot', 'temp'),
+(75, 'Pirates', 'temp'),
+(76, 'Political', 'temp'),
+(77, 'Post-Napoleonic', 'temp'),
+(78, 'Prehistoric', 'temp'),
+(79, 'Print & Play', 'temp'),
+(80, 'Puzzle', 'temp'),
+(81, 'Racing', 'temp'),
+(82, 'Real-time', 'temp'),
+(83, 'Religious', 'temp'),
+(84, 'Renaissance', 'temp'),
+(85, 'Science Fiction', 'temp'),
+(86, 'Space Exploration', 'temp'),
+(87, 'Spies / Secret Agents', 'temp'),
+(88, 'Sports', 'temp'),
+(89, 'Territory Building', 'temp'),
+(90, 'Trains', 'temp'),
+(91, 'Transportation', 'temp'),
+(92, 'Travel', 'temp'),
+(93, 'Trivia', 'temp'),
+(94, 'Video Game Theme', 'temp'),
+(95, 'Vietnam War', 'temp'),
+(96, 'Wargame', 'temp'),
+(97, 'Word Game', 'temp'),
+(98, 'World War I', 'temp'),
+(99, 'World War II', 'temp'),
+(100, 'Zombies', 'temp');
 
 -- --------------------------------------------------------
 
@@ -156,7 +299,6 @@ CREATE TABLE `product` (
   `url` varchar(100) NOT NULL,
   `description` text NOT NULL,
   `price` decimal(10,2) NOT NULL,
-  `photo_extension` varchar(10) NOT NULL,
   `available` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci COMMENT='Tabulka s nabízenými produkty';
 
@@ -164,10 +306,11 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`product_id`, `category_id`, `title`, `url`, `description`, `price`, `photo_extension`, `available`) VALUES
-(1, NULL, 'aTestovací produkt2', 'testovaci-produkt', 'Lorem ipsum...', '100.00', '', 1),
-(3, NULL, 'test', 'test', '+++', '11.00', 'jpeg', 1),
-(6, NULL, 'test', 'testx', 'qaa', '1.00', '', 1);
+INSERT INTO `product` (`product_id`, `category_id`, `title`, `url`, `description`, `price`, `available`) VALUES
+(1, NULL, 'aTestovací produkt2', 'testovaci-produkt', 'Lorem ipsum...', '100.00', 1),
+(3, NULL, 'test', 'test', '+++', '11.00', 1),
+(6, NULL, 'test', 'testx', 'qaa', '1.00', 1),
+(7, 2, 'Strategy game', 'strat', 'Such a great game', '5.00', 1);
 
 -- --------------------------------------------------------
 
@@ -309,19 +452,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `category_id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT for table `forgotten_password`
@@ -339,7 +482,7 @@ ALTER TABLE `permission`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user`
