@@ -2,6 +2,7 @@
 
 namespace App\FrontModule\Components\NewPasswordForm;
 
+use App\FrontModule\Components\UserLoginControl\UserLoginControl;
 use App\Model\Entities\User;
 use App\Model\Facades\UsersFacade;
 use Nette;
@@ -33,6 +34,8 @@ class NewPasswordForm extends Form {
     private UsersFacade $usersFacade;
     private Nette\Security\Passwords $passwords;
 
+    private User $user;
+
     /**
      * NewPasswordForm constructor.
      * @param UsersFacade $usersFacade
@@ -40,16 +43,19 @@ class NewPasswordForm extends Form {
      * @param Nette\ComponentModel\IContainer|null $parent
      * @param string|null $name
      */
-    public function __construct(UsersFacade $usersFacade, Nette\Security\Passwords $passwords, ?Nette\ComponentModel\IContainer $parent = null, ?string $name = null) {
+    public function __construct(UserLoginControl $userLoginControl, UsersFacade $usersFacade, Nette\Security\Passwords $passwords, ?Nette\ComponentModel\IContainer $parent = null, ?string $name = null) {
         parent::__construct($parent, $name);
         $this->setRenderer(new Bs4FormRenderer(FormLayout::VERTICAL));
         $this->usersFacade = $usersFacade;
         $this->passwords = $passwords;
+
+        // TODO HACK - jinak padalo na to, že nezná userId
+        $this->user = $this->usersFacade->getUser($userLoginControl->getCurrentUser()->id);
         $this->createSubcomponents();
     }
 
     private function createSubcomponents(): void {
-        $this->addHidden('userId');
+        $this->addHidden('userId', $this->user->userId);
 
         $password = $this->addPassword('password', 'Heslo');
         $password
