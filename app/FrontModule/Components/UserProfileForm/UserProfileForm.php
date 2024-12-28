@@ -44,12 +44,8 @@ class UserProfileForm extends Form {
         $this->setRenderer(new Bs4FormRenderer(FormLayout::VERTICAL));
         $this->usersFacade = $usersFacade;
 
-        try {
-            $userEntity = $this->usersFacade->getUser($userLoginControl->getCurrentUser()->getId());
-            $this->user = $userEntity;
-        } catch (\Exception $e) {
-            $this->redirect('login');
-        }
+        $userEntity = $this->usersFacade->getUser($userLoginControl->getCurrentUser()->getId());
+        $this->user = $userEntity;
 
         $this->createSubcomponents();
     }
@@ -70,28 +66,19 @@ class UserProfileForm extends Form {
                     //pokud nebyl uživatel nalezen (tj. je vyhozena výjimka), je to z hlediska registrace v pořádku
                     return true;
                 }
-                return false;
+                return $this->user->email == $input->value;
             }, 'Uživatel s tímto e-mailem je již registrován.');
-        $password = $this->addPassword('password', 'Heslo');
-        $password->setRequired('Zadejte požadované heslo')
-            ->addRule(Form::MIN_LENGTH, 'Heslo musí obsahovat minimálně 5 znaků.', 5);
-        $this->addPassword('password2', 'Heslo znovu:')
-            ->addRule(Form::EQUAL, 'Hesla se neshodují', $password);
 
         $this->addSubmit('ok', 'Uložit změny')
             ->onClick[] = function (SubmitButton $button) {
-
             //uložení uživatele
             $values = $this->getValues('array');
-            $user = new User();
-            $user->name = $values['name'];
-            $user->email = $values['email'];
-            $user->password = $this->passwords->hash($values['password']); //heslo samozřejmě rovnou hashujeme :)
-            $this->usersFacade->saveUser($user);
-
+            $this->user->name = $values['name'];
+            $this->user->email = $values['email'];
+            $this->usersFacade->saveUser($this->user);
             $this->onFinished();
         };
-        $this->addSubmit('storno', 'zrušit')
+        $this->addSubmit('storno', 'Zrušit')
             ->setValidationScope([])
             ->onClick[] = function (SubmitButton $button) {
             $this->onCancel();
