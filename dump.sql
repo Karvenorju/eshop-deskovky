@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Počítač: localhost:3306
--- Vytvořeno: Sob 28. pro 2024, 00:29
--- Verze serveru: 10.5.23-MariaDB-0+deb11u1
--- Verze PHP: 8.1.29
+-- Host: localhost:3306
+-- Generation Time: Jan 03, 2025 at 05:16 PM
+-- Server version: 10.5.23-MariaDB-0+deb11u1
+-- PHP Version: 8.1.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Databáze: `kovj19`
+-- Database: `bela08`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `cart`
+-- Table structure for table `cart`
 --
 
 CREATE TABLE `cart` (
@@ -34,7 +34,7 @@ CREATE TABLE `cart` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 
 --
--- Vypisuji data pro tabulku `cart`
+-- Dumping data for table `cart`
 --
 
 INSERT INTO `cart` (`cart_id`, `user_id`, `last_modified`) VALUES
@@ -91,7 +91,7 @@ INSERT INTO `cart` (`cart_id`, `user_id`, `last_modified`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `cart_item`
+-- Table structure for table `cart_item`
 --
 
 CREATE TABLE `cart_item` (
@@ -101,18 +101,10 @@ CREATE TABLE `cart_item` (
   `count` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 
---
--- Vypisuji data pro tabulku `cart_item`
---
-
-INSERT INTO `cart_item` (`cart_item_id`, `product_id`, `cart_id`, `count`) VALUES
-(4, 1, 14, 3),
-(5, 3, 14, 6);
-
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `category`
+-- Table structure for table `category`
 --
 
 CREATE TABLE `category` (
@@ -229,7 +221,7 @@ INSERT INTO `category` (`category_id`, `title`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `forgotten_password`
+-- Table structure for table `forgotten_password`
 --
 
 CREATE TABLE `forgotten_password` (
@@ -242,7 +234,7 @@ CREATE TABLE `forgotten_password` (
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `permission`
+-- Table structure for table `permission`
 --
 
 CREATE TABLE `permission` (
@@ -254,7 +246,7 @@ CREATE TABLE `permission` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 
 --
--- Vypisuji data pro tabulku `permission`
+-- Dumping data for table `permission`
 --
 
 INSERT INTO `permission` (`permission_id`, `role_id`, `resource_id`, `action`, `type`) VALUES
@@ -290,7 +282,7 @@ INSERT INTO `permission` (`permission_id`, `role_id`, `resource_id`, `action`, `
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `product`
+-- Table structure for table `product`
 --
 
 CREATE TABLE `product` (
@@ -299,24 +291,27 @@ CREATE TABLE `product` (
   `title` varchar(100) NOT NULL,
   `url` varchar(100) NOT NULL,
   `description` text NOT NULL,
-  `price` decimal(10,2) NOT NULL,
   `photo_extension` varchar(10) NOT NULL,
-  `available` tinyint(1) NOT NULL DEFAULT 1
+  `price` decimal(10,2) NOT NULL,
+  `min_player` int(11) NOT NULL DEFAULT 1,
+  `max_player` int(11) NOT NULL,
+  `play_time` int(11) NOT NULL,
+  `min_age` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci COMMENT='Tabulka s nabízenými produkty';
 
 --
--- Vypisuji data pro tabulku `product`
+-- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`product_id`, `category_id`, `title`, `url`, `description`, `price`, `photo_extension`, `available`) VALUES
-(1, NULL, 'aTestovací produkt2', 'testovaci-produkt', 'Lorem ipsum...', '100.00', '', 1),
-(3, NULL, 'test', 'test', '+++', '11.00', 'jpeg', 1),
-(6, NULL, 'test', 'testx', 'qaa', '1.00', '', 1);
+INSERT INTO `product` (`product_id`, `category_id`, `title`, `url`, `description`, `photo_extension`, `price`, `min_player`, `max_player`, `play_time`, `min_age`) VALUES
+(7, 96, 'Risk', 'risk', 'Possibly the most popular, mass market war game. The goal is conquest of the world.\r\n\r\nEach player\'s turn consists of:\r\n- gaining reinforcements through number of territories held, control of every territory on each continent, and turning sets of bonus cards.\r\n- Attacking other players using a simple combat rule of comparing the highest dice rolled for each side. Players may attack as often as desired. If one enemy territory is successfully taken, the player is awarded with a bonus card.\r\n- Moving a group of armies to another adjacent territory.\r\n', '', '400.00', 1, 2, 6, 10),
+(8, 60, 'Carcassonne ', 'carcassonne', 'Carcassonne is a tile placement game in which the players draw and place a tile with a piece of southern French landscape represented on it. The tile might feature a city, a road, a cloister, grassland or some combination thereof, and it must be placed adjacent to tiles that have already been played, in such a way that cities are connected to cities, roads to roads, et cetera. Having placed a tile, the player can then decide to place one of his/her meeples in one of the areas on it: in the city as a knight, on the road as a robber, in the cloister as a monk, or in the field as a farmer. When that area is complete that meeple scores points for its owner.\r\n\r\nDuring a game of Carcassonne, players are faced with decisions like: \"Is it really worth putting my last meeple there?\" or \"Should I use this tile to expand my city, or should I place it near my opponent instead, giving him/her a hard time to complete his/her project and score points?\" Since players place only one tile and have the option to place one meeple on it, turns proceed quickly even if it is a game full of options and possibilities.\r\n\r\nFirst game in the Carcassonne series.', '', '300.00', 2, 5, 45, 7),
+(9, 40, 'Monopoly: The Portable Property Trading Game', 'monopoly', 'A very small travel version of Monopoly which often comes in the shape of a red suitcase and plays very similarly to the original game. One difference is that it contains three dice. The Community Chest and Chance cards are replaced with tables. Three dice are rolled and the tables are referenced to find the result.\r\n\r\nThe Waddington\'s UK edition has different properties than the U.S. version, and also comes in a different sort of case with a magnetic board and magnetic hotels, houses, and movers.\r\n', '', '645.00', 2, 6, 120, 8);
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `resource`
+-- Table structure for table `resource`
 --
 
 CREATE TABLE `resource` (
@@ -324,7 +319,7 @@ CREATE TABLE `resource` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci COMMENT='Tabulka obsahující seznam zdrojů';
 
 --
--- Vypisuji data pro tabulku `resource`
+-- Dumping data for table `resource`
 --
 
 INSERT INTO `resource` (`resource_id`) VALUES
@@ -344,7 +339,7 @@ INSERT INTO `resource` (`resource_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `role`
+-- Table structure for table `role`
 --
 
 CREATE TABLE `role` (
@@ -352,7 +347,7 @@ CREATE TABLE `role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 
 --
--- Vypisuji data pro tabulku `role`
+-- Dumping data for table `role`
 --
 
 INSERT INTO `role` (`role_id`) VALUES
@@ -363,7 +358,7 @@ INSERT INTO `role` (`role_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -380,14 +375,14 @@ CREATE TABLE `user` (
 --
 
 --
--- Indexy pro tabulku `cart`
+-- Indexes for table `cart`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`cart_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexy pro tabulku `cart_item`
+-- Indexes for table `cart_item`
 --
 ALTER TABLE `cart_item`
   ADD PRIMARY KEY (`cart_item_id`),
@@ -395,20 +390,20 @@ ALTER TABLE `cart_item`
   ADD KEY `cart_id` (`cart_id`);
 
 --
--- Indexy pro tabulku `category`
+-- Indexes for table `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`category_id`);
 
 --
--- Indexy pro tabulku `forgotten_password`
+-- Indexes for table `forgotten_password`
 --
 ALTER TABLE `forgotten_password`
   ADD PRIMARY KEY (`forgotten_password_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexy pro tabulku `permission`
+-- Indexes for table `permission`
 --
 ALTER TABLE `permission`
   ADD PRIMARY KEY (`permission_id`),
@@ -416,28 +411,27 @@ ALTER TABLE `permission`
   ADD KEY `permission_ibfk_1` (`resource_id`);
 
 --
--- Indexy pro tabulku `product`
+-- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`product_id`),
   ADD UNIQUE KEY `url` (`url`),
-  ADD KEY `category_id` (`category_id`),
-  ADD KEY `available` (`available`);
+  ADD KEY `category_id` (`category_id`);
 
 --
--- Indexy pro tabulku `resource`
+-- Indexes for table `resource`
 --
 ALTER TABLE `resource`
   ADD PRIMARY KEY (`resource_id`);
 
 --
--- Indexy pro tabulku `role`
+-- Indexes for table `role`
 --
 ALTER TABLE `role`
   ADD PRIMARY KEY (`role_id`);
 
 --
--- Indexy pro tabulku `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`),
@@ -446,89 +440,89 @@ ALTER TABLE `user`
   ADD KEY `role_id` (`role_id`);
 
 --
--- AUTO_INCREMENT pro tabulky
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pro tabulku `cart`
+-- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
--- AUTO_INCREMENT pro tabulku `cart_item`
+-- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
   MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT pro tabulku `category`
+-- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `category_id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
--- AUTO_INCREMENT pro tabulku `forgotten_password`
+-- AUTO_INCREMENT for table `forgotten_password`
 --
 ALTER TABLE `forgotten_password`
   MODIFY `forgotten_password_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pro tabulku `permission`
+-- AUTO_INCREMENT for table `permission`
 --
 ALTER TABLE `permission`
   MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
--- AUTO_INCREMENT pro tabulku `product`
+-- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT pro tabulku `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Omezení pro exportované tabulky
+-- Constraints for dumped tables
 --
 
 --
--- Omezení pro tabulku `cart`
+-- Constraints for table `cart`
 --
 ALTER TABLE `cart`
   ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Omezení pro tabulku `cart_item`
+-- Constraints for table `cart_item`
 --
 ALTER TABLE `cart_item`
   ADD CONSTRAINT `cart_item_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `cart_item_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Omezení pro tabulku `forgotten_password`
+-- Constraints for table `forgotten_password`
 --
 ALTER TABLE `forgotten_password`
   ADD CONSTRAINT `forgotten_password_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Omezení pro tabulku `permission`
+-- Constraints for table `permission`
 --
 ALTER TABLE `permission`
   ADD CONSTRAINT `permission_ibfk_1` FOREIGN KEY (`resource_id`) REFERENCES `resource` (`resource_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `permission_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Omezení pro tabulku `product`
+-- Constraints for table `product`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE SET NULL;
 
 --
--- Omezení pro tabulku `user`
+-- Constraints for table `user`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE SET NULL ON UPDATE CASCADE;

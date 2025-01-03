@@ -12,16 +12,23 @@ use LeanMapper\Entity;
  * @property string $url
  * @property string $description
  * @property float $price
- * @property string $photoExtension = ''
- * @property bool $available = true
  * @property Category|null $category m:hasOne
+ * @property int $minPlayers
+ * @property int $maxPlayers
+ * @property int $playTime
+ * @property int $minAge
+ * @property string $photoExtension = ''
  */
-class Product extends Entity implements \Nette\Security\Resource{
+class Product extends Entity implements \Nette\Security\Resource {
 
-  /**
-   * @inheritDoc
-   */
-  function getResourceId():string{
-    return 'Product';
-  }
+    /**
+     * @inheritDoc
+     */
+    function getResourceId(): string {
+        return 'Product';
+    }
+    public function getImagePath(): string {
+        return __DIR__ . '/../../../www/img/products/' . $this->url . '.jpeg';
+    }
+
 }
