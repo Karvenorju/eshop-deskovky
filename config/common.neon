@@ -41,8 +41,10 @@ services:
 	        - setMailFrom(%mailFrom.email%,%mailFrom.name%)
 	- App\FrontModule\Components\NewPasswordForm\NewPasswordFormFactory
 	- App\FrontModule\Components\ProductCartForm\ProductCartFormFactory
+	- App\FrontModule\Components\ProductListFilterForm\ProductListFilterFormFactory
 	- App\FrontModule\Components\CartControl\CartControlFactory
 	- App\FrontModule\Components\UserLoginControl\UserLoginControlFactory
+
 
 	- App\Model\Facades\CategoriesFacade
 	- App\Model\Facades\ProductsFacade

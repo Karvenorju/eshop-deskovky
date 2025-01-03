@@ -13,8 +13,8 @@ use LeanMapper\Entity;
  * @property string $description
  * @property float $price
  * @property Category|null $category m:hasOne
- * @property int $minPlayers
- * @property int $maxPlayers
+ * @property int $minPlayer
+ * @property int $maxPlayer
  * @property int $playTime
  * @property int $minAge
  * @property string $photoExtension = ''
