@@ -13,9 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
           integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
 
-    <link rel="icon" href="{$basePath}/img/favicon/favicon.ico" sizes="any"/>
-    <link rel="apple-touch-icon" sizes="180x180" href="{$basePath}/img/favicon/favicon-180x180.png"/>
-    <link rel="icon" href="{$basePath}/img/favicon/favicon.svg" type="image/svg+xml"/>
+    <link rel="icon" href="{$basePath}/img/favicon/logo.ico" sizes="any"/>
     <link rel="manifest" href="{plink Homepage:manifest}"/>
 
     {block head}{/block}
@@ -24,7 +22,11 @@
 
 <header class="navbar navbar-light bg-light mb-4">
     <div class="container">
-        <h1 class="h2 mt-1 "><a href="{plink Homepage:default}" class="text-dark">E-shop</a></h1>
+        <a href="{plink Homepage:default}"
+           class="d-inline-flex text-dark text-decoration-none" style="height: 65px">
+            <img class="img-fluid" src="{$basePath}/img/favicon/logo.png" alt="logo">
+            <h1 class="align-self-center ml-1">Deskovky.cz</h1>
+        </a>
         <div class="ml-auto d-inline-flex">
             <div class="mr-3" n:snippet="cart">{control cart}</div>
             {control userLogin}
