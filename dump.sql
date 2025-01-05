@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jan 03, 2025 at 05:16 PM
--- Server version: 10.5.23-MariaDB-0+deb11u1
--- PHP Version: 8.1.29
+-- Počítač: localhost:3306
+-- Vytvořeno: Ned 05. led 2025, 14:29
+-- Verze serveru: 10.5.23-MariaDB-0+deb11u1
+-- Verze PHP: 8.1.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `bela08`
+-- Databáze: `kovj19`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cart`
+-- Struktura tabulky `cart`
 --
 
 CREATE TABLE `cart` (
@@ -34,7 +34,7 @@ CREATE TABLE `cart` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 
 --
--- Dumping data for table `cart`
+-- Vypisuji data pro tabulku `cart`
 --
 
 INSERT INTO `cart` (`cart_id`, `user_id`, `last_modified`) VALUES
@@ -91,7 +91,7 @@ INSERT INTO `cart` (`cart_id`, `user_id`, `last_modified`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cart_item`
+-- Struktura tabulky `cart_item`
 --
 
 CREATE TABLE `cart_item` (
@@ -104,7 +104,7 @@ CREATE TABLE `cart_item` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
+-- Struktura tabulky `category`
 --
 
 CREATE TABLE `category` (
@@ -114,7 +114,7 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci COMMENT='Kategorie poznámek';
 
 --
--- Dumping data for table `category`
+-- Vypisuji data pro tabulku `category`
 --
 
 INSERT INTO `category` (`category_id`, `title`, `description`) VALUES
@@ -221,7 +221,7 @@ INSERT INTO `category` (`category_id`, `title`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `forgotten_password`
+-- Struktura tabulky `forgotten_password`
 --
 
 CREATE TABLE `forgotten_password` (
@@ -234,7 +234,7 @@ CREATE TABLE `forgotten_password` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `permission`
+-- Struktura tabulky `permission`
 --
 
 CREATE TABLE `permission` (
@@ -246,7 +246,7 @@ CREATE TABLE `permission` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 
 --
--- Dumping data for table `permission`
+-- Vypisuji data pro tabulku `permission`
 --
 
 INSERT INTO `permission` (`permission_id`, `role_id`, `resource_id`, `action`, `type`) VALUES
@@ -282,7 +282,7 @@ INSERT INTO `permission` (`permission_id`, `role_id`, `resource_id`, `action`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
+-- Struktura tabulky `product`
 --
 
 CREATE TABLE `product` (
@@ -300,7 +300,7 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci COMMENT='Tabulka s nabízenými produkty';
 
 --
--- Dumping data for table `product`
+-- Vypisuji data pro tabulku `product`
 --
 
 INSERT INTO `product` (`product_id`, `category_id`, `title`, `url`, `description`, `photo_extension`, `price`, `min_player`, `max_player`, `play_time`, `min_age`) VALUES
@@ -311,7 +311,7 @@ INSERT INTO `product` (`product_id`, `category_id`, `title`, `url`, `description
 -- --------------------------------------------------------
 
 --
--- Table structure for table `resource`
+-- Struktura tabulky `resource`
 --
 
 CREATE TABLE `resource` (
@@ -319,7 +319,7 @@ CREATE TABLE `resource` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci COMMENT='Tabulka obsahující seznam zdrojů';
 
 --
--- Dumping data for table `resource`
+-- Vypisuji data pro tabulku `resource`
 --
 
 INSERT INTO `resource` (`resource_id`) VALUES
@@ -339,7 +339,7 @@ INSERT INTO `resource` (`resource_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `role`
+-- Struktura tabulky `role`
 --
 
 CREATE TABLE `role` (
@@ -347,7 +347,7 @@ CREATE TABLE `role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 
 --
--- Dumping data for table `role`
+-- Vypisuji data pro tabulku `role`
 --
 
 INSERT INTO `role` (`role_id`) VALUES
@@ -358,7 +358,7 @@ INSERT INTO `role` (`role_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktura tabulky `user`
 --
 
 CREATE TABLE `user` (
@@ -367,22 +367,24 @@ CREATE TABLE `user` (
   `email` varchar(255) NOT NULL,
   `facebook_id` varchar(100) DEFAULT NULL,
   `role_id` varchar(50) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL
+  `password` varchar(255) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `address` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci COMMENT='Tabulka s daty uživatelů';
 
 --
--- Indexes for dumped tables
+-- Indexy pro exportované tabulky
 --
 
 --
--- Indexes for table `cart`
+-- Indexy pro tabulku `cart`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`cart_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `cart_item`
+-- Indexy pro tabulku `cart_item`
 --
 ALTER TABLE `cart_item`
   ADD PRIMARY KEY (`cart_item_id`),
@@ -390,20 +392,20 @@ ALTER TABLE `cart_item`
   ADD KEY `cart_id` (`cart_id`);
 
 --
--- Indexes for table `category`
+-- Indexy pro tabulku `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`category_id`);
 
 --
--- Indexes for table `forgotten_password`
+-- Indexy pro tabulku `forgotten_password`
 --
 ALTER TABLE `forgotten_password`
   ADD PRIMARY KEY (`forgotten_password_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `permission`
+-- Indexy pro tabulku `permission`
 --
 ALTER TABLE `permission`
   ADD PRIMARY KEY (`permission_id`),
@@ -411,7 +413,7 @@ ALTER TABLE `permission`
   ADD KEY `permission_ibfk_1` (`resource_id`);
 
 --
--- Indexes for table `product`
+-- Indexy pro tabulku `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`product_id`),
@@ -419,19 +421,19 @@ ALTER TABLE `product`
   ADD KEY `category_id` (`category_id`);
 
 --
--- Indexes for table `resource`
+-- Indexy pro tabulku `resource`
 --
 ALTER TABLE `resource`
   ADD PRIMARY KEY (`resource_id`);
 
 --
--- Indexes for table `role`
+-- Indexy pro tabulku `role`
 --
 ALTER TABLE `role`
   ADD PRIMARY KEY (`role_id`);
 
 --
--- Indexes for table `user`
+-- Indexy pro tabulku `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`),
@@ -440,89 +442,89 @@ ALTER TABLE `user`
   ADD KEY `role_id` (`role_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pro tabulky
 --
 
 --
--- AUTO_INCREMENT for table `cart`
+-- AUTO_INCREMENT pro tabulku `cart`
 --
 ALTER TABLE `cart`
   MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
--- AUTO_INCREMENT for table `cart_item`
+-- AUTO_INCREMENT pro tabulku `cart_item`
 --
 ALTER TABLE `cart_item`
   MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `category`
+-- AUTO_INCREMENT pro tabulku `category`
 --
 ALTER TABLE `category`
   MODIFY `category_id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
--- AUTO_INCREMENT for table `forgotten_password`
+-- AUTO_INCREMENT pro tabulku `forgotten_password`
 --
 ALTER TABLE `forgotten_password`
   MODIFY `forgotten_password_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `permission`
+-- AUTO_INCREMENT pro tabulku `permission`
 --
 ALTER TABLE `permission`
   MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
--- AUTO_INCREMENT for table `product`
+-- AUTO_INCREMENT pro tabulku `product`
 --
 ALTER TABLE `product`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT pro tabulku `user`
 --
 ALTER TABLE `user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Constraints for dumped tables
+-- Omezení pro exportované tabulky
 --
 
 --
--- Constraints for table `cart`
+-- Omezení pro tabulku `cart`
 --
 ALTER TABLE `cart`
   ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `cart_item`
+-- Omezení pro tabulku `cart_item`
 --
 ALTER TABLE `cart_item`
   ADD CONSTRAINT `cart_item_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `cart_item_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `forgotten_password`
+-- Omezení pro tabulku `forgotten_password`
 --
 ALTER TABLE `forgotten_password`
   ADD CONSTRAINT `forgotten_password_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `permission`
+-- Omezení pro tabulku `permission`
 --
 ALTER TABLE `permission`
   ADD CONSTRAINT `permission_ibfk_1` FOREIGN KEY (`resource_id`) REFERENCES `resource` (`resource_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `permission_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `product`
+-- Omezení pro tabulku `product`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE SET NULL;
 
 --
--- Constraints for table `user`
+-- Omezení pro tabulku `user`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE SET NULL ON UPDATE CASCADE;
