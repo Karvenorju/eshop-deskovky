@@ -73,13 +73,14 @@ class UserProfileForm extends Form {
         $this->addText('phone', 'Tel. číslo:')
             ->setDefaultValue($this->user->phone)
             ->setHtmlType('tel')
+            ->setEmptyValue('+420 ')
             ->addRule(function ($control) {
                 return $this->validatePhoneNumber($control->getValue());
             }, 'Telefonní číslo není platné.')
-            ->setHtmlAttribute('maxLenght', 20);
+            ->setHtmlAttribute('maxlength', 20);
         $this->addText('address', 'Doručovací adresa')
             ->setDefaultValue($this->user->address)
-            ->setHtmlAttribute('maxLenght', 200);
+            ->setHtmlAttribute('maxlength', 200);
 
         $this->addSubmit('ok', 'Uložit změny')
             ->onClick[] = function (SubmitButton $button) {

@@ -227,22 +227,13 @@ class UserPresenter extends BasePresenter {
     }
 
     /**
-     * Formulář pro registraci nového uživatele
-     * @return UserRegistrationForm
+     * Formulář pro editaci uživatelského profilu
+     * @return UserProfileForm
      */
     protected function createComponentUserProfileForm(): UserProfileForm {
         $form = $this->userProfileFormFactory->create();
         $form->onFinished[] = function () use ($form) {
-            $values = $form->getValues('array');
-            // TODO JK
-            /* try {
-                 //po registraci uživatele rovnou i přihlásíme
-                 $this->user->login($values['email'], $values['password']);
-                 $this->flashMessage('Vítejte v našem eshopu :)');
-             } catch (\Exception $e) {
-                 $this->flashMessage('Při registraci se vyskytla chyba', 'error');
-             }*/
-            $this->redirect('Homepage:default');
+            $this->flashMessage('Změny uloženy.');
         };
         $form->onCancel[] = function () use ($form) {
             $this->redirect('Homepage:default');
