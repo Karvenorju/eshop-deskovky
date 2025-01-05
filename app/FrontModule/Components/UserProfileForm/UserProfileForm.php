@@ -5,6 +5,8 @@ namespace App\FrontModule\Components\UserProfileForm;
 use App\FrontModule\Components\UserLoginControl\UserLoginControl;
 use App\Model\Entities\User;
 use App\Model\Facades\UsersFacade;
+use Brick\PhoneNumber\PhoneNumber;
+use Brick\PhoneNumber\PhoneNumberParseException;
 use Nette;
 use Nette\Application\UI\Form;
 use Nette\ComponentModel\IContainer;
@@ -55,7 +57,7 @@ class UserProfileForm extends Form {
             ->setDefaultValue($this->user->name)
             ->setRequired('Zadejte své jméno')
             ->setHtmlAttribute('maxlength', 40)
-            ->addRule(Form::MAX_LENGTH, 'Jméno je příliš dlouhé, může mít maximálně 40 znaků.', 40);
+            ->addRule(Nette\Forms\Form::MAX_LENGTH, 'Jméno je příliš dlouhé, může mít maximálně 40 znaků.', 40);
         $this->addEmail('email', 'E-mail')
             ->setDefaultValue($this->user->email)
             ->setRequired('Zadejte platný email')
@@ -68,6 +70,16 @@ class UserProfileForm extends Form {
                 }
                 return $this->user->email == $input->value;
             }, 'Uživatel s tímto e-mailem je již registrován.');
+        $this->addText('phone', 'Tel. číslo:')
+            ->setDefaultValue($this->user->phone)
+            ->setHtmlType('tel')
+            ->addRule(function ($control) {
+                return $this->validatePhoneNumber($control->getValue());
+            }, 'Telefonní číslo není platné.')
+            ->setHtmlAttribute('maxLenght', 20);
+        $this->addText('address', 'Doručovací adresa')
+            ->setDefaultValue($this->user->address)
+            ->setHtmlAttribute('maxLenght', 200);
 
         $this->addSubmit('ok', 'Uložit změny')
             ->onClick[] = function (SubmitButton $button) {
@@ -75,14 +87,20 @@ class UserProfileForm extends Form {
             $values = $this->getValues('array');
             $this->user->name = $values['name'];
             $this->user->email = $values['email'];
+            $this->user->phone = $values['phone'];
+            $this->user->address = $values['address'];
             $this->usersFacade->saveUser($this->user);
             $this->onFinished();
         };
-        $this->addSubmit('storno', 'Zrušit')
-            ->setValidationScope([])
-            ->onClick[] = function (SubmitButton $button) {
-            $this->onCancel();
-        };
+    }
+
+    function validatePhoneNumber(string $number): bool {
+        try {
+            $number = PhoneNumber::parse($number);
+        } catch (PhoneNumberParseException $e) {
+            return false;
+        }
+        return $number->isValidNumber();
     }
 
 }
