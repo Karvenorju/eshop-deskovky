@@ -21,7 +21,8 @@
 		"tharos/leanmapper": "^4.0",
 		"vojir/leanmapper-mappers": "^1.0",
 		"league/oauth2-facebook": "^2.2",
-		"nextras/forms-rendering": "^1.1"
+		"nextras/forms-rendering": "^1.1",
+		"brick/phonenumber": "^0.6.0"
 	},
 	"autoload": {
 		"psr-4": {
