@@ -35,35 +35,19 @@ class ProductListFilterForm extends Form {
         // Category (checkboxes)
         $this->addCheckboxList('category', 'Category', $filterParams['categories']);
 
-        // Price (double range slider)
-        $this->addText('price', 'Price')
-            ->setHtmlAttribute('id', 'price-slider')
-            ->setHtmlAttribute('readonly', true)
-            ->setHtmlAttribute('min', $filterParams['priceRange']['min'])
-            ->setHtmlAttribute('max', $filterParams['priceRange']['max'])
-            ->setHtmlAttribute('step', '10')
-            ->setHtmlAttribute('multiple', true);
-
-
-        // Number of players (double range slider)
-        $this->addText('players', 'Number of Players')
+        // Price (slider)
+        $this->addInteger('price', 'Cena')
             ->setHtmlType('range')
-            ->setHtmlAttribute('id', 'players-slider')
+            ->setHtmlAttribute('min', $filterParams['price']['min'])
+            ->setHtmlAttribute('max', $filterParams['price']['max'])
+            ->setHtmlAttribute('step', 1)
+            ->setHtmlAttribute('value', $filterParams['price']['max'])
+            ->setHtmlAttribute('oninput', 'this.nextElementSibling.value = this.value');
+        $this->addText('priceOutput', 'Cena')
             ->setHtmlAttribute('readonly', true)
-            ->setHtmlAttribute('min', $filterParams['playerRange']['min'])
-            ->setHtmlAttribute('max', $filterParams['playerRange']['max'])
-            ->setHtmlAttribute('step', '1')
-            ->setHtmlAttribute('multiple', true);
+            ->setHtmlAttribute('style', 'border:0; color:#f6931f; font-weight:bold;')
+            ->setHtmlAttribute('id', 'priceOutput');
 
-        // Age (radio buttons)
-        $this->addRadioList('age', 'Age', $filterParams['ageGroups']);
-
-        // Play time (range slider)
-        $this->addText('play_time', 'Play Time')
-            ->setHtmlType('range')
-            ->setHtmlAttribute('min', $filterParams['playTimeRange']['min'])
-            ->setHtmlAttribute('max', $filterParams['playTimeRange']['max'])
-            ->setHtmlAttribute('step', '10');
 
         $this->addSubmit('filter', 'Filtrovat');
     }
