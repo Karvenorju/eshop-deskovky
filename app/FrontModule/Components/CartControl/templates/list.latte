@@ -6,17 +6,26 @@
 
     {else}
         <table class="table table-hover">
-
+            <thead>
+            <tr>
+                <th>Produkt</th>
+                <th>Množství</th>
+                <th>Cena</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
             {foreach $cart->items as $item}
                 <tr>
-                    <th>{$item->product->title}</th>
+                    <td>{$item->product->title}</td>
                     <td>{$item->count}</td>
+                    <td>{$item->product->price|number:2} Kč</td>
                     <td>
-                        <a href="{link remove! $item->cartItemId}" class="ajax">odebrat</a>
+                        <a href="{link remove! $item->cartItemId}" class="btn btn-danger btn-sm ajax">Odebrat</a>
                     </td>
                 </tr>
             {/foreach}
-
+            </tbody>
         </table>
 
 
