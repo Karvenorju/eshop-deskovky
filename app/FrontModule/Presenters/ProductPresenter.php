@@ -44,8 +44,8 @@ class ProductPresenter extends BasePresenter {
      */
     public function renderList(): void {
         //TODO tady by mělo přibýt filtrování podle kategorie, stránkování atp.
-        $this->template->filterParams = $this->productsFacade->getFilterParams();
-        $this->template->products = $this->productsFacade->findProducts(['order' => 'title']);
+        $filterParams = $this->getHttpRequest()->getPost();
+        $this->template->products = $this->productsFacade->findProducts($filterParams);
     }
 
     protected function createComponentProductCartForm(): Multiplier {
@@ -84,8 +84,8 @@ class ProductPresenter extends BasePresenter {
 
     protected function createComponentProductListFilterForm(): ProductListFilterForm {
         $form = $this->productListFilterFormFactory->create();
-        $form->onSuccess[] = function (ProductListFilterForm $form) {
-            $this->redirect('this', ['category' => $form->values->category]);
+        $form->onSubmit[] = function (ProductListFilterForm $form) {
+            $this->redirect('this', $form->getValues(true));
         };
 
         return $form;

@@ -29,6 +29,10 @@ class ProductListFilterForm extends Form {
     private function createSubcomponents(){
         // Get filter parameters
         $filterParams = $this->productsFacade->getFilterParams();
+        asort($filterParams['categories']);
+        asort($filterParams['player']['min']);
+        asort($filterParams['player']['max']);
+        asort($filterParams['age']);
 
         // Category (checkboxes)
         $this->addCheckboxList('category', 'Category', $filterParams['categories']);
@@ -42,14 +46,14 @@ class ProductListFilterForm extends Form {
             ->setDefaultValue($filterParams['price']['max'])
             ->setHtmlAttribute('oninput', 'updateSliderValue(this.value, "priceSliderValue")');
 
-        $this->addText('priceSliderValue')
+            $this->addText('priceSliderValue')
             ->setHtmlAttribute('id', 'priceSliderValue')
             ->setHtmlAttribute('readonly', true)
             ->setHtmlAttribute('value', $filterParams['price']['max']);
 
         // Number of players (min radio, max radio)
-        $this->addRadioList('minPlayers', 'Minimální počet hráčů', $filterParams['player']['min']);
-        $this->addRadioList('maxPlayers', 'Maximální počet hráčů', $filterParams['player']['max']);
+        $this->addRadioList('minPlayer', 'Minimální počet hráčů', $filterParams['player']['min']);
+        $this->addRadioList('maxPlayer', 'Maximální počet hráčů', $filterParams['player']['max']);
 
         // Age (radio)
         $this->addRadioList('age', 'Věk', $filterParams['age']);

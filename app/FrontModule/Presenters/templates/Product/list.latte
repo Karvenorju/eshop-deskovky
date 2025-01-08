@@ -14,12 +14,7 @@
             {foreach $products as $product}
                 <div class="col-md-6 col-lg-4 my-2 card">
                     <a href="{plink Product:show url=>$product->url}" class="h4">{$product->title}</a>
-                    {if file_exists($product->getImagePath())}
-                    {else}
-                    {/if}
                     {control "productCartForm-$product->productId"}
-                    <p>no</p>
-                    <img src="{$basePath}/img/products/{$product->url}.jpeg" alt="{$product->title}" class="img-fluid"/>
                 </div>
             {/foreach}
         </section>

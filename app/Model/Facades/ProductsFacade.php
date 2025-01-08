@@ -42,7 +42,29 @@ class ProductsFacade {
      * @return Product[]
      */
     public function findProducts(array $params = null, int $offset = null, int $limit = null): array {
-        return $this->productRepository->findAllBy($params, $offset, $limit);
+        $whereArr = [];
+
+        var_dump($params);
+
+        if (isset($params['category']) && is_array($params['category'])) {
+            $whereArr[] = ['category_id IN (?)', $params['category']];
+        }
+        if (isset($params['price'])) {
+            $whereArr[] = ['price <= ?', $params['price']];
+        }
+        if (isset($params['minPlayer'])) {
+            $whereArr[] = ['min_player >= ?', $params['minPlayer']];
+        }
+        if (isset($params['maxPlayer'])) {
+            $whereArr[] = ['max_player <= ?', $params['maxPlayer']];
+        }
+        if (isset($params['age'])) {
+            $whereArr[] = ['min_age >= ?', $params['age']];
+        }
+        if (isset($params['playTime'])) {
+            $whereArr[] = ['play_time <= ?', $params['playTime']];
+        }
+        return $this->productRepository->findAllBy($whereArr, $offset, $limit);
     }
 
     /**
@@ -116,23 +138,23 @@ class ProductsFacade {
         $playTimes = [];
 
         foreach ($products as $product) {
-            $categories[] = $product->category->title;
+            $categories[$product->category->categoryId] = $product->category->title;;
             $prices[] = $product->price;
-            $minPlayer[] = $product->minPlayer;
-            $maxPlayer[] = $product->maxPlayer;
-            $ages[] = $product->minAge;
+            $minPlayer[$product->minPlayer] = $product->minPlayer;
+            $maxPlayer[$product->maxPlayer] = $product->maxPlayer;
+            $ages[$product->minAge] = $product->minAge;
             $playTimes[] = $product->playTime;
         }
 
         return [
-            'categories' => array_unique($categories),
+            'categories' => $categories,
             'price' => [
                 'min' => min($prices),
                 'max' => max($prices)
             ],
             'player' => [
-                'min' => $minPlayer,
-                'max' => $maxPlayer
+                'min' => (array_unique($minPlayer)),
+                'max' => array_unique($maxPlayer)
             ],
             'age' => array_unique($ages),
             'playTime' => [
