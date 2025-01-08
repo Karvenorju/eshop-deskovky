@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Počítač: localhost:3306
--- Vytvořeno: Ned 05. led 2025, 14:29
--- Verze serveru: 10.5.23-MariaDB-0+deb11u1
--- Verze PHP: 8.1.29
+-- Host: localhost:3306
+-- Generation Time: Jan 09, 2025 at 12:23 AM
+-- Server version: 10.5.23-MariaDB-0+deb11u1
+-- PHP Version: 8.1.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Databáze: `kovj19`
+-- Database: `bela08`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `cart`
+-- Table structure for table `cart`
 --
 
 CREATE TABLE `cart` (
@@ -34,64 +34,242 @@ CREATE TABLE `cart` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 
 --
--- Vypisuji data pro tabulku `cart`
+-- Dumping data for table `cart`
 --
 
 INSERT INTO `cart` (`cart_id`, `user_id`, `last_modified`) VALUES
-(15, NULL, '2024-12-27 13:53:39'),
-(16, NULL, '2024-12-27 13:53:41'),
-(17, NULL, '2024-12-27 13:54:06'),
-(18, NULL, '2024-12-27 13:54:20'),
-(19, NULL, '2024-12-27 13:54:22'),
-(20, NULL, '2024-12-27 13:54:23'),
-(21, NULL, '2024-12-27 14:20:30'),
-(22, NULL, '2024-12-27 14:20:34'),
-(23, NULL, '2024-12-27 14:42:59'),
-(24, NULL, '2024-12-27 15:11:48'),
-(25, NULL, '2024-12-27 15:11:50'),
-(26, NULL, '2024-12-27 15:11:52'),
-(27, NULL, '2024-12-27 15:14:52'),
-(28, NULL, '2024-12-27 15:16:12'),
-(29, NULL, '2024-12-27 15:19:14'),
-(30, NULL, '2024-12-27 15:23:07'),
-(31, NULL, '2024-12-27 15:24:26'),
-(32, NULL, '2024-12-27 15:24:29'),
-(33, NULL, '2024-12-27 15:26:45'),
-(34, NULL, '2024-12-27 15:26:50'),
-(35, NULL, '2024-12-27 15:42:51'),
-(36, NULL, '2024-12-27 15:54:22'),
-(37, NULL, '2024-12-27 15:57:28'),
-(38, NULL, '2024-12-27 15:58:09'),
-(39, NULL, '2024-12-27 15:58:59'),
-(40, NULL, '2024-12-27 15:59:11'),
-(41, NULL, '2024-12-27 15:59:34'),
-(42, NULL, '2024-12-27 16:00:44'),
-(43, NULL, '2024-12-27 16:00:48'),
-(44, NULL, '2024-12-27 16:01:44'),
-(45, NULL, '2024-12-27 16:01:47'),
-(46, NULL, '2024-12-27 16:03:03'),
-(47, NULL, '2024-12-27 16:06:43'),
-(48, NULL, '2024-12-27 16:07:32'),
-(49, NULL, '2024-12-27 16:07:52'),
-(50, NULL, '2024-12-27 16:10:02'),
-(51, NULL, '2024-12-27 16:10:24'),
-(52, NULL, '2024-12-27 16:13:12'),
-(53, NULL, '2024-12-27 16:15:37'),
-(54, NULL, '2024-12-27 16:16:28'),
-(55, NULL, '2024-12-27 18:09:54'),
-(56, NULL, '2024-12-27 18:11:07'),
-(57, NULL, '2024-12-27 18:11:13'),
-(58, NULL, '2024-12-27 18:11:15'),
-(59, NULL, '2024-12-27 18:11:22'),
-(60, NULL, '2024-12-27 18:11:41'),
-(61, NULL, '2024-12-27 18:13:06'),
-(62, NULL, '2024-12-27 18:13:08'),
-(63, NULL, '2024-12-27 18:23:32');
+(140, NULL, '2025-01-07 14:17:04'),
+(141, NULL, '2025-01-07 14:17:05'),
+(142, NULL, '2025-01-07 14:17:17'),
+(143, NULL, '2025-01-07 14:20:25'),
+(144, NULL, '2025-01-07 14:20:34'),
+(145, NULL, '2025-01-07 14:42:36'),
+(146, NULL, '2025-01-07 14:43:04'),
+(147, NULL, '2025-01-07 14:43:11'),
+(148, NULL, '2025-01-07 14:43:36'),
+(149, NULL, '2025-01-07 14:43:37'),
+(150, NULL, '2025-01-07 14:43:40'),
+(151, NULL, '2025-01-07 14:43:53'),
+(152, NULL, '2025-01-07 14:46:28'),
+(153, NULL, '2025-01-07 14:51:02'),
+(154, NULL, '2025-01-07 14:51:10'),
+(155, NULL, '2025-01-07 14:51:28'),
+(156, NULL, '2025-01-07 14:51:33'),
+(157, NULL, '2025-01-07 14:52:05'),
+(158, NULL, '2025-01-07 14:52:10'),
+(159, NULL, '2025-01-07 14:52:52'),
+(160, NULL, '2025-01-07 14:54:06'),
+(161, NULL, '2025-01-07 14:54:12'),
+(162, NULL, '2025-01-07 14:57:48'),
+(163, NULL, '2025-01-07 15:20:50'),
+(164, NULL, '2025-01-07 15:20:53'),
+(165, NULL, '2025-01-07 15:20:55'),
+(166, NULL, '2025-01-07 15:20:56'),
+(167, NULL, '2025-01-07 15:20:58'),
+(168, NULL, '2025-01-07 15:26:27'),
+(169, NULL, '2025-01-07 15:26:31'),
+(170, NULL, '2025-01-07 15:26:59'),
+(171, NULL, '2025-01-07 15:27:01'),
+(172, NULL, '2025-01-07 15:29:14'),
+(173, NULL, '2025-01-07 15:29:38'),
+(174, NULL, '2025-01-07 15:46:47'),
+(175, NULL, '2025-01-07 15:48:33'),
+(176, NULL, '2025-01-07 15:48:34'),
+(177, NULL, '2025-01-07 15:48:37'),
+(178, NULL, '2025-01-07 15:49:01'),
+(179, NULL, '2025-01-08 15:10:17'),
+(180, NULL, '2025-01-08 15:10:40'),
+(181, NULL, '2025-01-08 15:10:43'),
+(182, NULL, '2025-01-08 15:11:49'),
+(183, NULL, '2025-01-08 15:12:15'),
+(184, NULL, '2025-01-08 15:13:34'),
+(185, NULL, '2025-01-08 15:16:46'),
+(186, NULL, '2025-01-08 15:17:35'),
+(187, NULL, '2025-01-08 15:18:19'),
+(188, NULL, '2025-01-08 15:18:45'),
+(189, NULL, '2025-01-08 15:19:18'),
+(190, NULL, '2025-01-08 15:21:25'),
+(191, NULL, '2025-01-08 15:22:05'),
+(192, NULL, '2025-01-08 15:23:01'),
+(193, NULL, '2025-01-08 15:23:34'),
+(194, NULL, '2025-01-08 15:26:38'),
+(195, NULL, '2025-01-08 15:27:08'),
+(196, NULL, '2025-01-08 15:44:21'),
+(197, NULL, '2025-01-08 15:45:20'),
+(198, NULL, '2025-01-08 15:54:54'),
+(199, NULL, '2025-01-08 15:55:04'),
+(200, NULL, '2025-01-08 15:55:14'),
+(201, NULL, '2025-01-08 15:55:23'),
+(202, NULL, '2025-01-08 16:06:00'),
+(203, NULL, '2025-01-08 16:06:05'),
+(204, NULL, '2025-01-08 16:06:54'),
+(205, NULL, '2025-01-08 16:16:53'),
+(206, NULL, '2025-01-08 16:16:58'),
+(207, NULL, '2025-01-08 16:17:50'),
+(208, NULL, '2025-01-08 16:21:46'),
+(209, NULL, '2025-01-08 16:22:57'),
+(210, NULL, '2025-01-08 16:23:03'),
+(211, NULL, '2025-01-08 16:24:18'),
+(212, NULL, '2025-01-08 16:24:21'),
+(213, NULL, '2025-01-08 16:24:24'),
+(214, NULL, '2025-01-08 16:25:52'),
+(215, NULL, '2025-01-08 16:26:32'),
+(216, NULL, '2025-01-08 16:26:35'),
+(217, NULL, '2025-01-08 16:26:53'),
+(218, NULL, '2025-01-08 16:27:19'),
+(219, NULL, '2025-01-08 16:47:03'),
+(220, NULL, '2025-01-08 16:47:23'),
+(221, NULL, '2025-01-08 16:47:31'),
+(222, NULL, '2025-01-08 16:48:28'),
+(223, NULL, '2025-01-08 16:48:55'),
+(224, NULL, '2025-01-08 16:49:01'),
+(225, NULL, '2025-01-08 16:49:09'),
+(226, NULL, '2025-01-08 16:49:57'),
+(227, NULL, '2025-01-08 16:51:42'),
+(228, NULL, '2025-01-08 16:51:46'),
+(229, NULL, '2025-01-08 16:51:53'),
+(230, NULL, '2025-01-08 16:52:50'),
+(231, NULL, '2025-01-08 17:20:06'),
+(232, NULL, '2025-01-08 17:20:09'),
+(233, NULL, '2025-01-08 17:22:11'),
+(234, NULL, '2025-01-08 17:24:30'),
+(235, NULL, '2025-01-08 17:24:36'),
+(236, NULL, '2025-01-08 17:24:40'),
+(237, NULL, '2025-01-08 17:24:43'),
+(238, NULL, '2025-01-08 17:24:46'),
+(239, NULL, '2025-01-08 17:24:49'),
+(240, NULL, '2025-01-08 17:24:52'),
+(241, NULL, '2025-01-08 17:25:05'),
+(242, NULL, '2025-01-08 17:27:55'),
+(243, NULL, '2025-01-08 17:28:05'),
+(244, NULL, '2025-01-08 17:32:18'),
+(245, NULL, '2025-01-08 17:55:03'),
+(246, NULL, '2025-01-08 17:57:52'),
+(247, NULL, '2025-01-08 17:57:56'),
+(248, NULL, '2025-01-08 17:58:01'),
+(249, NULL, '2025-01-08 17:58:08'),
+(250, NULL, '2025-01-08 18:08:36'),
+(251, NULL, '2025-01-08 18:11:43'),
+(252, NULL, '2025-01-08 18:11:47'),
+(253, NULL, '2025-01-08 18:14:23'),
+(254, NULL, '2025-01-08 18:14:29'),
+(255, NULL, '2025-01-08 18:14:31'),
+(256, NULL, '2025-01-08 18:14:32'),
+(257, NULL, '2025-01-08 18:14:33'),
+(258, NULL, '2025-01-08 18:15:50'),
+(259, NULL, '2025-01-08 18:15:59'),
+(260, NULL, '2025-01-08 18:16:01'),
+(261, NULL, '2025-01-08 18:17:57'),
+(262, NULL, '2025-01-08 18:18:02'),
+(263, NULL, '2025-01-08 18:18:04'),
+(264, NULL, '2025-01-08 18:22:43'),
+(265, NULL, '2025-01-08 18:23:09'),
+(266, NULL, '2025-01-08 18:23:10'),
+(267, NULL, '2025-01-08 18:23:11'),
+(268, NULL, '2025-01-08 18:23:11'),
+(269, NULL, '2025-01-08 18:23:12'),
+(270, NULL, '2025-01-08 18:23:58'),
+(271, NULL, '2025-01-08 18:24:07'),
+(272, NULL, '2025-01-08 18:24:22'),
+(273, NULL, '2025-01-08 18:26:55'),
+(274, NULL, '2025-01-08 18:26:58'),
+(275, NULL, '2025-01-08 18:27:47'),
+(276, NULL, '2025-01-08 18:28:02'),
+(277, NULL, '2025-01-08 18:28:37'),
+(278, NULL, '2025-01-08 18:29:51'),
+(279, NULL, '2025-01-08 18:30:45'),
+(280, NULL, '2025-01-08 18:30:47'),
+(281, NULL, '2025-01-08 18:30:48'),
+(282, NULL, '2025-01-08 18:30:49'),
+(283, NULL, '2025-01-08 18:30:49'),
+(284, NULL, '2025-01-08 18:30:50'),
+(285, NULL, '2025-01-08 18:30:52'),
+(286, NULL, '2025-01-08 18:31:02'),
+(287, NULL, '2025-01-08 18:31:05'),
+(288, NULL, '2025-01-08 18:31:14'),
+(289, NULL, '2025-01-08 18:33:57'),
+(290, NULL, '2025-01-08 18:34:01'),
+(291, NULL, '2025-01-08 18:34:25'),
+(292, NULL, '2025-01-08 18:34:28'),
+(293, NULL, '2025-01-08 18:34:31'),
+(294, NULL, '2025-01-08 18:37:12'),
+(295, NULL, '2025-01-08 18:37:16'),
+(296, NULL, '2025-01-08 18:37:18'),
+(297, NULL, '2025-01-08 18:38:55'),
+(298, NULL, '2025-01-08 18:39:00'),
+(299, NULL, '2025-01-08 18:39:02'),
+(300, NULL, '2025-01-08 18:39:04'),
+(301, NULL, '2025-01-08 18:39:11'),
+(302, NULL, '2025-01-08 18:39:15'),
+(303, NULL, '2025-01-08 18:39:39'),
+(304, NULL, '2025-01-08 18:39:40'),
+(305, NULL, '2025-01-08 18:39:42'),
+(306, NULL, '2025-01-08 22:46:44'),
+(307, NULL, '2025-01-08 22:48:32'),
+(308, NULL, '2025-01-08 22:48:34'),
+(309, NULL, '2025-01-08 22:48:37'),
+(310, NULL, '2025-01-08 22:48:46'),
+(311, NULL, '2025-01-08 22:49:33'),
+(312, NULL, '2025-01-08 22:49:45'),
+(313, NULL, '2025-01-08 22:50:04'),
+(314, NULL, '2025-01-08 22:50:12'),
+(315, NULL, '2025-01-08 22:52:37'),
+(316, NULL, '2025-01-08 22:52:42'),
+(317, NULL, '2025-01-08 22:52:47'),
+(318, NULL, '2025-01-08 22:52:53'),
+(319, NULL, '2025-01-08 22:53:40'),
+(320, NULL, '2025-01-08 22:54:57'),
+(321, NULL, '2025-01-08 22:55:00'),
+(322, NULL, '2025-01-08 22:55:06'),
+(323, NULL, '2025-01-08 22:55:10'),
+(324, NULL, '2025-01-08 22:56:09'),
+(325, NULL, '2025-01-08 22:56:36'),
+(326, NULL, '2025-01-08 22:56:40'),
+(327, NULL, '2025-01-08 22:56:48'),
+(328, NULL, '2025-01-08 22:56:53'),
+(329, NULL, '2025-01-08 22:56:56'),
+(330, NULL, '2025-01-08 22:57:00'),
+(331, NULL, '2025-01-08 22:58:49'),
+(332, NULL, '2025-01-08 22:58:51'),
+(333, NULL, '2025-01-08 22:58:55'),
+(334, NULL, '2025-01-08 22:58:58'),
+(335, NULL, '2025-01-08 22:59:00'),
+(336, NULL, '2025-01-08 22:59:12'),
+(337, NULL, '2025-01-08 22:59:26'),
+(338, NULL, '2025-01-08 22:59:30'),
+(339, NULL, '2025-01-08 22:59:38'),
+(340, NULL, '2025-01-08 22:59:51'),
+(341, NULL, '2025-01-08 22:59:53'),
+(342, NULL, '2025-01-08 22:59:56'),
+(343, NULL, '2025-01-08 23:03:51'),
+(344, NULL, '2025-01-08 23:06:28'),
+(345, NULL, '2025-01-08 23:06:40'),
+(346, NULL, '2025-01-08 23:07:44'),
+(347, NULL, '2025-01-08 23:08:12'),
+(348, NULL, '2025-01-08 23:08:17'),
+(349, NULL, '2025-01-08 23:08:21'),
+(350, NULL, '2025-01-08 23:08:29'),
+(351, NULL, '2025-01-08 23:10:14'),
+(352, NULL, '2025-01-08 23:10:18'),
+(353, NULL, '2025-01-08 23:11:51'),
+(354, NULL, '2025-01-08 23:11:57'),
+(355, NULL, '2025-01-08 23:12:26'),
+(356, NULL, '2025-01-08 23:12:31'),
+(357, NULL, '2025-01-08 23:13:19'),
+(358, NULL, '2025-01-08 23:14:43'),
+(359, NULL, '2025-01-08 23:18:03'),
+(360, NULL, '2025-01-08 23:18:05'),
+(361, NULL, '2025-01-08 23:18:10'),
+(362, NULL, '2025-01-08 23:18:25'),
+(363, NULL, '2025-01-08 23:19:07'),
+(364, NULL, '2025-01-08 23:21:26'),
+(365, NULL, '2025-01-08 23:21:43'),
+(366, NULL, '2025-01-08 23:21:49');
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `cart_item`
+-- Table structure for table `cart_item`
 --
 
 CREATE TABLE `cart_item` (
@@ -104,7 +282,7 @@ CREATE TABLE `cart_item` (
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `category`
+-- Table structure for table `category`
 --
 
 CREATE TABLE `category` (
@@ -114,7 +292,7 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci COMMENT='Kategorie poznámek';
 
 --
--- Vypisuji data pro tabulku `category`
+-- Dumping data for table `category`
 --
 
 INSERT INTO `category` (`category_id`, `title`, `description`) VALUES
@@ -221,7 +399,7 @@ INSERT INTO `category` (`category_id`, `title`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `forgotten_password`
+-- Table structure for table `forgotten_password`
 --
 
 CREATE TABLE `forgotten_password` (
@@ -234,7 +412,7 @@ CREATE TABLE `forgotten_password` (
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `permission`
+-- Table structure for table `permission`
 --
 
 CREATE TABLE `permission` (
@@ -246,7 +424,7 @@ CREATE TABLE `permission` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 
 --
--- Vypisuji data pro tabulku `permission`
+-- Dumping data for table `permission`
 --
 
 INSERT INTO `permission` (`permission_id`, `role_id`, `resource_id`, `action`, `type`) VALUES
@@ -282,7 +460,7 @@ INSERT INTO `permission` (`permission_id`, `role_id`, `resource_id`, `action`, `
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `product`
+-- Table structure for table `product`
 --
 
 CREATE TABLE `product` (
@@ -300,18 +478,21 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci COMMENT='Tabulka s nabízenými produkty';
 
 --
--- Vypisuji data pro tabulku `product`
+-- Dumping data for table `product`
 --
 
 INSERT INTO `product` (`product_id`, `category_id`, `title`, `url`, `description`, `photo_extension`, `price`, `min_player`, `max_player`, `play_time`, `min_age`) VALUES
 (7, 96, 'Risk', 'risk', 'Possibly the most popular, mass market war game. The goal is conquest of the world.\r\n\r\nEach player\'s turn consists of:\r\n- gaining reinforcements through number of territories held, control of every territory on each continent, and turning sets of bonus cards.\r\n- Attacking other players using a simple combat rule of comparing the highest dice rolled for each side. Players may attack as often as desired. If one enemy territory is successfully taken, the player is awarded with a bonus card.\r\n- Moving a group of armies to another adjacent territory.\r\n', '', '400.00', 1, 2, 6, 10),
 (8, 60, 'Carcassonne ', 'carcassonne', 'Carcassonne is a tile placement game in which the players draw and place a tile with a piece of southern French landscape represented on it. The tile might feature a city, a road, a cloister, grassland or some combination thereof, and it must be placed adjacent to tiles that have already been played, in such a way that cities are connected to cities, roads to roads, et cetera. Having placed a tile, the player can then decide to place one of his/her meeples in one of the areas on it: in the city as a knight, on the road as a robber, in the cloister as a monk, or in the field as a farmer. When that area is complete that meeple scores points for its owner.\r\n\r\nDuring a game of Carcassonne, players are faced with decisions like: \"Is it really worth putting my last meeple there?\" or \"Should I use this tile to expand my city, or should I place it near my opponent instead, giving him/her a hard time to complete his/her project and score points?\" Since players place only one tile and have the option to place one meeple on it, turns proceed quickly even if it is a game full of options and possibilities.\r\n\r\nFirst game in the Carcassonne series.', '', '300.00', 2, 5, 45, 7),
-(9, 40, 'Monopoly: The Portable Property Trading Game', 'monopoly', 'A very small travel version of Monopoly which often comes in the shape of a red suitcase and plays very similarly to the original game. One difference is that it contains three dice. The Community Chest and Chance cards are replaced with tables. Three dice are rolled and the tables are referenced to find the result.\r\n\r\nThe Waddington\'s UK edition has different properties than the U.S. version, and also comes in a different sort of case with a magnetic board and magnetic hotels, houses, and movers.\r\n', '', '645.00', 2, 6, 120, 8);
+(9, 40, 'Monopoly: The Portable Property Trading Game', 'monopoly', 'A very small travel version of Monopoly which often comes in the shape of a red suitcase and plays very similarly to the original game. One difference is that it contains three dice. The Community Chest and Chance cards are replaced with tables. Three dice are rolled and the tables are referenced to find the result.\r\n\r\nThe Waddington\'s UK edition has different properties than the U.S. version, and also comes in a different sort of case with a magnetic board and magnetic hotels, houses, and movers.\r\n', '', '645.00', 2, 6, 120, 8),
+(10, 47, 'Clank! Legacy: Acquisitions Incorporated', 'clank', 'Clank! Legacy: Acquisitions Incorporated extends the deck-building fun of Clank! with legacy-style gameplay! Found your own franchise of the legendary adventuring company, Acquisitions Incorporated, and shepherd your fledgling treasure-hunters to immortal corporate glory over the course of multiple games. Your game board, your deck, and your world change as you play to create a unique campaign tailored to your adventuring party. Be cunning, be bold, and most importantly, be ready...', '', '546.00', 2, 4, 120, 13),
+(11, 40, 'A Feast for Odin ', 'feast-for-odin', 'A Feast for Odin is a saga in the form of a board game. You are reliving the cultural achievements, mercantile expeditions, and pillages of those tribes we know as Viking today — a term that was used quite differently towards the end of the first millennium.\r\n\r\nWhen the northerners went out for a raid, they used to say they headed out for a viking. Their Scandinavian ancestors, however, were much more than just pirates. They were explorers and founders of states. Leif Eriksson is said to be the first European in America, long before Columbus.\r\nIn what is known today as Normandy, the intruders were not called Vikings but Normans. One of them is the famous William the Conqueror who invaded England in 1066. He managed to do what the king of Norway failed to do only a few years prior: conquer the Throne of England. The reason the people of these times became such strong seafarers was their unfortunate agricultural situation: crop shortfalls caused great distress.\r\n\r\nIn this game, you will raid and explore new territories. You will also engage in the day-to-day activity of collecting goods with which to achieve a financially secure position in society. In the end, the player whose possessions bear the greatest value will be declared the winner.', '', '875.00', 1, 4, 120, 12),
+(12, 4, 'Frosthaven', 'frosthaven', 'Frosthaven is the story of a small outpost far to the north of the capital city of White Oak. It\'s an outpost barely surviving the harsh weather let alone invasions from forces both known and unknown. However, a group of mercenaries, at the end of their rope, will help bring this settlement back from the edge of destruction. Not only will they have to deal with the harsh elements, but with other, far more dangerous threats out in the unforgiving cold, as well. There are: Algox, the bigger, more yeti-like cousins of the Inox, attacking from the mountains; Lurkers flooding in from the northern sea; and rumors have it that there are machines that wander the frozen wastes of their own free will. The party of mercenaries must face all of these perils, and perhaps in doing so, make peace with these new races so they can work together against even more sinister forces.\r\n\r\nFrosthaven is a standalone adventure from the designer and publisher of Gloomhaven that features sixteen new characters, three new races, more than twenty new enemies, more than one hundred new items, and a new, 100-scenario campaign. Characters and items from Gloomhaven will be usable in Frosthaven, and vice versa.\r\n\r\nIn addition to using the well-known combat mechanisms of Gloomhaven, Frosthaven features other elements, such as mysteries to solve, a seasonal event system to live through, and player control over how the ramshackle village expands, with each new building offering new ways to progress.\r\n\r\nFrosthaven has a whole new set of items but there is a mechanism for bringing items over from \'Gloomhaven\'. However, as Frosthaven\'s outpost is a remote location, these products may be imported but are not present as standard items. Resources are much more valuable and you have to build items through a crafting system rather than just buying them.', '', '246.00', 1, 4, 180, 14);
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `resource`
+-- Table structure for table `resource`
 --
 
 CREATE TABLE `resource` (
@@ -319,7 +500,7 @@ CREATE TABLE `resource` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci COMMENT='Tabulka obsahující seznam zdrojů';
 
 --
--- Vypisuji data pro tabulku `resource`
+-- Dumping data for table `resource`
 --
 
 INSERT INTO `resource` (`resource_id`) VALUES
@@ -339,7 +520,7 @@ INSERT INTO `resource` (`resource_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `role`
+-- Table structure for table `role`
 --
 
 CREATE TABLE `role` (
@@ -347,7 +528,7 @@ CREATE TABLE `role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 
 --
--- Vypisuji data pro tabulku `role`
+-- Dumping data for table `role`
 --
 
 INSERT INTO `role` (`role_id`) VALUES
@@ -358,7 +539,7 @@ INSERT INTO `role` (`role_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -367,24 +548,22 @@ CREATE TABLE `user` (
   `email` varchar(255) NOT NULL,
   `facebook_id` varchar(100) DEFAULT NULL,
   `role_id` varchar(50) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `address` varchar(200) DEFAULT NULL
+  `password` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci COMMENT='Tabulka s daty uživatelů';
 
 --
--- Indexy pro exportované tabulky
+-- Indexes for dumped tables
 --
 
 --
--- Indexy pro tabulku `cart`
+-- Indexes for table `cart`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`cart_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexy pro tabulku `cart_item`
+-- Indexes for table `cart_item`
 --
 ALTER TABLE `cart_item`
   ADD PRIMARY KEY (`cart_item_id`),
@@ -392,20 +571,20 @@ ALTER TABLE `cart_item`
   ADD KEY `cart_id` (`cart_id`);
 
 --
--- Indexy pro tabulku `category`
+-- Indexes for table `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`category_id`);
 
 --
--- Indexy pro tabulku `forgotten_password`
+-- Indexes for table `forgotten_password`
 --
 ALTER TABLE `forgotten_password`
   ADD PRIMARY KEY (`forgotten_password_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexy pro tabulku `permission`
+-- Indexes for table `permission`
 --
 ALTER TABLE `permission`
   ADD PRIMARY KEY (`permission_id`),
@@ -413,7 +592,7 @@ ALTER TABLE `permission`
   ADD KEY `permission_ibfk_1` (`resource_id`);
 
 --
--- Indexy pro tabulku `product`
+-- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`product_id`),
@@ -421,19 +600,19 @@ ALTER TABLE `product`
   ADD KEY `category_id` (`category_id`);
 
 --
--- Indexy pro tabulku `resource`
+-- Indexes for table `resource`
 --
 ALTER TABLE `resource`
   ADD PRIMARY KEY (`resource_id`);
 
 --
--- Indexy pro tabulku `role`
+-- Indexes for table `role`
 --
 ALTER TABLE `role`
   ADD PRIMARY KEY (`role_id`);
 
 --
--- Indexy pro tabulku `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`),
@@ -442,89 +621,89 @@ ALTER TABLE `user`
   ADD KEY `role_id` (`role_id`);
 
 --
--- AUTO_INCREMENT pro tabulky
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pro tabulku `cart`
+-- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=367;
 
 --
--- AUTO_INCREMENT pro tabulku `cart_item`
+-- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT pro tabulku `category`
+-- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
   MODIFY `category_id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
--- AUTO_INCREMENT pro tabulku `forgotten_password`
+-- AUTO_INCREMENT for table `forgotten_password`
 --
 ALTER TABLE `forgotten_password`
   MODIFY `forgotten_password_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pro tabulku `permission`
+-- AUTO_INCREMENT for table `permission`
 --
 ALTER TABLE `permission`
   MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
--- AUTO_INCREMENT pro tabulku `product`
+-- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT pro tabulku `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Omezení pro exportované tabulky
+-- Constraints for dumped tables
 --
 
 --
--- Omezení pro tabulku `cart`
+-- Constraints for table `cart`
 --
 ALTER TABLE `cart`
   ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Omezení pro tabulku `cart_item`
+-- Constraints for table `cart_item`
 --
 ALTER TABLE `cart_item`
   ADD CONSTRAINT `cart_item_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `cart_item_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Omezení pro tabulku `forgotten_password`
+-- Constraints for table `forgotten_password`
 --
 ALTER TABLE `forgotten_password`
   ADD CONSTRAINT `forgotten_password_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Omezení pro tabulku `permission`
+-- Constraints for table `permission`
 --
 ALTER TABLE `permission`
   ADD CONSTRAINT `permission_ibfk_1` FOREIGN KEY (`resource_id`) REFERENCES `resource` (`resource_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `permission_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Omezení pro tabulku `product`
+-- Constraints for table `product`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE SET NULL;
 
 --
--- Omezení pro tabulku `user`
+-- Constraints for table `user`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE SET NULL ON UPDATE CASCADE;
