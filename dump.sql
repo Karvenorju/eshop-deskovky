@@ -548,7 +548,9 @@ CREATE TABLE `user` (
   `email` varchar(255) NOT NULL,
   `facebook_id` varchar(100) DEFAULT NULL,
   `role_id` varchar(50) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL
+  `password` varchar(255) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `address` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci COMMENT='Tabulka s daty uživatelů';
 
 --
