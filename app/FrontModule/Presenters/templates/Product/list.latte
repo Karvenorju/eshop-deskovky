@@ -5,8 +5,6 @@
 
     <div class="col d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
         {control productListFilterForm}
-        <div id="slider"></div>
-
     </div>
 
     <div class="col-9">
@@ -29,47 +27,7 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var priceSlider = document.getElementById('price-slider');
-        var playersSlider = document.getElementById('players-slider');
-
-        noUiSlider.create(priceSlider, {
-            start: [{$filterParams['priceRange']['min']}, {$filterParams['priceRange']['max']}],
-            connect: true,
-            range: {
-                'min': 0,
-                'max': 100
-            },
-        });
-
-        noUiSlider.create(playersSlider, {
-            start: [{$filterParams['playerRange']['min']}, {$filterParams['playerRange']['max']}],
-            connect: true,
-            range: {
-                'min': {$filterParams['playerRange']['min']},
-                'max': {$filterParams['playerRange']['max']}
-            },
-            tooltips: true,
-            format: {
-                to: function (value) {
-                    return value.toFixed(0);
-                },
-                from: function (value) {
-                    return Number(value);
-                }
-            }
-        });
-
-        var slider = document.getElementById('slider');
-
-        noUiSlider.create(slider, {
-            start: [20, 80],
-            connect: true,
-            range: {
-                'min': 0,
-                'max': 100
-            }
-        });
-
-    });
+    function updateSliderValue(val, id) {
+        document.getElementById(id).value = val;
+    }
 </script>

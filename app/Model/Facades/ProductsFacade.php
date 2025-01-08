@@ -126,16 +126,16 @@ class ProductsFacade {
 
         return [
             'categories' => array_unique($categories),
-            'priceRange' => [
+            'price' => [
                 'min' => min($prices),
                 'max' => max($prices)
             ],
-            'playerRange' => [
-                'min' => min($minPlayer),
-                'max' => max($maxPlayer)
+            'player' => [
+                'min' => $minPlayer,
+                'max' => $maxPlayer
             ],
-            'ageGroups' => array_unique($ages),
-            'playTimeRange' => [
+            'age' => array_unique($ages),
+            'playTime' => [
                 'min' => min($playTimes),
                 'max' => max($playTimes)
             ]

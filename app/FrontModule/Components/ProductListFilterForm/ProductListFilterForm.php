@@ -27,27 +27,47 @@ class ProductListFilterForm extends Form {
     }
 
     private function createSubcomponents(){
-        /*
-         * TODO fitering by: category (checkboxes), price (double range slider), number of players (double range slider), age (radio buttons), play time (range slider), search (text input)
-         */
+        // Get filter parameters
         $filterParams = $this->productsFacade->getFilterParams();
 
         // Category (checkboxes)
         $this->addCheckboxList('category', 'Category', $filterParams['categories']);
 
         // Price (slider)
-        $this->addInteger('price', 'Cena')
+        $this->addInteger('price', 'Cena (Kč)')
             ->setHtmlType('range')
             ->setHtmlAttribute('min', $filterParams['price']['min'])
             ->setHtmlAttribute('max', $filterParams['price']['max'])
             ->setHtmlAttribute('step', 1)
-            ->setHtmlAttribute('value', $filterParams['price']['max'])
-            ->setHtmlAttribute('oninput', 'this.nextElementSibling.value = this.value');
-        $this->addText('priceOutput', 'Cena')
-            ->setHtmlAttribute('readonly', true)
-            ->setHtmlAttribute('style', 'border:0; color:#f6931f; font-weight:bold;')
-            ->setHtmlAttribute('id', 'priceOutput');
+            ->setDefaultValue($filterParams['price']['max'])
+            ->setHtmlAttribute('oninput', 'updateSliderValue(this.value, "priceSliderValue")');
 
+        $this->addText('priceSliderValue')
+            ->setHtmlAttribute('id', 'priceSliderValue')
+            ->setHtmlAttribute('readonly', true)
+            ->setHtmlAttribute('value', $filterParams['price']['max']);
+
+        // Number of players (min radio, max radio)
+        $this->addRadioList('minPlayers', 'Minimální počet hráčů', $filterParams['player']['min']);
+        $this->addRadioList('maxPlayers', 'Maximální počet hráčů', $filterParams['player']['max']);
+
+        // Age (radio)
+        $this->addRadioList('age', 'Věk', $filterParams['age']);
+
+        // Play time (slider)
+        $this->addInteger('playTime', 'Doba hraní (minuty)')
+            ->setHtmlType('range')
+            ->setHtmlAttribute('min', $filterParams['playTime']['min'])
+            ->setHtmlAttribute('max', $filterParams['playTime']['max'])
+            ->setHtmlAttribute('step', 1)
+            ->setHtmlAttribute('value', $filterParams['playTime']['max'])
+            ->setDefaultValue($filterParams['playTime']['max'])
+            ->setHtmlAttribute('oninput', 'updateSliderValue(this.value, "playTimeSliderValue")');
+
+        $this->addText('playTimeSliderValue')
+            ->setHtmlAttribute('id', 'playTimeSliderValue')
+            ->setHtmlAttribute('readonly', true)
+            ->setHtmlAttribute('value', $filterParams['playTime']['max']);
 
         $this->addSubmit('filter', 'Filtrovat');
     }
