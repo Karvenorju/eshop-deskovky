@@ -13,7 +13,9 @@ use LeanMapper\Entity;
  * @property string $email
  * @property string|null $facebookId = null
  * @property string|null $password = null
+ * @property string|null $phone = null
+ * @property string|null $address = null
  */
-class User extends Entity{
+class User extends Entity {
 
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: localhost:3306
--- Vytvořeno: Sob 28. pro 2024, 00:29
+-- Vytvořeno: Ned 05. led 2025, 14:29
 -- Verze serveru: 10.5.23-MariaDB-0+deb11u1
 -- Verze PHP: 8.1.29
 
@@ -101,14 +101,6 @@ CREATE TABLE `cart_item` (
   `count` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
 
---
--- Vypisuji data pro tabulku `cart_item`
---
-
-INSERT INTO `cart_item` (`cart_item_id`, `product_id`, `cart_id`, `count`) VALUES
-(4, 1, 14, 3),
-(5, 3, 14, 6);
-
 -- --------------------------------------------------------
 
 --
@@ -122,7 +114,7 @@ CREATE TABLE `category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci COMMENT='Kategorie poznámek';
 
 --
--- Dumping data for table `category`
+-- Vypisuji data pro tabulku `category`
 --
 
 INSERT INTO `category` (`category_id`, `title`, `description`) VALUES
@@ -299,19 +291,22 @@ CREATE TABLE `product` (
   `title` varchar(100) NOT NULL,
   `url` varchar(100) NOT NULL,
   `description` text NOT NULL,
-  `price` decimal(10,2) NOT NULL,
   `photo_extension` varchar(10) NOT NULL,
-  `available` tinyint(1) NOT NULL DEFAULT 1
+  `price` decimal(10,2) NOT NULL,
+  `min_player` int(11) NOT NULL DEFAULT 1,
+  `max_player` int(11) NOT NULL,
+  `play_time` int(11) NOT NULL,
+  `min_age` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci COMMENT='Tabulka s nabízenými produkty';
 
 --
 -- Vypisuji data pro tabulku `product`
 --
 
-INSERT INTO `product` (`product_id`, `category_id`, `title`, `url`, `description`, `price`, `photo_extension`, `available`) VALUES
-(1, NULL, 'aTestovací produkt2', 'testovaci-produkt', 'Lorem ipsum...', '100.00', '', 1),
-(3, NULL, 'test', 'test', '+++', '11.00', 'jpeg', 1),
-(6, NULL, 'test', 'testx', 'qaa', '1.00', '', 1);
+INSERT INTO `product` (`product_id`, `category_id`, `title`, `url`, `description`, `photo_extension`, `price`, `min_player`, `max_player`, `play_time`, `min_age`) VALUES
+(7, 96, 'Risk', 'risk', 'Possibly the most popular, mass market war game. The goal is conquest of the world.\r\n\r\nEach player\'s turn consists of:\r\n- gaining reinforcements through number of territories held, control of every territory on each continent, and turning sets of bonus cards.\r\n- Attacking other players using a simple combat rule of comparing the highest dice rolled for each side. Players may attack as often as desired. If one enemy territory is successfully taken, the player is awarded with a bonus card.\r\n- Moving a group of armies to another adjacent territory.\r\n', '', '400.00', 1, 2, 6, 10),
+(8, 60, 'Carcassonne ', 'carcassonne', 'Carcassonne is a tile placement game in which the players draw and place a tile with a piece of southern French landscape represented on it. The tile might feature a city, a road, a cloister, grassland or some combination thereof, and it must be placed adjacent to tiles that have already been played, in such a way that cities are connected to cities, roads to roads, et cetera. Having placed a tile, the player can then decide to place one of his/her meeples in one of the areas on it: in the city as a knight, on the road as a robber, in the cloister as a monk, or in the field as a farmer. When that area is complete that meeple scores points for its owner.\r\n\r\nDuring a game of Carcassonne, players are faced with decisions like: \"Is it really worth putting my last meeple there?\" or \"Should I use this tile to expand my city, or should I place it near my opponent instead, giving him/her a hard time to complete his/her project and score points?\" Since players place only one tile and have the option to place one meeple on it, turns proceed quickly even if it is a game full of options and possibilities.\r\n\r\nFirst game in the Carcassonne series.', '', '300.00', 2, 5, 45, 7),
+(9, 40, 'Monopoly: The Portable Property Trading Game', 'monopoly', 'A very small travel version of Monopoly which often comes in the shape of a red suitcase and plays very similarly to the original game. One difference is that it contains three dice. The Community Chest and Chance cards are replaced with tables. Three dice are rolled and the tables are referenced to find the result.\r\n\r\nThe Waddington\'s UK edition has different properties than the U.S. version, and also comes in a different sort of case with a magnetic board and magnetic hotels, houses, and movers.\r\n', '', '645.00', 2, 6, 120, 8);
 
 -- --------------------------------------------------------
 
@@ -372,11 +367,13 @@ CREATE TABLE `user` (
   `email` varchar(255) NOT NULL,
   `facebook_id` varchar(100) DEFAULT NULL,
   `role_id` varchar(50) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL
+  `password` varchar(255) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `address` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci COMMENT='Tabulka s daty uživatelů';
 
 --
--- Indexes for dumped tables
+-- Indexy pro exportované tabulky
 --
 
 --
@@ -421,8 +418,7 @@ ALTER TABLE `permission`
 ALTER TABLE `product`
   ADD PRIMARY KEY (`product_id`),
   ADD UNIQUE KEY `url` (`url`),
-  ADD KEY `category_id` (`category_id`),
-  ADD KEY `available` (`available`);
+  ADD KEY `category_id` (`category_id`);
 
 --
 -- Indexy pro tabulku `resource`
@@ -453,7 +449,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pro tabulku `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT pro tabulku `cart_item`
@@ -465,7 +461,7 @@ ALTER TABLE `cart_item`
 -- AUTO_INCREMENT pro tabulku `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `category_id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT pro tabulku `forgotten_password`
@@ -483,7 +479,7 @@ ALTER TABLE `permission`
 -- AUTO_INCREMENT pro tabulku `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pro tabulku `user`

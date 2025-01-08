@@ -1,7 +1,16 @@
 {block content}
+<div class="card m-3 mb-4 shadow-lg"
+     style="border-radius: 10px; border-left:8px #0066cc solid; border-right: none; border-top:none; border-bottom:none">
+    <div class="card-body">
+        <h2 class="card-title h4 mb-3">Uživatelský profil</h2>
+        {control userProfileForm}
+    </div>
+</div>
 
-<h2 n:block="title">Uživatelský profil</h2>
-{control userProfileForm}
-<h2>Změna hesla</h2>
-{control newPasswordForm}
-
+<div class="card m-3 mb-4 shadow-lg"
+     style="border-radius: 10px; border-left:8px #0066cc solid; border-right: none; border-top:none; border-bottom:none">
+    <div class="card-body">
+        <h2 class="card-title h4 mb-3">Změna hesla</h2>
+        {control newPasswordForm}
+    </div>
+</div>

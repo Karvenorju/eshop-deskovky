@@ -10,13 +10,22 @@ class ComposerStaticInitfc6bfc876deafdb89bfe5ed71b0a4ec5
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         'd507e002f7fce7f0c6dbf1f22edcb902' => __DIR__ . '/..' . '/tracy/tracy/src/Tracy/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'l' => 
+        array (
+            'libphonenumber\\' => 15,
+        ),
         'V' => 
         array (
             'Vojir\\LeanMapper\\Mappers\\' => 25,
+        ),
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
         ),
         'P' => 
         array (
@@ -36,6 +45,11 @@ class ComposerStaticInitfc6bfc876deafdb89bfe5ed71b0a4ec5
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
+            'Giggsey\\Locale\\' => 15,
+        ),
+        'B' => 
+        array (
+            'Brick\\PhoneNumber\\' => 18,
         ),
         'A' => 
         array (
@@ -44,9 +58,17 @@ class ComposerStaticInitfc6bfc876deafdb89bfe5ed71b0a4ec5
     );
 
     public static $prefixDirsPsr4 = array (
+        'libphonenumber\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/giggsey/libphonenumber-for-php/src',
+        ),
         'Vojir\\LeanMapper\\Mappers\\' => 
         array (
             0 => __DIR__ . '/..' . '/vojir/leanmapper-mappers/src',
+        ),
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
         'Psr\\Http\\Message\\' => 
         array (
@@ -77,6 +99,14 @@ class ComposerStaticInitfc6bfc876deafdb89bfe5ed71b0a4ec5
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'Giggsey\\Locale\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/giggsey/locale/src',
+        ),
+        'Brick\\PhoneNumber\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/brick/phonenumber/src',
         ),
         'App\\' => 
         array (
