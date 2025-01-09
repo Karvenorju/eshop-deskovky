@@ -85,8 +85,8 @@ class ComposerStaticInitfc6bfc876deafdb89bfe5ed71b0a4ec5
         ),
         'League\\OAuth2\\Client\\' => 
         array (
-            0 => __DIR__ . '/..' . '/league/oauth2-client/src',
-            1 => __DIR__ . '/..' . '/league/oauth2-facebook/src',
+            0 => __DIR__ . '/..' . '/league/oauth2-facebook/src',
+            1 => __DIR__ . '/..' . '/league/oauth2-client/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
@@ -531,6 +531,9 @@ class ComposerStaticInitfc6bfc876deafdb89bfe5ed71b0a4ec5
         'Nette\\PhpGenerator\\Printer' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/Printer.php',
         'Nette\\PhpGenerator\\PromotedParameter' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/PromotedParameter.php',
         'Nette\\PhpGenerator\\Property' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/Property.php',
+        'Nette\\PhpGenerator\\PropertyAccessMode' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/PropertyAccessMode.php',
+        'Nette\\PhpGenerator\\PropertyHook' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/PropertyHook.php',
+        'Nette\\PhpGenerator\\PropertyHookType' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/PropertyHookType.php',
         'Nette\\PhpGenerator\\PsrPrinter' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/PsrPrinter.php',
         'Nette\\PhpGenerator\\TraitType' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/TraitType.php',
         'Nette\\PhpGenerator\\TraitUse' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/TraitUse.php',
@@ -541,9 +544,11 @@ class ComposerStaticInitfc6bfc876deafdb89bfe5ed71b0a4ec5
         'Nette\\PhpGenerator\\Traits\\MethodsAware' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/Traits/MethodsAware.php',
         'Nette\\PhpGenerator\\Traits\\NameAware' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/Traits/NameAware.php',
         'Nette\\PhpGenerator\\Traits\\PropertiesAware' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/Traits/PropertiesAware.php',
+        'Nette\\PhpGenerator\\Traits\\PropertyLike' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/Traits/PropertyLike.php',
         'Nette\\PhpGenerator\\Traits\\TraitsAware' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/Traits/TraitsAware.php',
         'Nette\\PhpGenerator\\Traits\\VisibilityAware' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/Traits/VisibilityAware.php',
         'Nette\\PhpGenerator\\Type' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/Type.php',
+        'Nette\\PhpGenerator\\Visibility' => __DIR__ . '/..' . '/nette/php-generator/src/PhpGenerator/Visibility.php',
         'Nette\\Routing\\Route' => __DIR__ . '/..' . '/nette/routing/src/Routing/Route.php',
         'Nette\\Routing\\RouteList' => __DIR__ . '/..' . '/nette/routing/src/Routing/RouteList.php',
         'Nette\\Routing\\Router' => __DIR__ . '/..' . '/nette/routing/src/Routing/Router.php',
