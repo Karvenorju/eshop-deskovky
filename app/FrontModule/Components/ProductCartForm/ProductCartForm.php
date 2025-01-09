@@ -14,38 +14,35 @@ use Nextras\FormsRendering\Renderers\FormLayout;
  * Class ProductCartForm
  * @package App\FrontModule\Components\ProductCartForm
  */
-class ProductCartForm extends Form{
+class ProductCartForm extends Form {
 
-  use SmartObject;
+    use SmartObject;
 
-  private CartControl $cartControl;
+    private CartControl $cartControl;
 
-  /**
-   * ProductCartForm constructor.
-   * @param Nette\ComponentModel\IContainer|null $parent
-   * @param string|null $name
-   */
-  public function __construct(Nette\ComponentModel\IContainer $parent = null, string $name = null){
-    parent::__construct($parent, $name);
-    $this->setRenderer(new Bs4FormRenderer(FormLayout::VERTICAL));
-    $this->createSubcomponents();
-  }
+    /**
+     * ProductCartForm constructor.
+     * @param Nette\ComponentModel\IContainer|null $parent
+     * @param string|null $name
+     */
+    public function __construct(Nette\ComponentModel\IContainer $parent = null, string $name = null) {
+        parent::__construct($parent, $name);
+        $this->setRenderer(new Bs4FormRenderer(FormLayout::VERTICAL));
+        $this->createSubcomponents();
+    }
 
-  /**
-   * Metoda pro předání komponenty košíku jako závislosti
-   * @param CartControl $cartControl
-   */
-  public function setCartControl(CartControl $cartControl):void {
-    $this->cartControl=$cartControl;
-  }
+    /**
+     * Metoda pro předání komponenty košíku jako závislosti
+     * @param CartControl $cartControl
+     */
+    public function setCartControl(CartControl $cartControl): void {
+        $this->cartControl = $cartControl;
+    }
 
-  private function createSubcomponents(){
-    $this->setHtmlAttribute('class', 'ajax'); //třída ajax zařídí, že se Naja pokusí odchytit využití tohoto formuláře
-    $this->addHidden('productId');
-    $this->addInteger('count','Počet kusů')
-      ->addRule(Form::RANGE,'Chybný počet kusů.',[1,100]);
-
-    $this->addSubmit('ok','přidat do košíku');
-  }
+    private function createSubcomponents() {
+        $this->setHtmlAttribute('class', 'ajax'); //třída ajax zařídí, že se Naja pokusí odchytit využití tohoto formuláře
+        $this->addHidden('productId');
+        $this->addSubmit('ok', Nette\Utils\Html::el('i')->setAttribute('class', 'bi bi-cart-plus-fill'));
+    }
 
 }

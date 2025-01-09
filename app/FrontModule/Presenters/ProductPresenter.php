@@ -67,7 +67,8 @@ class ProductPresenter extends BasePresenter {
                 //přidání do košíku
                 /** @var CartControl $cart */
                 $cart = $this->getComponent('cart');
-                $cart->addToCart($product, (int)$form->values->count);
+//                $cart->addToCart($product, (int)$form->values->count);
+                $cart->addToCart($product,1);
 
                 $this->flashMessage('Produkt přidán do košíku: ' . $product->title);
                 if ($this->isAjax()) {
