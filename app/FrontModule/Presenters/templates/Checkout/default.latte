@@ -1,0 +1,45 @@
+{block content}
+    <div class="container mt-4">
+        <!-- Celková karta -->
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <!-- Sekce: Obsah košíku -->
+                <div class="mb-4">
+                    <h3 class="card-title">Obsah košíku</h3>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Produkt</th>
+                            <th>Množství</th>
+                            <th>Cena</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $cart->items as $item}
+                            <tr>
+                                <td>{$item->product->title}</td>
+                                <td>{$item->count}</td>
+                                <td>{$item->product->price|number:2} Kč</td>
+                            </tr>
+                        {/foreach}
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="2"><strong>Celková cena:</strong></td>
+                            <td>{$cart->getTotalPrice()|number:2} Kč</td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <hr> <!-- Oddělení sekcí -->
+
+                <!-- Sekce: Informace o objednávce -->
+                <div class="mt-4">
+                    <h3 class="card-title">Kontaktní údaje</h3>
+                    {control checkoutForm} <!-- Zde se zobrazí CheckoutForm -->
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}

@@ -44,6 +44,7 @@ services:
 	- App\FrontModule\Components\ProductListFilterForm\ProductListFilterFormFactory
 	- App\FrontModule\Components\CartControl\CartControlFactory
 	- App\FrontModule\Components\UserLoginControl\UserLoginControlFactory
+	- App\FrontModule\Components\CheckoutForm\CheckoutFormFactory
 
 
 	- App\Model\Facades\CategoriesFacade

@@ -10,85 +10,106 @@ use App\Model\Repositories\CartRepository;
 use Dibi\DateTime;
 use LeanMapper\Exception\InvalidStateException;
 
-class CartFacade{
-  private CartRepository $cartRepository;
-  private CartItemRepository $cartItemRepository;
+class CartFacade
+{
+    private CartRepository $cartRepository;
+    private CartItemRepository $cartItemRepository;
 
-  /**
-   * Metoda vracející košík podle cartId
-   * @param int $id
-   * @return Cart
-   * @throws \Exception
-   */
-  public function getCartById(int $id):Cart {
-    return $this->cartRepository->find($id);
-  }
-
-  /**
-   * Metoda vracející košík konkrétního uživatele
-   * @param User|int $user
-   * @return Cart
-   * @throws \Exception
-   */
-  public function getCartByUser($user):Cart {
-    if ($user instanceof User){
-      $user=$user->userId;
+    /**
+     * Metoda vracející položku košíku podle cartItemId
+     * @param int $cartItemId
+     * @return CartItem
+     * @throws \Exception
+     */
+    public function getCartItem(int $cartItemId): CartItem
+    {
+        return $this->cartItemRepository->find($cartItemId);
     }
-    return $this->cartRepository->findBy(['user_id'=>$user]);
-  }
 
-  /**
-   * Metoda pro smazání košíku konkrétního uživatele
-   * @param User|int $user
-   */
-  public function deleteCartByUser($user):void {
-    try{
-      $this->cartRepository->delete($this->getCartByUser($user));
-    }catch (\Exception $e){}
-  }
+    /**
+     * Metoda vracející košík podle cartId
+     * @param int $id
+     * @return Cart
+     * @throws \Exception
+     */
+    public function getCartById(int $id): Cart
+    {
+        return $this->cartRepository->find($id);
+    }
 
-  /**
-   * Metoda pro smazání starých košíků
-   */
-  public function deleteOldCarts():void {
-    try{
-      $this->cartRepository->deleteOldCarts();
-    }catch (\Exception $e){}
-  }
+    /**
+     * Metoda vracející košík konkrétního uživatele
+     * @param User|int $user
+     * @return Cart
+     * @throws \Exception
+     */
+    public function getCartByUser($user): Cart
+    {
+        if ($user instanceof User) {
+            $user = $user->userId;
+        }
+        return $this->cartRepository->findBy(['user_id' => $user]);
+    }
 
-  /**
-   * Metoda pro uložení položky v košíku
-   * @param CartItem $cartItem
-   */
-  public function saveCartItem(CartItem $cartItem):void {
-    $this->cartItemRepository->persist($cartItem);
-  }
-
-  /**
-   * Metoda pro uložení košíku, automaticky aktualizuje informaci o jeho poslední změně
-   * @param Cart $cart
-   */
-  public function saveCart(Cart $cart):void {
-    $cart->lastModified = new DateTime();
-    $this->cartRepository->persist($cart);
-  }
-
-  /**
-   * CartFacade constructor.
-   * @param CartRepository $cartRepository
-   * @param CartItemRepository $cartItemRepository
-   */
-  public function __construct(CartRepository $cartRepository, CartItemRepository $cartItemRepository){
-    $this->cartRepository=$cartRepository;
-    $this->cartItemRepository=$cartItemRepository;
-  }
-
-    public function deleteCartItem(int $cartItemId)
+    /**
+     * Metoda pro smazání košíku konkrétního uživatele
+     * @param User|int $user
+     */
+    public function deleteCartByUser($user): void
     {
         try {
-            $this->cartItemRepository->delete($this->cartItemRepository->find($cartItemId));
+            $this->cartRepository->delete($this->getCartByUser($user));
         } catch (\Exception $e) {
-
         }
+    }
+
+    /**
+     * Metoda pro smazání starých košíků
+     */
+    public function deleteOldCarts(): void
+    {
+        try {
+            $this->cartRepository->deleteOldCarts();
+        } catch (\Exception $e) {
+        }
+    }
+
+    /**
+     * Metoda pro uložení položky v košíku
+     * @param CartItem $cartItem
+     */
+    public function saveCartItem(CartItem $cartItem): void
+    {
+        $this->cartItemRepository->persist($cartItem);
+    }
+
+    /**
+     * Metoda pro uložení košíku, automaticky aktualizuje informaci o jeho poslední změně
+     * @param Cart $cart
+     */
+    public function saveCart(Cart $cart): void
+    {
+        $cart->lastModified = new DateTime();
+        $this->cartRepository->persist($cart);
+    }
+
+    /**
+     * CartFacade constructor.
+     * @param CartRepository $cartRepository
+     * @param CartItemRepository $cartItemRepository
+     */
+    public function __construct(CartRepository $cartRepository, CartItemRepository $cartItemRepository)
+    {
+        $this->cartRepository = $cartRepository;
+        $this->cartItemRepository = $cartItemRepository;
+    }
+
+    public function deleteCartItem($cartItemId)
+    {
+        $this->cartItemRepository->delete($cartItemId);
+    }
+
+    public function createOrder(Cart $cart, string $name, string $address): void {
+        // Logic to create an order
     }
 }
