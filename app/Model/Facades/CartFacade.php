@@ -109,7 +109,4 @@ class CartFacade
         $this->cartItemRepository->delete($cartItemId);
     }
 
-    public function createOrder(Cart $cart, string $name, string $address): void {
-        // Logic to create an order
-    }
 }

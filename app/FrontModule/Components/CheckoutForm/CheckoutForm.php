@@ -49,19 +49,10 @@ class CheckoutForm extends Form
             ->setHtmlAttribute('maxlength', 15)
             ->addRule(Form::PATTERN, 'Zadejte platné telefonní číslo.', '^[0-9+\s-]+$');
 
-        // Address Information
-        $this->addText('city', 'Město:')
-            ->setDefaultValue($user?->city)
-            ->setRequired('Zadejte město');
-
-        $this->addText('street', 'Ulice:')
-            ->setDefaultValue($user?->street)
+        $this->addText('address', 'Adresa:')
+            ->setDefaultValue($user?->address)
             ->setRequired('Zadejte ulici a číslo domu');
 
-        $this->addText('postalCode', 'PSČ:')
-            ->setDefaultValue($user?->postalCode)
-            ->setRequired('Zadejte PSČ')
-            ->addRule(Form::PATTERN, 'Zadejte platné PSČ.', '^\d{5}$');
         // Submit Button
         $this->addSubmit('submitOrder', 'Odeslat objednávku')
             ->setHtmlAttribute('class', 'btn btn-primary btn-block'); // Třída pro styl tlačítka
