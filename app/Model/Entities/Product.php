@@ -16,9 +16,7 @@ use LeanMapper\Entity;
  * @property int $minPlayer
  * @property int $maxPlayer
  * @property int $playTime
- * @property int $minAge
- * @property string $photoExtension = ''
- */
+ * @property int $minAge */
 class Product extends Entity implements \Nette\Security\Resource {
 
     /**
@@ -27,8 +25,4 @@ class Product extends Entity implements \Nette\Security\Resource {
     function getResourceId(): string {
         return 'Product';
     }
-    public function getImagePath(): string {
-        return __DIR__ . '/../../../www/img/products/' . $this->url . '.jpeg';
-    }
-
 }

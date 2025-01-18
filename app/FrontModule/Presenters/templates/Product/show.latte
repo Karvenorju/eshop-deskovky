@@ -1,8 +1,63 @@
 {varType App\Model\Entities\Product $product}
 {block content}
+<style>
+    .thumbnail {
+        width: 80px; /* Adjust the width as needed */
+        height: auto; /* Maintain aspect ratio */
+    }
+</style>
+{*<h1 n:block="title">{$product->title}</h1>*}
+{*<p>*}
+{*    {$product->description}*}
+{*</p>*}
+<!-- Credit to Andreas Müller, sourced from https://bootstrapexamples.com/@andreas-muller/product-details-page-->
+<div class="container mt-5">
+    <div class="row">
+        <!-- Product Images -->
+        <div class="col-md-6 mb-4">
+            <img src="{$basePath}/img/products/risk-front.png" alt="Product" class="img-fluid rounded mb-3 product-image" id="mainImage">
+            <div class="d-flex justify-content-between">
+                <img src="{$basePath}/img/products/risk-front.png" alt="Thumbnail 1" class="thumbnail rounded active" onclick="changeImage(event, this.src)">
+                <img src="{$basePath}/img/products/risk-back.png" alt="Thumbnail 2" class="thumbnail rounded" onclick="changeImage(event, this.src)">
+                <img src="{$basePath}/img/products/risk-board.png" alt="Thumbnail 3" class="thumbnail rounded" onclick="changeImage(event, this.src)">
+            </div>
+        </div>
 
-<h1 n:block="title">{$product->title}</h1>
-
-<p>
-    {$product->description}
-</p>
+        <!-- Product Details -->
+        <div class="col-md-6">
+            <h2 class="mb-3">{$product->title}</h2>
+            <div class="mb-3">
+                <span class="h4 me-2">{$product->price} CZK</span>
+            </div>
+            <div class="mb-3">
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-half text-warning"></i>
+                <span class="ms-2">4.5 (120 recenzí)</span>
+            </div>
+            <p class="mb-4">{$product->description}.</p>
+            <div class="mb-4">
+                <label for="quantity" class="form-label">Počet:</label>
+                <input type="number" class="form-control" id="quantity" value="1" min="1" style="width: 80px;">
+            </div>
+            {control "productCartForm-$product->productId"}
+            <div class="mt-4">
+                <h5>Atributy:</h5>
+                <ul>
+                    <li>Počet hráčů: {$product->minPlayer}-{$product->maxPlayer}</li>
+                    <li>Doba hraní: {$product->playTime} minut</li>
+                    <li>Věk: {$product->minAge}+</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function changeImage(event, src) {
+        document.getElementById('mainImage').src = src;
+        document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+</script>
