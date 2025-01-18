@@ -101,6 +101,7 @@ class ProductEditForm extends Form{
     $photoUpload //limit pro velikost nahrávaného souboru
       ->addRule(Form::MAX_FILE_SIZE, 'Nahraný soubor je příliš velký', 1000000);
 
+    //TODO - rework this for new photo architecture
     $photoUpload //kontrola typu nahraného souboru, pokud je nahraný
       ->addCondition(Form::FILLED)
         ->addRule(function(Nette\Forms\Controls\UploadControl $photoUpload){

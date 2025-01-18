@@ -118,12 +118,13 @@ class ProductsFacade {
      * @throws \Exception
      */
     public function saveProductPhoto(FileUpload $fileUpload, Product &$product): void {
-        if ($fileUpload->isOk() && $fileUpload->isImage()) {
-            $fileExtension = strtolower($fileUpload->getSuggestedExtension());
-            $fileUpload->move(__DIR__ . '/../../../www/img/products/' . $product->productId . '.' . $fileExtension);
-            $product->photoExtension = $fileExtension;
-            $this->saveProduct($product);
-        }
+        //TODO rework this for new photo architecture
+//        if ($fileUpload->isOk() && $fileUpload->isImage()) {
+//            $fileExtension = strtolower($fileUpload->getSuggestedExtension());
+//            $fileUpload->move(__DIR__ . '/../../../www/img/products/' . $product->productId . '.' . $fileExtension);
+//            $product->photoExtension = $fileExtension;
+//            $this->saveProduct($product);
+//        }
     }
     public function getFilterParams(): array {
         $products = $this->productRepository->findAll();
