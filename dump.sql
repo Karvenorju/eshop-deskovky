@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 18, 2025 at 06:01 PM
+-- Generation Time: Jan 18, 2025 at 10:31 PM
 -- Server version: 10.5.23-MariaDB-0+deb11u1
 -- PHP Version: 8.1.29
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `bela08`
+-- Database: `cafp00`
 --
 
 -- --------------------------------------------------------
@@ -351,6 +351,37 @@ INSERT INTO `role` (`role_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sale_order`
+--
+
+CREATE TABLE `sale_order` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `address` varchar(255) NOT NULL,
+  `total_price` decimal(10,2) NOT NULL CHECK (`total_price` >= 0),
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sale_order_line`
+--
+
+CREATE TABLE `sale_order_line` (
+  `id` int(11) NOT NULL,
+  `sale_order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL CHECK (`quantity` > 0),
+  `price` decimal(10,2) NOT NULL CHECK (`price` >= 0)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -433,6 +464,19 @@ ALTER TABLE `role`
   ADD PRIMARY KEY (`role_id`);
 
 --
+-- Indexes for table `sale_order`
+--
+ALTER TABLE `sale_order`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sale_order_line`
+--
+ALTER TABLE `sale_order_line`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sale_order_id` (`sale_order_id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -482,6 +526,18 @@ ALTER TABLE `product`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `sale_order`
+--
+ALTER TABLE `sale_order`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `sale_order_line`
+--
+ALTER TABLE `sale_order_line`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
@@ -528,6 +584,12 @@ ALTER TABLE `permission`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `sale_order_line`
+--
+ALTER TABLE `sale_order_line`
+  ADD CONSTRAINT `sale_order_line_ibfk_1` FOREIGN KEY (`sale_order_id`) REFERENCES `sale_order` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `user`
