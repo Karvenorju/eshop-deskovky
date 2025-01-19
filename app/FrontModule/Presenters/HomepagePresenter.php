@@ -2,8 +2,21 @@
 
 namespace App\FrontModule\Presenters;
 
-class HomepagePresenter extends BasePresenter{
+use App\Model\Facades\ProductsFacade;
 
-  //TODO
+class HomepagePresenter extends BasePresenter {
+
+    private ProductsFacade $productsFacade;
+
+    public function __construct(ProductsFacade $productsFacade) {
+        parent::__construct();
+        $this->productsFacade = $productsFacade;
+    }
+
+    public function renderDefault(): void {
+        $topProducts = $this->productsFacade->findTopProducts();
+
+        $this->template->topProducts = $topProducts;
+    }
 
 }

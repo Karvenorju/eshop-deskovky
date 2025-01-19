@@ -235,6 +235,7 @@ class UserPresenter extends BasePresenter {
             if (!empty($message)) {
                 $this->flashMessage($message);
             }
+            $this->user->logout();
             $this->redirect('login');
         };
         $form->onFailed[] = function ($message = '') {
@@ -256,6 +257,15 @@ class UserPresenter extends BasePresenter {
     protected function createComponentUserProfileForm(): UserProfileForm {
         $form = $this->userProfileFormFactory->create();
         $form->onFinished[] = function () use ($form) {
+            $values = $form->getValues('array');
+
+            $userEntity = $this->usersFacade->getUser($this->user->id);
+            //necháme si vytvořit identitu uživatele
+            $userUdentity = $this->usersFacade->getUserIdentity($userEntity);
+
+            //po změně uživ. údajů uživatele znovu přihlásíme
+            $this->user->login($userUdentity);
+
             $this->flashMessage('Změny uloženy.');
         };
         $form->onCancel[] = function () use ($form) {

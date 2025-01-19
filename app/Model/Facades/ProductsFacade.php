@@ -66,6 +66,19 @@ class ProductsFacade {
     }
 
     /**
+     * Metoda pro vyhledání nejprodávanějších produktů
+     * @param int $limit počet vrácených produktů
+     * @return Product[]
+     */
+    public function findTopProducts(int $limit = 5): array {
+        $whereArr = [
+            'order' => 'sold_quantity DESC'
+        ];
+
+        return $this->productRepository->findAllBy($whereArr, 0, $limit);
+    }
+
+    /**
      * Metoda pro zjištění počtu produktů
      * @param array|null $params
      * @return int
@@ -126,6 +139,7 @@ class ProductsFacade {
 //            $this->saveProduct($product);
 //        }
     }
+
     public function getFilterParams(): array {
         $products = $this->productRepository->findAll();
 
@@ -162,6 +176,7 @@ class ProductsFacade {
             ]
         ];
     }
+
     public function __construct(ProductRepository $productRepository) {
         $this->productRepository = $productRepository;
     }

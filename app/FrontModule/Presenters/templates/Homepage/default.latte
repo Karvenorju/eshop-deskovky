@@ -1,50 +1,39 @@
+{varType App\Model\Entities\Product[] $topProducts}
 {block content}
 
 <a href="{plink Product:list}">Pracovní výpis produktů</a>
 
 <h2 class="h3">Nejprodávanější stolní hry</h2>
-
-<div id="carouselExampleControls" class="carousel slide" data-mdb-ride="carousel" data-mdb-carousel-init>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp" class="d-block w-100" alt="Wild Landscape"/>
-        </div>
-        <div class="carousel-item">
-            <img src="{$basePath}/img/favicon/logo.png" class="d-block w-100 img-fluid" alt="deskovka1">
-        </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleControls"
-            data-mdb-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleControls"
-            data-mdb-slide="next">
-        <span class="visually-hidden">Next</span>
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    </button>
-</div>
-
-<h2 class="h3 mt-4">Populární kategorie</h2>
-
-<div id="carouselExampleControls" class="carousel slide" data-mdb-ride="carousel" data-mdb-carousel-init>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp" class="d-block w-100" alt="Wild Landscape"/>
-        </div>
-        <div class="carousel-item">
-            <img src="{$basePath}/img/favicon/logo.png" class="d-block w-100 img-fluid" alt="deskovka1">
+<div class="card mt-3 shadow-lg"
+     style="border-radius: 10px; border-left:8px #0066cc solid; border-right: none; border-top:none; border-bottom:none">
+    <div class="card-body">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                {foreach $topProducts as $product}
+                    <div class="carousel-item {if $iterator->first}active{/if}">
+                        <div class="carousel-image-container bg-img">
+                            <img src="{$basePath}/img/products/{$product->getFrontImageUrl()}"
+                                 class="d-block w-100" alt="{$product->title}"/>
+                            <div id="image-overlay" class="position-absolute bottom-0 text-light w-100">
+                                <p class="p-1 m-0 title">{$iterator->counter}. {$product->title}</p>
+                                <p>Cena: <span class="price-tag p-0 m-0">{$product->price}</span>,- Kč</p>
+                            </div>
+                        </div>
+                    </div>
+                {/foreach}
+            </div>
+            <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls"
+                    data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Předešlé</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-target="#carouselExampleControls"
+                    data-slide="next">
+                <span class="visually-hidden">Další</span>
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </button>
         </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleControls"
-            data-mdb-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleControls"
-            data-mdb-slide="next">
-        <span class="visually-hidden">Next</span>
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    </button>
 </div>
 
+<h2 class="h3 my-4">Populární kategorie</h2>

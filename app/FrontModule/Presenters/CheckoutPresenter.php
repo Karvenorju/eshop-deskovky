@@ -2,26 +2,25 @@
 
 namespace App\FrontModule\Presenters;
 
+use App\FrontModule\Components\CartControl\CartControl;
 use App\FrontModule\Components\CheckoutForm\CheckoutFormFactory;
 use App\Model\Entities\Cart;
+use App\Model\Facades\ProductsFacade;
 use App\Model\Facades\SaleOrderFacade;
 use App\Model\Facades\UsersFacade;
-use \Nette\Application\UI\Form;
+use Nette\Application\UI\Form;
 class CheckoutPresenter extends BasePresenter {
 
     private CheckoutFormFactory $checkoutFormFactory;
     private SaleOrderFacade $saleOrderFacade;
+    private ProductsFacade $productsFacade;
     private UsersFacade $usersFacade;
 
-
-    public function injectCheckoutFormFactory(CheckoutFormFactory $factory): void
-    {
+    public function injectCheckoutFormFactory(CheckoutFormFactory $factory): void {
         $this->checkoutFormFactory = $factory;
     }
 
-
-    public function injectSaleOrderFacade(SaleOrderFacade $saleOrderFacade): void
-    {
+    public function injectSaleOrderFacade(SaleOrderFacade $saleOrderFacade): void {
         $this->saleOrderFacade = $saleOrderFacade;
     }
 
@@ -30,9 +29,11 @@ class CheckoutPresenter extends BasePresenter {
         $this->usersFacade = $usersFacade;
     }
 
+    public function injectProductFacade(ProductsFacade $productsFacade): void {
+        $this->productsFacade = $productsFacade;
+    }
 
-    protected function createComponentCheckoutForm(): Form
-    {
+    protected function createComponentCheckoutForm(): Form {
         $form = $this->checkoutFormFactory->create(); // Vytvoření formuláře pomocí factory
         $form->onSuccess[] = [$this, 'processCheckoutForm']; // Připojení callbacku
         return $form; // Vrácení formuláře
@@ -48,11 +49,11 @@ class CheckoutPresenter extends BasePresenter {
         $this->checkCartIsNotEmpty($cart);
     }
 
-    public function processCheckoutForm(Form $form, array $values): void
-    {
+    public function processCheckoutForm(Form $form, array $values): void {
         try {
             // Check cart emptiness
             // Fetch the cart
+            /** @var CartControl $cartControl */
             $cartControl = $this['cart'];
             $cart = $cartControl->getCart();
             $this->checkCartIsNotEmpty($cart);
@@ -70,6 +71,14 @@ class CheckoutPresenter extends BasePresenter {
             ];
             // Call SaleOrderFacade to create order
             $this->saleOrderFacade->createOrder($orderData, $cart->cartId);
+
+            foreach ($cart->items as $cartItem) {
+                $orderedProductEntity = $this->productsFacade->getProduct($cartItem->product->productId);
+                $orderedQuantity = $cartItem->count;
+
+                $orderedProductEntity->soldQuantity = $orderedProductEntity->soldQuantity + $orderedQuantity;
+                $this->productsFacade->saveProduct($orderedProductEntity);
+            }
 
             // Show success message and redirect
             $this->flashMessage('Objednávka byla úspěšně vytvořena.', 'success');
