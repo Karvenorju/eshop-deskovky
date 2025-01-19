@@ -16,7 +16,9 @@ use LeanMapper\Entity;
  * @property int $minPlayer
  * @property int $maxPlayer
  * @property int $playTime
- * @property int $minAge */
+ * @property int $minAge
+ * @property int $soldQuantity
+ */
 class Product extends Entity implements \Nette\Security\Resource {
 
     /**

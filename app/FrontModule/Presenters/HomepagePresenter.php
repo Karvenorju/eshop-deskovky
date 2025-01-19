@@ -2,8 +2,27 @@
 
 namespace App\FrontModule\Presenters;
 
-class HomepagePresenter extends BasePresenter{
+use App\Model\Facades\ProductsFacade;
 
-  //TODO
+class HomepagePresenter extends BasePresenter {
+
+    private ProductsFacade $productsFacade;
+
+    public function __construct(ProductsFacade $productsFacade) {
+        parent::__construct();
+        $this->productsFacade = $productsFacade;
+    }
+
+    public function renderDefault() {
+
+        $this->productsFacade->findProductsCount();
+
+        $cartControl = $this['cart']; // Přístup ke komponentě přes BasePresenter
+        // Získat data košíku
+        $cart = $cartControl->getCart();
+
+        // Pass data to the template
+        $this->template->cart = $cart;
+    }
 
 }
