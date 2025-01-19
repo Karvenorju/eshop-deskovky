@@ -9,7 +9,7 @@ use LeanMapper\Entity;
  * Class SaleOrderLine
  * @package App\Model\Entities
  *
- * @property int $id
+ * @property int $SaleOrderLineId
  * @property SaleOrder $saleOrder m:hasOne
  * @property Product $product m:hasOne
  * @property int $quantity = 0

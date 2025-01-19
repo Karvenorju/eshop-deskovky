@@ -44,6 +44,14 @@ class UserLoginControl extends Control {
         }
     }
 
+    public function handleSaleOrders(): void {
+        if ($this->user->isLoggedIn()) {
+            $this->presenter->redirect(':Front:User:saleOrders');
+        } else {
+            $this->presenter->redirect(':Front:User:login', ['backlink' => $this->presenter->storeRequest()]);
+        }
+    }
+
     /**
      * @throws \Nette\Application\AbortException
      */

@@ -5,11 +5,13 @@ namespace App\FrontModule\Presenters;
 use App\FrontModule\Components\CheckoutForm\CheckoutFormFactory;
 use App\Model\Entities\Cart;
 use App\Model\Facades\SaleOrderFacade;
+use App\Model\Facades\UsersFacade;
 use \Nette\Application\UI\Form;
 class CheckoutPresenter extends BasePresenter {
 
     private CheckoutFormFactory $checkoutFormFactory;
     private SaleOrderFacade $saleOrderFacade;
+    private UsersFacade $usersFacade;
 
 
     public function injectCheckoutFormFactory(CheckoutFormFactory $factory): void
@@ -21,6 +23,11 @@ class CheckoutPresenter extends BasePresenter {
     public function injectSaleOrderFacade(SaleOrderFacade $saleOrderFacade): void
     {
         $this->saleOrderFacade = $saleOrderFacade;
+    }
+
+    public function injectUsersFacade(UsersFacade $usersFacade): void
+    {
+        $this->usersFacade = $usersFacade;
     }
 
 
@@ -51,14 +58,15 @@ class CheckoutPresenter extends BasePresenter {
             $this->checkCartIsNotEmpty($cart);
 
             $userLoginControl = $this['userLogin'];
-            $loggedUserId = $userLoginControl->getCurrentUser()->getId();
+            $userEntity = $this->usersFacade->getUser($userLoginControl->getCurrentUser()->getId());
+
             // Order data from form
             $orderData = [
-                'userId' => $loggedUserId,
-                'name' => $values['name'],
-                'email' => $values['email'],
-                'phone' => $values['phone'],
-                'address' => $values['address'],
+                'user' => $userEntity,
+                'customerName' => $values['name'],
+                'customerEmail' => $values['email'],
+                'customerPhone' => $values['phone'],
+                'customerAddress' => $values['address'],
             ];
             // Call SaleOrderFacade to create order
             $this->saleOrderFacade->createOrder($orderData, $cart->cartId);

@@ -1,0 +1,62 @@
+{block content}
+    <div class="container mt-4">
+        <!-- Back to Orders Button -->
+        <div class="mb-3">
+            <a href="{link saleOrders}" class="btn btn-secondary">
+                ⬅ Zpět
+            </a>
+        </div>
+
+        <h3><i class="bi bi-receipt"></i> Detail objednávky</h3>
+
+        <table class="table table-bordered mt-3">
+            <tr>
+                <th>Číslo objednávky:</th>
+                <td>{$order->orderName}</td>
+            </tr>
+            <tr>
+                <th>Datum vytvoření:</th>
+                <td>{$order->createdAt|date:'d.m.Y H:i'}</td>
+            </tr>
+            <tr>
+                <th>Celková cena:</th>
+                <td><strong>{$order->totalPrice|number:2} Kč</strong></td>
+            </tr>
+            <tr>
+                <th>Stav:</th>
+                <td>
+                    {if $order->status == 'pending'}
+                        <span class="badge bg-warning">Čeká na vyřízení</span>
+                    {elseif $order->status == 'shipped'}
+                        <span class="badge bg-info">Odesláno</span>
+                    {elseif $order->status == 'done'}
+                        <span class="badge bg-success">Doručeno</span>
+                    {else}
+                        <span class="badge bg-danger">Zrušeno</span>
+                    {/if}
+                </td>
+            </tr>
+        </table>
+
+        <h4>Položky objednávky</h4>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Produkt</th>
+                <th>Množství</th>
+                <th>Cena</th>
+            </tr>
+            </thead>
+            <tbody>
+            {foreach $order->items as $item}
+                <tr>
+                    <td>{$item->product->title}</td>
+                    <td>{$item->quantity}</td>
+                    <td>{$item->price|number:2} Kč</td>
+                </tr>
+            {/foreach}
+            </tbody>
+        </table>
+
+    </div>
+{/block}

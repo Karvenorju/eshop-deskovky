@@ -54,17 +54,19 @@ abstract class BaseRepository extends \LeanMapper\Repository {
    * @param null|int $limit
    * @return array
    */
-  public function findAllBy($whereArr = null, $offset = null, $limit = null) {
-    $query = $this->connection->select('*')->from($this->getTable());
-    if (isset($whereArr['order'])) {
-      $query->orderBy($whereArr['order']);
-      unset($whereArr['order']);
+    public function findAllBy($whereArr = null, $offset = null, $limit = null) {
+        $query = $this->connection->select('*')->from($this->getTable());
+        if (isset($whereArr['order'])) {
+            $query->orderBy($whereArr['order']);
+            unset($whereArr['order']);
+        }
+        if ($whereArr != null && count($whereArr) > 0) {
+            $query = $query->where($whereArr);
+        }
+
+        $result = $query->fetchAll($offset, $limit);
+        return $this->createEntities($result);
     }
-    if ($whereArr != null && count($whereArr) > 0) {
-      $query = $query->where($whereArr);
-    }
-    return $this->createEntities($query->fetchAll($offset, $limit));
-  }
 
   /**
    * @param array|null $whereArr

@@ -1,0 +1,52 @@
+{block content}
+    <div class="container mt-4">
+        <h3 class="mb-3">📦 Seznam objednávek</h3>
+
+        <div class="table-responsive">
+            <table class="table table-bordered text-center">
+                <thead class="table-dark">
+                <tr>
+                    <th>📅 Datum</th>
+                    <th>🔢 Číslo objednávky</th>
+                    <th>💰 Celková cena</th>
+                    <th>📌 Stav</th>
+                    <th> </th> <!-- Empty for Detail action button -->
+                </tr>
+                </thead>
+                <tbody>
+                {foreach $userOrders as $order}
+                    <tr>
+                        <td>{$order->createdAt|date:'d.m.Y H:i'}</td>
+                        <td><strong>{$order->orderName}</strong></td>
+                        <td><span>{$order->totalPrice|number:2} Kč</span></td>
+                        <td>
+                            {if $order->status == 'pending'}
+                                <span class="badge bg-warning text-dark">🕒 Čeká na vyřízení</span>
+                            {elseif $order->status == 'shipped'}
+                                <span class="badge bg-info">📦 Odesláno</span>
+                            {elseif $order->status == 'done'}
+                                <span class="badge bg-success">✅ Dokončeno</span>
+                            {elseif $order->status == 'cancelled'}
+                                <span class="badge bg-danger">❌ Zrušeno</span>
+                            {else}
+                                <span class="badge bg-secondary">🔍 Neznámý stav</span>
+                            {/if}
+                        </td>
+                        <td>
+                            <a href="{link saleOrder, id => $order->saleOrderId}" class="btn btn-outline-primary btn-sm" title="Zobrazit detail">
+                                <i class="bi bi-info-circle"></i> <!-- Bootstrap Info Icon -->
+                            </a>
+                        </td>
+                    </tr>
+                {/foreach}
+                </tbody>
+            </table>
+        </div>
+
+        {if empty($userOrders)}
+            <div class="alert alert-info text-center mt-3">
+                😕 Nemáte žádné objednávky.
+            </div>
+        {/if}
+    </div>
+{/block}

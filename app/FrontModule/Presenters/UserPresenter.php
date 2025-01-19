@@ -13,6 +13,7 @@ use App\FrontModule\Components\UserProfileForm\UserProfileFormFactory;
 use App\FrontModule\Components\UserRegistrationForm\UserRegistrationForm;
 use App\FrontModule\Components\UserRegistrationForm\UserRegistrationFormFactory;
 use App\Model\Api\Facebook\FacebookApi;
+use App\Model\Facades\SaleOrderFacade;
 use App\Model\Facades\UsersFacade;
 use Nette;
 use Nette\Application\BadRequestException;
@@ -34,6 +35,7 @@ class UserPresenter extends BasePresenter {
     private NewPasswordFormFactory $newPasswordFormFactory;
     private UserProfileFormFactory $userProfileFormFactory;
     private FacebookApi $facebookApi;
+    private SaleOrderFacade $orderFacade;
 
     /**
      * Akce pro odhlášení uživatele
@@ -66,6 +68,27 @@ class UserPresenter extends BasePresenter {
         if ($this->user->isLoggedIn()) {
             $this->redirect('Homepage:default');
         }
+    }
+
+    public function renderSaleOrders(): void {
+        $userId = $this->user->getId(); // Get the logged-in user's ID
+
+        // Fetch user orders from the facade/repository
+        $userOrders = $this->orderFacade->getOrdersByUserId($userId);
+        // Pass the orders to the template
+        $this->template->userOrders = $userOrders;
+    }
+
+    public function renderSaleOrder(int $id): void
+    {
+        $order = $this->orderFacade->getOrderById($id);
+
+        if (!$order) {
+            $this->flashMessage('Objednávka nebyla nalezena.', 'error');
+            $this->redirect('saleOrders');
+        }
+
+        $this->template->order = $order;
     }
 
     /**
@@ -244,6 +267,10 @@ class UserPresenter extends BasePresenter {
     #region injections
     public function injectUsersFacade(UsersFacade $usersFacade): void {
         $this->usersFacade = $usersFacade;
+    }
+
+    public function injectSaleOrdersFacade(SaleOrderFacade $saleOrdersFacade): void {
+        $this->orderFacade = $saleOrdersFacade;
     }
 
     public function injectUserLoginFormFactory(UserLoginFormFactory $userLoginFormFactory): void {

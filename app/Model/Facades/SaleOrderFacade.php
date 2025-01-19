@@ -31,6 +31,28 @@ class SaleOrderFacade
     }
 
     /**
+     * Generates a unique sale order name.
+     * Format: SO-YYYYMMDD-XXXXXX (e.g., SO-20250119-000001)
+     *
+     * @return string
+     */
+    public function generateOrderName(): string {
+        // Get today's date
+        $date = date('Ymd');
+        // Fetch number of orders created today
+        $orderCount = $this->saleOrderRepository->countOrdersToday();
+        // Increment for the new order
+        $orderNumber = str_pad($orderCount + 1, 6, '0', STR_PAD_LEFT);
+        return "SO-{$date}-{$orderNumber}";
+    }
+
+    public function getOrdersByUserId(int $userId): array {
+        $where = ['user_id => ?', $userId];
+        $orders = $this->saleOrderRepository->findAll();
+        return $orders ?: []; // Ensure an array is always returned
+    }
+
+    /**
      * Creates an order from a cart using transaction rollback if needed.
      *
      * @param array $orderData User input data (name, email, address, etc.)
@@ -51,13 +73,16 @@ class SaleOrderFacade
 
             // Create a new SaleOrder entity
             $order = new SaleOrder();
-            $order->userId = $orderData['userId'] ?? null;
-            $order->name = $orderData['name'];
-            $order->email = $orderData['email'] ?? null;
-            $order->phone = $orderData['phone'] ?? null;
-            $order->address = $orderData['address'];
+            $order->status = SaleOrder::STATUS_PENDING;
+            $order->orderName = $this->generateOrderName();
+            $order->user = $orderData['user'] ?? null;
             $order->totalPrice = $cart->getTotalPrice();
             $order->createdAt = new DateTime();
+            // customer info
+            $order->customerName = $orderData['customerName'];
+            $order->customerEmail = $orderData['customerEmail'];
+            $order->customerPhone = $orderData['customerPhone'] ?? null;
+            $order->customerAddress = $orderData['customerAddress'];
 
             // Save the order
             $this->saleOrderRepository->persist($order);
@@ -77,7 +102,6 @@ class SaleOrderFacade
                 if ($orderItem->price < 0) {
                     throw new Exception('Invalid price for product ID ' . $orderItem->productId);
                 }
-
                 $this->saleOrderLineRepository->persist($orderItem);
             }
 
@@ -91,5 +115,10 @@ class SaleOrderFacade
             $this->db->rollback(); // Rollback transaction if an error occurs
             throw new Exception('Order creation failed: ' . $e->getMessage());
         }
+    }
+
+    public function getOrderById(int $id): ?SaleOrder
+    {
+        return $this->saleOrderRepository->find($id);
     }
 }
