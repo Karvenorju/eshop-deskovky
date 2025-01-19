@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 19, 2025 at 10:06 PM
+-- Generation Time: Jan 19, 2025 at 08:21 PM
 -- Server version: 10.5.23-MariaDB-0+deb11u1
 -- PHP Version: 8.1.29
 
@@ -70,7 +70,63 @@ INSERT INTO `cart` (`cart_id`, `user_id`, `last_modified`) VALUES
 (100, NULL, '2025-01-19 15:16:21'),
 (101, NULL, '2025-01-19 15:16:24'),
 (102, NULL, '2025-01-19 15:16:26'),
-(106, 2, '2025-01-19 15:17:50');
+(106, 2, '2025-01-19 15:17:50'),
+(107, NULL, '2025-01-19 18:10:41'),
+(108, NULL, '2025-01-19 18:11:07'),
+(109, NULL, '2025-01-19 18:11:15'),
+(110, NULL, '2025-01-19 18:11:23'),
+(111, NULL, '2025-01-19 18:11:33'),
+(112, NULL, '2025-01-19 18:11:41'),
+(113, NULL, '2025-01-19 18:11:48'),
+(114, NULL, '2025-01-19 18:11:50'),
+(115, NULL, '2025-01-19 18:11:50'),
+(116, NULL, '2025-01-19 18:11:54'),
+(117, NULL, '2025-01-19 18:12:05'),
+(118, NULL, '2025-01-19 18:13:34'),
+(119, NULL, '2025-01-19 18:14:00'),
+(120, NULL, '2025-01-19 18:15:35'),
+(121, NULL, '2025-01-19 18:16:41'),
+(122, NULL, '2025-01-19 18:17:50'),
+(123, NULL, '2025-01-19 18:20:04'),
+(124, NULL, '2025-01-19 18:22:03'),
+(125, NULL, '2025-01-19 18:22:52'),
+(126, NULL, '2025-01-19 18:25:00'),
+(127, NULL, '2025-01-19 18:25:08'),
+(128, NULL, '2025-01-19 18:26:19'),
+(129, NULL, '2025-01-19 18:26:22'),
+(130, NULL, '2025-01-19 18:26:24'),
+(131, NULL, '2025-01-19 18:26:26'),
+(132, NULL, '2025-01-19 18:26:29'),
+(133, NULL, '2025-01-19 18:26:51'),
+(134, NULL, '2025-01-19 18:27:47'),
+(135, NULL, '2025-01-19 18:35:06'),
+(136, NULL, '2025-01-19 18:35:53'),
+(137, NULL, '2025-01-19 18:45:05'),
+(138, NULL, '2025-01-19 18:47:54'),
+(139, NULL, '2025-01-19 18:50:13'),
+(140, NULL, '2025-01-19 18:51:54'),
+(141, NULL, '2025-01-19 18:52:03'),
+(142, NULL, '2025-01-19 18:52:09'),
+(143, NULL, '2025-01-19 18:52:45'),
+(144, NULL, '2025-01-19 18:54:10'),
+(145, NULL, '2025-01-19 18:54:34'),
+(146, NULL, '2025-01-19 18:59:16'),
+(147, NULL, '2025-01-19 19:05:04'),
+(148, NULL, '2025-01-19 19:09:00'),
+(149, NULL, '2025-01-19 19:09:02'),
+(150, NULL, '2025-01-19 19:09:03'),
+(151, NULL, '2025-01-19 19:09:03'),
+(152, NULL, '2025-01-19 19:09:05'),
+(153, NULL, '2025-01-19 19:09:05'),
+(154, NULL, '2025-01-19 19:09:05'),
+(155, NULL, '2025-01-19 19:09:05'),
+(156, NULL, '2025-01-19 19:09:07'),
+(157, NULL, '2025-01-19 19:09:14'),
+(158, NULL, '2025-01-19 19:10:19'),
+(159, NULL, '2025-01-19 19:10:20'),
+(160, NULL, '2025-01-19 19:12:01'),
+(161, NULL, '2025-01-19 19:15:38'),
+(162, NULL, '2025-01-19 19:18:17');
 
 -- --------------------------------------------------------
 
@@ -223,32 +279,33 @@ CREATE TABLE `forgotten_password` (
 
 CREATE TABLE `image` (
   `url` varchar(100) NOT NULL,
-  `product_id` int(11) NOT NULL
+  `product_id` int(11) NOT NULL,
+  `type` enum('front','back','board','other') NOT NULL DEFAULT 'other'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `image`
 --
 
-INSERT INTO `image` (`url`, `product_id`) VALUES
-('risk-back.png', 7),
-('risk-board.png', 7),
-('risk-front.png', 7),
-('carcassonne-back.png', 8),
-('carcassonne-board.png', 8),
-('carcassonne-front.jpg', 8),
-('monopoly-card-back.png', 9),
-('monopoly-card-board.png', 9),
-('monopoly-card-front.jpg', 9),
-('clank-back.png', 10),
-('clank-board.png', 10),
-('clank-front.png', 10),
-('feast-for-odin-back.png', 11),
-('feast-for-odin-board.png', 11),
-('feast-for-odin-front.png', 11),
-('frosthaven-back.png', 12),
-('frosthaven-board.png', 12),
-('frosthaven-front.png', 12);
+INSERT INTO `image` (`url`, `product_id`, `type`) VALUES
+('carcassonne-back.png', 8, 'back'),
+('carcassonne-board.png', 8, 'board'),
+('carcassonne-front.jpg', 8, 'front'),
+('clank-back.png', 10, 'back'),
+('clank-board.png', 10, 'board'),
+('clank-front.png', 10, 'front'),
+('feast-for-odin-back.png', 11, 'back'),
+('feast-for-odin-board.png', 11, 'board'),
+('feast-for-odin-front.png', 11, 'front'),
+('frosthaven-back.png', 12, 'back'),
+('frosthaven-board.png', 12, 'board'),
+('frosthaven-front.png', 12, 'front'),
+('monopoly-card-back.png', 9, 'back'),
+('monopoly-card-board.png', 9, 'board'),
+('monopoly-card-front.jpg', 9, 'front'),
+('risk-back.png', 7, 'back'),
+('risk-board.png', 7, 'board'),
+('risk-front.png', 7, 'front');
 
 -- --------------------------------------------------------
 
