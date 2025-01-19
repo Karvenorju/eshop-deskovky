@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 18, 2025 at 10:31 PM
+-- Generation Time: Jan 19, 2025 at 10:06 PM
 -- Server version: 10.5.23-MariaDB-0+deb11u1
 -- PHP Version: 8.1.29
 
@@ -38,8 +38,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`cart_id`, `user_id`, `last_modified`) VALUES
-(68, NULL, '2025-01-15 18:20:54'),
-(69, NULL, '2025-01-15 18:21:11');
+(110, NULL, '2025-01-19 20:49:29');
 
 -- --------------------------------------------------------
 
@@ -253,6 +252,8 @@ INSERT INTO `permission` (`permission_id`, `role_id`, `resource_id`, `action`, `
 (9, 'authenticated', 'Front:User', 'login', 'allow'),
 (10, 'authenticated', 'Front:User', 'logout', 'allow'),
 (39, 'authenticated', 'Front:User', 'profile', 'allow'),
+(44, 'authenticated', 'Front:User', 'saleOrder', 'allow'),
+(43, 'authenticated', 'Front:User', 'saleOrders', 'allow'),
 (27, 'authenticated', 'Product', '', 'allow'),
 (26, 'guest', 'Admin:Product', '', 'allow'),
 (35, 'guest', 'Front:Cart', '', 'allow'),
@@ -355,15 +356,24 @@ INSERT INTO `role` (`role_id`) VALUES
 --
 
 CREATE TABLE `sale_order` (
-  `id` int(11) NOT NULL,
+  `sale_order_id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `address` varchar(255) NOT NULL,
-  `total_price` decimal(10,2) NOT NULL CHECK (`total_price` >= 0),
-  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+  `order_name` varchar(255) NOT NULL,
+  `customer_name` varchar(255) NOT NULL,
+  `customer_email` varchar(255) NOT NULL,
+  `customer_phone` varchar(20) DEFAULT NULL,
+  `customer_address` text NOT NULL,
+  `total_price` decimal(10,2) NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `status` enum('pending','shipped','done','cancelled') NOT NULL DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sale_order`
+--
+
+INSERT INTO `sale_order` (`sale_order_id`, `user_id`, `order_name`, `customer_name`, `customer_email`, `customer_phone`, `customer_address`, `total_price`, `created_at`, `status`) VALUES
+(2, 3, 'SO-20250119-000001', 'Petr Cafourek', 'cafourek2@gmail.com', '+420 731730756', 'something 123', '300.00', '2025-01-19 21:15:47', 'pending');
 
 -- --------------------------------------------------------
 
@@ -372,12 +382,19 @@ CREATE TABLE `sale_order` (
 --
 
 CREATE TABLE `sale_order_line` (
-  `id` int(11) NOT NULL,
+  `sale_order_line_id` int(11) NOT NULL,
   `sale_order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL CHECK (`quantity` > 0),
-  `price` decimal(10,2) NOT NULL CHECK (`price` >= 0)
+  `quantity` int(11) NOT NULL DEFAULT 1 CHECK (`quantity` > 0),
+  `price` decimal(10,2) NOT NULL DEFAULT 0.00 CHECK (`price` >= 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sale_order_line`
+--
+
+INSERT INTO `sale_order_line` (`sale_order_line_id`, `sale_order_id`, `product_id`, `quantity`, `price`) VALUES
+(2, 2, 8, 1, '300.00');
 
 -- --------------------------------------------------------
 
@@ -395,6 +412,13 @@ CREATE TABLE `user` (
   `phone` varchar(20) DEFAULT NULL,
   `address` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci COMMENT='Tabulka s daty uživatelů';
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `name`, `email`, `facebook_id`, `role_id`, `password`, `phone`, `address`) VALUES
+(3, 'Petr Cafourek', 'cafourek2@gmail.com', NULL, NULL, '$2y$10$0f8twanVO/ep33KiMsgQGumKVqQq/o6er3aWFF29fFQrHp5sarrGu', '+420 731730756', 'something 123');
 
 --
 -- Indexes for dumped tables
@@ -467,14 +491,16 @@ ALTER TABLE `role`
 -- Indexes for table `sale_order`
 --
 ALTER TABLE `sale_order`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`sale_order_id`),
+  ADD KEY `fk_sale_order_user` (`user_id`);
 
 --
 -- Indexes for table `sale_order_line`
 --
 ALTER TABLE `sale_order_line`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `sale_order_id` (`sale_order_id`);
+  ADD PRIMARY KEY (`sale_order_line_id`),
+  ADD KEY `fk_sale_order_line_order` (`sale_order_id`),
+  ADD KEY `fk_sale_order_line_product` (`product_id`);
 
 --
 -- Indexes for table `user`
@@ -493,13 +519,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 
 --
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -517,7 +543,7 @@ ALTER TABLE `forgotten_password`
 -- AUTO_INCREMENT for table `permission`
 --
 ALTER TABLE `permission`
-  MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -529,19 +555,19 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `sale_order`
 --
 ALTER TABLE `sale_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `sale_order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `sale_order_line`
 --
 ALTER TABLE `sale_order_line`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `sale_order_line_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -586,10 +612,17 @@ ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE SET NULL;
 
 --
+-- Constraints for table `sale_order`
+--
+ALTER TABLE `sale_order`
+  ADD CONSTRAINT `fk_sale_order_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE SET NULL;
+
+--
 -- Constraints for table `sale_order_line`
 --
 ALTER TABLE `sale_order_line`
-  ADD CONSTRAINT `sale_order_line_ibfk_1` FOREIGN KEY (`sale_order_id`) REFERENCES `sale_order` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_sale_order_line_order` FOREIGN KEY (`sale_order_id`) REFERENCES `sale_order` (`sale_order_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_sale_order_line_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
 
 --
 -- Constraints for table `user`
