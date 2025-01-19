@@ -2,6 +2,7 @@
 
 namespace App\Model\Entities;
 
+use App\Model\Enums\ImageType;
 use LeanMapper\Entity;
 
 /**
@@ -18,6 +19,7 @@ use LeanMapper\Entity;
  * @property int $playTime
  * @property int $minAge
  * @property int $soldQuantity
+ * @property Image[] $images m:belongsToMany = []
  */
 class Product extends Entity implements \Nette\Security\Resource {
 
@@ -26,5 +28,16 @@ class Product extends Entity implements \Nette\Security\Resource {
      */
     function getResourceId(): string {
         return 'Product';
+    }
+
+    /**
+     * Get the URL of the front image
+     *
+     * @return string
+     */
+    public function getFrontImageUrl(): string {
+        $frontImage = array_filter($this->images, fn($image) => $image->type === ImageType::FRONT->value);
+        $frontImage = reset($frontImage);
+        return $frontImage ? $frontImage->url : '';
     }
 }

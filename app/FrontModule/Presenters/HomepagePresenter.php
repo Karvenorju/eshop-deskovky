@@ -13,16 +13,10 @@ class HomepagePresenter extends BasePresenter {
         $this->productsFacade = $productsFacade;
     }
 
-    public function renderDefault() {
+    public function renderDefault(): void {
+        $topProducts = $this->productsFacade->findTopProducts();
 
-        $this->productsFacade->findProductsCount();
-
-        $cartControl = $this['cart']; // Přístup ke komponentě přes BasePresenter
-        // Získat data košíku
-        $cart = $cartControl->getCart();
-
-        // Pass data to the template
-        $this->template->cart = $cart;
+        $this->template->topProducts = $topProducts;
     }
 
 }
