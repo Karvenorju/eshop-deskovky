@@ -33,7 +33,7 @@ class UserProfileForm extends Form {
 
     private UsersFacade $usersFacade;
 
-    private User $user;
+    private User $userEntity;
 
     /**
      * UserRegistrationForm constructor.
@@ -47,31 +47,30 @@ class UserProfileForm extends Form {
         $this->usersFacade = $usersFacade;
 
         $userEntity = $this->usersFacade->getUser($userLoginControl->getCurrentUser()->getId());
-        $this->user = $userEntity;
+        $this->userEntity = $userEntity;
 
         $this->createSubcomponents();
     }
 
     private function createSubcomponents(): void {
         $this->addText('name', 'Jméno a příjmení:')
-            ->setDefaultValue($this->user->name)
+            ->setDefaultValue($this->userEntity->name)
             ->setRequired('Zadejte své jméno')
             ->setHtmlAttribute('maxlength', 40)
             ->addRule(Nette\Forms\Form::MAX_LENGTH, 'Jméno je příliš dlouhé, může mít maximálně 40 znaků.', 40);
         $this->addEmail('email', 'E-mail')
-            ->setDefaultValue($this->user->email)
+            ->setDefaultValue($this->userEntity->email)
             ->setRequired('Zadejte platný email')
             ->addRule(function (Nette\Forms\Controls\TextInput $input) {
                 try {
                     $this->usersFacade->getUserByEmail($input->value);
                 } catch (\Exception $e) {
-                    //pokud nebyl uživatel nalezen (tj. je vyhozena výjimka), je to z hlediska registrace v pořádku
                     return true;
                 }
-                return $this->user->email == $input->value;
+                return $this->userEntity->email == $input->value;
             }, 'Uživatel s tímto e-mailem je již registrován.');
-        $this->addText('phone', 'Tel. číslo:')
-            ->setDefaultValue($this->user->phone)
+        $this->addText('phone', 'Telefonní číslo:')
+            ->setDefaultValue($this->userEntity->phone)
             ->setHtmlType('tel')
             ->setEmptyValue('+420 ')
             ->addRule(function ($control) {
@@ -79,18 +78,19 @@ class UserProfileForm extends Form {
             }, 'Telefonní číslo není platné.')
             ->setHtmlAttribute('maxlength', 20);
         $this->addText('address', 'Doručovací adresa')
-            ->setDefaultValue($this->user->address)
+            ->setDefaultValue($this->userEntity->address)
             ->setHtmlAttribute('maxlength', 200);
 
         $this->addSubmit('ok', 'Uložit změny')
             ->onClick[] = function (SubmitButton $button) {
             //uložení uživatele
             $values = $this->getValues('array');
-            $this->user->name = $values['name'];
-            $this->user->email = $values['email'];
-            $this->user->phone = $values['phone'];
-            $this->user->address = $values['address'];
-            $this->usersFacade->saveUser($this->user);
+            $this->userEntity->name = $values['name'];
+            $this->userEntity->email = $values['email'];
+            $this->userEntity->phone = $values['phone'];
+            $this->userEntity->address = $values['address'];
+            $this->usersFacade->saveUser($this->userEntity);
+
             $this->onFinished();
         };
     }
