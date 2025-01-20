@@ -14,10 +14,14 @@
                         <div class="carousel-image-container bg-img">
                             <img src="{$basePath}/img/products/{$product->getFrontImageUrl()}"
                                  class="d-block w-100" alt="{$product->title}"/>
-                            <div id="image-overlay" class="position-absolute bottom-0 text-light w-100">
-                                <p class="p-1 m-0 title">{$iterator->counter}. {$product->title}</p>
-                                <p>Cena: <span class="price-tag p-0 m-0">{$product->price}</span>,- Kč</p>
-                            </div>
+                            <<a href="{plink Product:show url=>$product->url}">
+                                <div id="image-overlay" class="position-absolute bottom-0 text-light w-100">
+                                    <p class="pt-1 p-0 m-0 title">{$iterator->counter}. {$product->title}</p>
+                                    <p class="m-0 p-0 pb-1">Cena: <span
+                                                class="price-tag p-0 m-0">{$product->price}</span>,- Kč
+                                    </p>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 {/foreach}
@@ -25,7 +29,7 @@
             <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls"
                     data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Předešlé</span>
+                <span class="visually-hidden">Předchozí</span>
             </button>
             <button class="carousel-control-next" type="button" data-target="#carouselExampleControls"
                     data-slide="next">
