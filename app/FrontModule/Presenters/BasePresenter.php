@@ -14,52 +14,55 @@ use Nette\Application\ForbiddenRequestException;
  * @package App\FrontModule\Presenters
  */
 abstract class BasePresenter extends \Nette\Application\UI\Presenter {
-  private UserLoginControlFactory $userLoginControlFactory;
-  private CartControlFactory $cartControlFactory;
+    private UserLoginControlFactory $userLoginControlFactory;
+    private CartControlFactory $cartControlFactory;
 
-  /**
-   * @throws ForbiddenRequestException
-   * @throws AbortException
-   */
-  protected function startup():void {
-    parent::startup();
-    $presenterName = $this->request->presenterName;
-    $action = !empty($this->request->parameters['action'])?$this->request->parameters['action']:'';
+    /**
+     * @throws ForbiddenRequestException
+     * @throws AbortException
+     */
+    protected function startup(): void {
+        parent::startup();
+        $presenterName = $this->request->presenterName;
+        $action = !empty($this->request->parameters['action']) ? $this->request->parameters['action'] : '';
 
-    if (!$this->user->isAllowed($presenterName,$action)){
-      if ($this->user->isLoggedIn()){
-        throw new ForbiddenRequestException();
-      }else{
-        $this->flashMessage('Pro zobrazení požadovaného obsahu se musíte přihlásit!','warning');
-        //uložíme původní požadavek - předáme ho do persistentní proměnné v UserPresenteru
-        $this->redirect('User:login', ['backlink' => $this->storeRequest()]);
-      }
+        $isAdmin = in_array('admin', $this->user?->roles ?? []);
+        $this->template->isAdmin = $isAdmin;
+
+        if (!$this->user->isAllowed($presenterName, $action)) {
+            if ($this->user->isLoggedIn()) {
+                throw new ForbiddenRequestException();
+            } else {
+                $this->flashMessage('Pro zobrazení požadovaného obsahu se musíte přihlásit!', 'warning');
+                //uložíme původní požadavek - předáme ho do persistentní proměnné v UserPresenteru
+                $this->redirect('User:login', ['backlink' => $this->storeRequest()]);
+            }
+        }
     }
-  }
 
-  /**
-   * Komponenta pro zobrazení údajů o aktuálním uživateli (přihlášeném či nepřihlášeném)
-   * @return UserLoginControl
-   */
-  public function createComponentUserLogin():UserLoginControl {
-    return $this->userLoginControlFactory->create();
-  }
+    /**
+     * Komponenta pro zobrazení údajů o aktuálním uživateli (přihlášeném či nepřihlášeném)
+     * @return UserLoginControl
+     */
+    public function createComponentUserLogin(): UserLoginControl {
+        return $this->userLoginControlFactory->create();
+    }
 
-  /**
-   * Komponenta košíku
-   * @return CartControl
-   */
-  public function createComponentCart():CartControl {
-    return $this->cartControlFactory->create();
-  }
+    /**
+     * Komponenta košíku
+     * @return CartControl
+     */
+    public function createComponentCart(): CartControl {
+        return $this->cartControlFactory->create();
+    }
 
-  #region injections
-  public function injectUserLoginControlFactory(UserLoginControlFactory $userLoginControlFactory):void {
-    $this->userLoginControlFactory=$userLoginControlFactory;
-  }
+    #region injections
+    public function injectUserLoginControlFactory(UserLoginControlFactory $userLoginControlFactory): void {
+        $this->userLoginControlFactory = $userLoginControlFactory;
+    }
 
-  public function injectCartControlFactory(CartControlFactory $cartControlFactory):void {
-    $this->cartControlFactory=$cartControlFactory;
-  }
-  #endregion injections
+    public function injectCartControlFactory(CartControlFactory $cartControlFactory): void {
+        $this->cartControlFactory = $cartControlFactory;
+    }
+    #endregion injections
 }
