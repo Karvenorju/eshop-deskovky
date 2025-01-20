@@ -65,3 +65,11 @@
     font-weight: bold;
     color: #ffcc00;
 }
+
+.bordered-card {
+    border-radius: 10px;
+    border-left: 8px #0066cc solid;
+    border-right: none;
+    border-top: none;
+    border-bottom: none
+}
