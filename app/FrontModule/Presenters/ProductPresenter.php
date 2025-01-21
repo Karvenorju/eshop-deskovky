@@ -46,6 +46,10 @@ class ProductPresenter extends BasePresenter {
     public function renderList(): void {
         //TODO tady by mělo přibýt filtrování podle kategorie, stránkování atp.
         $filterParams = $this->getHttpRequest()->getPost();
+        $search = $this->getHttpRequest()->getQuery('search');
+        if (!empty($search)) {
+            $filterParams['search'] = $search;
+        }
         $this->template->products = $this->productsFacade->findProducts($filterParams);
     }
 
