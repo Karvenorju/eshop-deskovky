@@ -21,6 +21,7 @@ class UserLoginControl extends Control {
         $template = $this->prepareTemplate('default');
         $template->user = $this->user;
         $template->class = (!empty($params['class']) ? $params['class'] : '');
+        $template->isAdmin = in_array('admin', $this->user?->roles ?? []);
         $template->render();
     }
 

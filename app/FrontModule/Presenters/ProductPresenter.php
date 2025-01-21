@@ -7,7 +7,6 @@ use App\FrontModule\Components\ProductCartForm\ProductCartForm;
 use App\FrontModule\Components\ProductCartForm\ProductCartFormFactory;
 use App\FrontModule\Components\ProductListFilterForm\ProductListFilterForm;
 use App\FrontModule\Components\ProductListFilterForm\ProductListFilterFormFactory;
-use App\Model\Facades\ProductsFacade;
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\Multiplier;
 
@@ -17,7 +16,6 @@ use Nette\Application\UI\Multiplier;
  * @property string $category
  */
 class ProductPresenter extends BasePresenter {
-    private ProductsFacade $productsFacade;
     private ProductCartFormFactory $productCartFormFactory;
     private ProductListFilterFormFactory $productListFilterFormFactory;
 
@@ -96,10 +94,6 @@ class ProductPresenter extends BasePresenter {
     }
 
     #region injections
-    public function injectProductsFacade(ProductsFacade $productsFacade): void {
-        $this->productsFacade = $productsFacade;
-    }
-
     public function injectProductCartFormFactory(ProductCartFormFactory $productCartFormFactory): void {
         $this->productCartFormFactory = $productCartFormFactory;
     }
