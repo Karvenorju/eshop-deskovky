@@ -57,7 +57,7 @@ class NewPasswordForm extends Form {
     private function createSubcomponents(): void {
         $this->addHidden('userId', $this->user->userId);
 
-        $password = $this->addPassword('password', 'Heslo');
+        $password = $this->addPassword('password', 'Heslo:');
         $password
             ->setRequired('Zadejte požadované heslo')
             ->addRule(Form::MIN_LENGTH, 'Heslo musí obsahovat minimálně 5 znaků.', 5);

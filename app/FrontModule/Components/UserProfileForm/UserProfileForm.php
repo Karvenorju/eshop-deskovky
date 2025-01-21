@@ -58,7 +58,7 @@ class UserProfileForm extends Form {
             ->setRequired('Zadejte své jméno')
             ->setHtmlAttribute('maxlength', 40)
             ->addRule(Nette\Forms\Form::MAX_LENGTH, 'Jméno je příliš dlouhé, může mít maximálně 40 znaků.', 40);
-        $this->addEmail('email', 'E-mail')
+        $this->addEmail('email', 'E-mail:')
             ->setDefaultValue($this->userEntity->email)
             ->setRequired('Zadejte platný email')
             ->addRule(function (Nette\Forms\Controls\TextInput $input) {
@@ -77,7 +77,7 @@ class UserProfileForm extends Form {
                 return $this->validatePhoneNumber($control->getValue());
             }, 'Telefonní číslo není platné.')
             ->setHtmlAttribute('maxlength', 20);
-        $this->addText('address', 'Doručovací adresa')
+        $this->addText('address', 'Doručovací adresa:')
             ->setDefaultValue($this->userEntity->address)
             ->setHtmlAttribute('maxlength', 200);
 

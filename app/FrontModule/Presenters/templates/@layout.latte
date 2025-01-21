@@ -22,19 +22,39 @@
 </head>
 <body>
 
-<header class="navbar navbar-light bg-light mb-4">
-    <div class="container">
+<header class="navbar navbar-light bg-light mb-4 border-bottom">
+    <div class="container d-flex align-items-center justify-content-between">
         <a href="{plink Homepage:default}"
            class="d-inline-flex text-dark text-decoration-none" style="height: 65px">
             <img class="img-fluid" src="{$basePath}/img/favicon/logo.png" alt="logo">
             <h1 class="align-self-center ml-1">Deskovky.cz</h1>
         </a>
-        <div class="ml-auto d-inline-flex">
+
+        <div class="flex-grow-1 d-flex justify-content-center">
+            <div class="w-75">
+                <form action="{plink Product:list}" method="GET" class="input-group rounded">
+                    <input type="search" name="search" class="form-control rounded-pill shadow-sm"
+                           placeholder="Kterou hru hledáte?" aria-label="Search" list="suggestions"
+                           autocomplete="off"/>
+                    <datalist id="suggestions">
+                        {foreach $productNames as $productName}
+                            <option value="{$productName}"></option>
+                        {/foreach}
+                    </datalist>
+                    <button class="btn btn-primary shadow-sm ml-1" type="submit">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="d-inline-flex align-items-center">
             <div class="mr-3" n:snippet="cart">{control cart}</div>
             {control userLogin}
         </div>
     </div>
 </header>
+
 <!--  Main content  -->
 <div class="container min-vh-100">
 
@@ -71,7 +91,7 @@
                         </h5>
                     </a>
                     <p>
-                        Přinášíme Vám to nejlepší ze světa her za příznivé ceny!
+                        Přinášíme Vám to nejlepší ze světa deskových her!
                     </p>
                 </div>
 

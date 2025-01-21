@@ -4,29 +4,31 @@ namespace App\Model\Facades;
 
 use App\Model\Entities\SaleOrder;
 use App\Model\Entities\SaleOrderLine;
-use App\Model\Repositories\SaleOrderRepository;
-use App\Model\Repositories\SaleOrderLineRepository;
 use App\Model\Repositories\CartRepository;
+use App\Model\Repositories\SaleOrderLineRepository;
+use App\Model\Repositories\SaleOrderRepository;
 use Dibi\DateTime;
-use LeanMapper\Connection;
 use Exception;
+use LeanMapper\Connection;
 
-class SaleOrderFacade
-{
+class SaleOrderFacade {
     private SaleOrderRepository $saleOrderRepository;
     private SaleOrderLineRepository $saleOrderLineRepository;
     private CartRepository $cartRepository;
     private Connection $db;
+    private ProductsFacade $productsFacade;
 
     public function __construct(
-        SaleOrderRepository $saleOrderRepository,
+        SaleOrderRepository     $saleOrderRepository,
         SaleOrderLineRepository $saleOrderLineRepository,
-        CartRepository $cartRepository,
-        Connection $db
+        CartRepository          $cartRepository,
+        Connection              $db,
+        ProductsFacade          $productsFacade
     ) {
         $this->saleOrderRepository = $saleOrderRepository;
         $this->saleOrderLineRepository = $saleOrderLineRepository;
         $this->cartRepository = $cartRepository;
+        $this->productsFacade = $productsFacade;
         $this->db = $db;
     }
 
@@ -60,8 +62,7 @@ class SaleOrderFacade
      * @return SaleOrder Created order
      * @throws Exception If the transaction fails
      */
-    public function createOrder(array $orderData, int $cartId): SaleOrder
-    {
+    public function createOrder(array $orderData, int $cartId): SaleOrder {
         try {
             $this->db->begin(); // Start transaction
 
@@ -95,6 +96,12 @@ class SaleOrderFacade
                 $orderItem->quantity = $cartItem->count;
                 $orderItem->price = $cartItem->product->price;
 
+                // Zvýšení počtu prodaných kusů u produktů
+                $orderedProductEntity = $this->productsFacade->getProduct($cartItem->product->productId);
+                $orderedQuantity = $cartItem->count;
+                $orderedProductEntity->soldQuantity = $orderedProductEntity->soldQuantity + $orderedQuantity;
+                $this->productsFacade->saveProduct($orderedProductEntity);
+
                 // Ensure quantity and price are valid
                 if ($orderItem->quantity <= 0) {
                     throw new Exception('Invalid quantity for product ID ' . $orderItem->productId);
@@ -117,8 +124,7 @@ class SaleOrderFacade
         }
     }
 
-    public function getOrderById(int $id): ?SaleOrder
-    {
+    public function getOrderById(int $id): ?SaleOrder {
         return $this->saleOrderRepository->find($id);
     }
 

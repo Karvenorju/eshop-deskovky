@@ -24,6 +24,10 @@ class ProductsFacade {
         return $this->productRepository->find($id);
     }
 
+    public function getAllProducts(): array {
+        return $this->productRepository->findAll();
+    }
+
     /**
      * Metoda pro získání produktu podle URL
      * @param string $url
@@ -44,6 +48,9 @@ class ProductsFacade {
     public function findProducts(array $params = null, int $offset = null, int $limit = null): array {
         $whereArr = [];
 
+        if (isset($params['search'])) {
+            $whereArr[] = ['title LIKE ?', '%' . $params['search'] . '%'];
+        }
         if (isset($params['category']) && is_array($params['category'])) {
             $whereArr[] = ['category_id IN (?)', $params['category']];
         }

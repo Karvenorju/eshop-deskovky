@@ -7,7 +7,6 @@ use App\FrontModule\Components\ProductCartForm\ProductCartForm;
 use App\FrontModule\Components\ProductCartForm\ProductCartFormFactory;
 use App\FrontModule\Components\ProductListFilterForm\ProductListFilterForm;
 use App\FrontModule\Components\ProductListFilterForm\ProductListFilterFormFactory;
-use App\Model\Facades\ProductsFacade;
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\Multiplier;
 
@@ -17,7 +16,6 @@ use Nette\Application\UI\Multiplier;
  * @property string $category
  */
 class ProductPresenter extends BasePresenter {
-    private ProductsFacade $productsFacade;
     private ProductCartFormFactory $productCartFormFactory;
     private ProductListFilterFormFactory $productListFilterFormFactory;
 
@@ -35,7 +33,6 @@ class ProductPresenter extends BasePresenter {
         } catch (\Exception $e) {
             throw new BadRequestException('Produkt nebyl nalezen.');
         }
-
         $this->template->product = $product;
     }
 
@@ -45,6 +42,10 @@ class ProductPresenter extends BasePresenter {
     public function renderList(): void {
         //TODO tady by mělo přibýt filtrování podle kategorie, stránkování atp.
         $filterParams = $this->getHttpRequest()->getPost();
+        $search = $this->getHttpRequest()->getQuery('search');
+        if (!empty($search)) {
+            $filterParams['search'] = trim($search);
+        }
         $this->template->products = $this->productsFacade->findProducts($filterParams);
     }
 
@@ -68,7 +69,7 @@ class ProductPresenter extends BasePresenter {
                 /** @var CartControl $cart */
                 $cart = $this->getComponent('cart');
 //                $cart->addToCart($product, (int)$form->values->count);
-                $cart->addToCart($product,1);
+                $cart->addToCart($product, 1);
 
                 $this->flashMessage('Produkt přidán do košíku: ' . $product->title);
                 if ($this->isAjax()) {
@@ -93,10 +94,6 @@ class ProductPresenter extends BasePresenter {
     }
 
     #region injections
-    public function injectProductsFacade(ProductsFacade $productsFacade): void {
-        $this->productsFacade = $productsFacade;
-    }
-
     public function injectProductCartFormFactory(ProductCartFormFactory $productCartFormFactory): void {
         $this->productCartFormFactory = $productCartFormFactory;
     }
