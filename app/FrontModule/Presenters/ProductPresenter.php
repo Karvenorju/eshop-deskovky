@@ -20,7 +20,6 @@ use Nette\Application\UI\Multiplier;
  */
 class ProductPresenter extends BasePresenter {
     private ProductsFacade $productsFacade;
-    private ImageFacade $imageFacade;
     private ProductCartFormFactory $productCartFormFactory;
     private ProductListFilterFormFactory $productListFilterFormFactory;
 
@@ -38,13 +37,7 @@ class ProductPresenter extends BasePresenter {
         } catch (\Exception $e) {
             throw new BadRequestException('Produkt nebyl nalezen.');
         }
-
-        $images = $this->imageFacade->getImages($product);
-        $frontImage = $this->imageFacade->getFrontImage($product);
-
         $this->template->product = $product;
-        $this->template->images = $images;
-        $this->template->frontImage = $frontImage;
     }
 
     /**
@@ -103,10 +96,6 @@ class ProductPresenter extends BasePresenter {
     #region injections
     public function injectProductsFacade(ProductsFacade $productsFacade): void {
         $this->productsFacade = $productsFacade;
-    }
-
-    public function injectImageFacade(ImageFacade $imageFacade): void {
-        $this->imageFacade = $imageFacade;
     }
 
     public function injectProductCartFormFactory(ProductCartFormFactory $productCartFormFactory): void {
