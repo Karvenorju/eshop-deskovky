@@ -53,8 +53,16 @@ class CheckoutForm extends Form
             ->setDefaultValue($user?->address)
             ->setRequired('Zadejte ulici a číslo domu');
 
+        $this->addRadioList('paymentMethod', 'Způsob platby', [
+            'credit' => 'Kreditní karta',
+            'debit' => 'Dobírka',
+            'paypal' => 'PayPal',
+        ])
+            ->setDefaultValue('credit')
+            ->setRequired();
+
         // Submit Button
-        $this->addSubmit('submitOrder', 'Odeslat objednávku')
+        $this->addSubmit('submit', 'Odeslat objednávku')
             ->setHtmlAttribute('class', 'btn btn-primary btn-block'); // Třída pro styl tlačítka
     }
 }

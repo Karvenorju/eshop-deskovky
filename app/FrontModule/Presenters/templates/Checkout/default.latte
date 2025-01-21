@@ -50,7 +50,7 @@
             <!-- Checkout Form Second on Small Screens but First on Large Screens -->
             <div class="col-md-8 order-md-first">
                 <h4 class="mb-3">Fakturační údaje</h4>
-                <form n:name="checkoutForm">
+                {form checkoutForm}
                     <div class="mb-3">
                         <label for="name">Jméno</label>
                         <input type="text" class="form-control" n:name="name" placeholder="Jan Novák">
@@ -76,22 +76,22 @@
 
                     <div class="d-block my-3">
                         <div class="custom-control custom-radio">
-                            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked>
+                            <input id="credit" n:name="paymentMethod" type="radio" value="credit" class="custom-control-input" checked>
                             <label class="custom-control-label" for="credit">Kreditní karta</label>
                         </div>
                         <div class="custom-control custom-radio">
-                            <input id="debit" name="paymentMethod" type="radio" class="custom-control-input">
+                            <input id="debit" n:name="paymentMethod" type="radio" value="debit" class="custom-control-input">
                             <label class="custom-control-label" for="debit">Dobírka</label>
                         </div>
                         <div class="custom-control custom-radio">
-                            <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input">
+                            <input id="paypal" n:name="paymentMethod" type="radio" value="paypal" class="custom-control-input">
                             <label class="custom-control-label" for="paypal">PayPal</label>
                         </div>
                     </div>
 
                     <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Potvrdit objednávku</button>
-                </form>
+                    <button class="btn btn-primary btn-lg btn-block" n:name="submit">Potvrdit objednávku</button>
+                {/form}
             </div>
         </div>
     </div>
