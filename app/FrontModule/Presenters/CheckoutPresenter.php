@@ -5,15 +5,14 @@ namespace App\FrontModule\Presenters;
 use App\FrontModule\Components\CartControl\CartControl;
 use App\FrontModule\Components\CheckoutForm\CheckoutFormFactory;
 use App\Model\Entities\Cart;
-use App\Model\Facades\ProductsFacade;
 use App\Model\Facades\SaleOrderFacade;
 use App\Model\Facades\UsersFacade;
 use Nette\Application\UI\Form;
+
 class CheckoutPresenter extends BasePresenter {
 
     private CheckoutFormFactory $checkoutFormFactory;
     private SaleOrderFacade $saleOrderFacade;
-    private ProductsFacade $productsFacade;
     private UsersFacade $usersFacade;
 
     public function injectCheckoutFormFactory(CheckoutFormFactory $factory): void {
@@ -24,13 +23,8 @@ class CheckoutPresenter extends BasePresenter {
         $this->saleOrderFacade = $saleOrderFacade;
     }
 
-    public function injectUsersFacade(UsersFacade $usersFacade): void
-    {
+    public function injectUsersFacade(UsersFacade $usersFacade): void {
         $this->usersFacade = $usersFacade;
-    }
-
-    public function injectProductFacade(ProductsFacade $productsFacade): void {
-        $this->productsFacade = $productsFacade;
     }
 
     protected function createComponentCheckoutForm(): Form {
@@ -71,14 +65,6 @@ class CheckoutPresenter extends BasePresenter {
             ];
             // Call SaleOrderFacade to create order
             $this->saleOrderFacade->createOrder($orderData, $cart->cartId);
-
-            foreach ($cart->items as $cartItem) {
-                $orderedProductEntity = $this->productsFacade->getProduct($cartItem->product->productId);
-                $orderedQuantity = $cartItem->count;
-
-                $orderedProductEntity->soldQuantity = $orderedProductEntity->soldQuantity + $orderedQuantity;
-                $this->productsFacade->saveProduct($orderedProductEntity);
-            }
 
             // Show success message and redirect
             $this->flashMessage('Objednávka byla úspěšně vytvořena.', 'success');
