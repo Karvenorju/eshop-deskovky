@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 19, 2025 at 08:21 PM
+-- Generation Time: Jan 21, 2025 at 09:34 PM
 -- Server version: 10.5.23-MariaDB-0+deb11u1
 -- PHP Version: 8.1.29
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `kovj19`
+-- Database: `cafp00`
 --
 
 -- --------------------------------------------------------
@@ -32,101 +32,6 @@ CREATE TABLE `cart` (
   `user_id` int(11) DEFAULT NULL,
   `last_modified` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`cart_id`, `user_id`, `last_modified`) VALUES
-(70, NULL, '2025-01-19 10:51:52'),
-(71, NULL, '2025-01-19 10:52:13'),
-(72, NULL, '2025-01-19 10:52:22'),
-(74, NULL, '2025-01-19 10:59:39'),
-(75, NULL, '2025-01-19 10:59:40'),
-(76, NULL, '2025-01-19 10:59:43'),
-(77, 3, '2025-01-19 11:00:53'),
-(78, NULL, '2025-01-19 11:02:03'),
-(79, NULL, '2025-01-19 11:02:09'),
-(80, NULL, '2025-01-19 11:46:47'),
-(81, NULL, '2025-01-19 11:46:49'),
-(82, NULL, '2025-01-19 11:49:22'),
-(83, NULL, '2025-01-19 11:49:27'),
-(84, NULL, '2025-01-19 12:48:01'),
-(85, NULL, '2025-01-19 12:48:30'),
-(86, NULL, '2025-01-19 12:48:31'),
-(87, NULL, '2025-01-19 12:49:39'),
-(88, NULL, '2025-01-19 12:49:40'),
-(89, NULL, '2025-01-19 12:50:17'),
-(90, NULL, '2025-01-19 12:50:18'),
-(91, NULL, '2025-01-19 12:53:08'),
-(92, NULL, '2025-01-19 12:53:09'),
-(93, NULL, '2025-01-19 12:53:39'),
-(94, NULL, '2025-01-19 13:05:19'),
-(95, NULL, '2025-01-19 13:05:20'),
-(96, NULL, '2025-01-19 13:40:45'),
-(97, NULL, '2025-01-19 13:40:46'),
-(98, NULL, '2025-01-19 14:52:06'),
-(99, NULL, '2025-01-19 15:16:19'),
-(100, NULL, '2025-01-19 15:16:21'),
-(101, NULL, '2025-01-19 15:16:24'),
-(102, NULL, '2025-01-19 15:16:26'),
-(106, 2, '2025-01-19 15:17:50'),
-(107, NULL, '2025-01-19 18:10:41'),
-(108, NULL, '2025-01-19 18:11:07'),
-(109, NULL, '2025-01-19 18:11:15'),
-(110, NULL, '2025-01-19 18:11:23'),
-(111, NULL, '2025-01-19 18:11:33'),
-(112, NULL, '2025-01-19 18:11:41'),
-(113, NULL, '2025-01-19 18:11:48'),
-(114, NULL, '2025-01-19 18:11:50'),
-(115, NULL, '2025-01-19 18:11:50'),
-(116, NULL, '2025-01-19 18:11:54'),
-(117, NULL, '2025-01-19 18:12:05'),
-(118, NULL, '2025-01-19 18:13:34'),
-(119, NULL, '2025-01-19 18:14:00'),
-(120, NULL, '2025-01-19 18:15:35'),
-(121, NULL, '2025-01-19 18:16:41'),
-(122, NULL, '2025-01-19 18:17:50'),
-(123, NULL, '2025-01-19 18:20:04'),
-(124, NULL, '2025-01-19 18:22:03'),
-(125, NULL, '2025-01-19 18:22:52'),
-(126, NULL, '2025-01-19 18:25:00'),
-(127, NULL, '2025-01-19 18:25:08'),
-(128, NULL, '2025-01-19 18:26:19'),
-(129, NULL, '2025-01-19 18:26:22'),
-(130, NULL, '2025-01-19 18:26:24'),
-(131, NULL, '2025-01-19 18:26:26'),
-(132, NULL, '2025-01-19 18:26:29'),
-(133, NULL, '2025-01-19 18:26:51'),
-(134, NULL, '2025-01-19 18:27:47'),
-(135, NULL, '2025-01-19 18:35:06'),
-(136, NULL, '2025-01-19 18:35:53'),
-(137, NULL, '2025-01-19 18:45:05'),
-(138, NULL, '2025-01-19 18:47:54'),
-(139, NULL, '2025-01-19 18:50:13'),
-(140, NULL, '2025-01-19 18:51:54'),
-(141, NULL, '2025-01-19 18:52:03'),
-(142, NULL, '2025-01-19 18:52:09'),
-(143, NULL, '2025-01-19 18:52:45'),
-(144, NULL, '2025-01-19 18:54:10'),
-(145, NULL, '2025-01-19 18:54:34'),
-(146, NULL, '2025-01-19 18:59:16'),
-(147, NULL, '2025-01-19 19:05:04'),
-(148, NULL, '2025-01-19 19:09:00'),
-(149, NULL, '2025-01-19 19:09:02'),
-(150, NULL, '2025-01-19 19:09:03'),
-(151, NULL, '2025-01-19 19:09:03'),
-(152, NULL, '2025-01-19 19:09:05'),
-(153, NULL, '2025-01-19 19:09:05'),
-(154, NULL, '2025-01-19 19:09:05'),
-(155, NULL, '2025-01-19 19:09:05'),
-(156, NULL, '2025-01-19 19:09:07'),
-(157, NULL, '2025-01-19 19:09:14'),
-(158, NULL, '2025-01-19 19:10:19'),
-(159, NULL, '2025-01-19 19:10:20'),
-(160, NULL, '2025-01-19 19:12:01'),
-(161, NULL, '2025-01-19 19:15:38'),
-(162, NULL, '2025-01-19 19:18:17');
 
 -- --------------------------------------------------------
 
@@ -329,6 +234,7 @@ INSERT INTO `permission` (`permission_id`, `role_id`, `resource_id`, `action`, `
 (22, 'admin', 'Admin:Category', '', 'allow'),
 (21, 'admin', 'Admin:Dashboard', '', 'allow'),
 (24, 'admin', 'Admin:Product', '', 'allow'),
+(45, 'admin', 'Admin:SaleOrder', '', 'allow'),
 (12, 'admin', 'Category', '', 'allow'),
 (23, 'admin', 'Product', '', 'allow'),
 (28, 'authenticated', 'Admin:Product', '', 'allow'),
@@ -410,6 +316,7 @@ INSERT INTO `resource` (`resource_id`) VALUES
 ('Admin:Dashboard'),
 ('Admin:Error4xx'),
 ('Admin:Product'),
+('Admin:SaleOrder'),
 ('Category'),
 ('Front:Cart'),
 ('Front:Error'),
@@ -463,7 +370,11 @@ CREATE TABLE `sale_order` (
 --
 
 INSERT INTO `sale_order` (`sale_order_id`, `user_id`, `order_name`, `customer_name`, `customer_email`, `customer_phone`, `customer_address`, `total_price`, `created_at`, `status`) VALUES
-(2, 3, 'SO-20250119-000001', 'Petr Cafourek', 'cafourek2@gmail.com', '+420 731730756', 'something 123', '300.00', '2025-01-19 21:15:47', 'pending');
+(2, 3, 'SO-20250119-000001', 'Petr Cafourek', 'cafourek2@gmail.com', '+420 731730756', 'something 123', '300.00', '2025-01-19 21:15:47', 'pending'),
+(3, 3, 'SO-20250121-000001', 'Petr Cafourek', 'cafourek2@gmail.com', '+420 731730756', 'something 123', '947.00', '2025-01-21 19:18:52', 'pending'),
+(4, 3, 'SO-20250121-000002', 'Petr Cafourek', 'cafourek2@gmail.com', '+420 731730756', 'something 123', '584.00', '2025-01-21 19:23:09', 'pending'),
+(5, 3, 'SO-20250121-000003', 'Petr Cafourek', 'cafourek2@gmail.com', '+420 731730756', 'something 123', '947.00', '2025-01-21 19:23:37', 'pending'),
+(6, 3, 'SO-20250121-000004', 'Petr Cafourek', 'cafourek2@gmail.com', '+420 731730756', 'something 123', '947.00', '2025-01-21 19:27:26', 'pending');
 
 -- --------------------------------------------------------
 
@@ -484,7 +395,14 @@ CREATE TABLE `sale_order_line` (
 --
 
 INSERT INTO `sale_order_line` (`sale_order_line_id`, `sale_order_id`, `product_id`, `quantity`, `price`) VALUES
-(2, 2, 8, 1, '300.00');
+(2, 2, 8, 1, '300.00'),
+(3, 3, 7, 1, '400.00'),
+(4, 3, 8, 1, '300.00'),
+(5, 4, 7, 1, '400.00'),
+(6, 5, 7, 1, '400.00'),
+(7, 5, 8, 1, '300.00'),
+(8, 6, 7, 1, '400.00'),
+(9, 6, 8, 1, '300.00');
 
 -- --------------------------------------------------------
 
@@ -508,7 +426,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `name`, `email`, `facebook_id`, `role_id`, `password`, `phone`, `address`) VALUES
-(3, 'Petr Cafourek', 'cafourek2@gmail.com', NULL, NULL, '$2y$10$0f8twanVO/ep33KiMsgQGumKVqQq/o6er3aWFF29fFQrHp5sarrGu', '+420 731730756', 'something 123');
+(3, 'Petr Cafourek', 'cafourek2@gmail.com', NULL, 'admin', '$2y$10$0f8twanVO/ep33KiMsgQGumKVqQq/o6er3aWFF29fFQrHp5sarrGu', '+420 731730756', 'something 123');
 
 --
 -- Indexes for dumped tables
@@ -609,13 +527,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=288;
 
 --
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -633,7 +551,7 @@ ALTER TABLE `forgotten_password`
 -- AUTO_INCREMENT for table `permission`
 --
 ALTER TABLE `permission`
-  MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -645,13 +563,13 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `sale_order`
 --
 ALTER TABLE `sale_order`
-  MODIFY `sale_order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `sale_order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `sale_order_line`
 --
 ALTER TABLE `sale_order_line`
-  MODIFY `sale_order_line_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `sale_order_line_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -664,61 +582,11 @@ ALTER TABLE `user`
 --
 
 --
--- Constraints for table `cart`
---
-ALTER TABLE `cart`
-  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `cart_item`
 --
 ALTER TABLE `cart_item`
   ADD CONSTRAINT `cart_item_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `cart_item_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `forgotten_password`
---
-ALTER TABLE `forgotten_password`
-  ADD CONSTRAINT `forgotten_password_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `image`
---
-ALTER TABLE `image`
-  ADD CONSTRAINT `image_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `permission`
---
-ALTER TABLE `permission`
-  ADD CONSTRAINT `permission_ibfk_1` FOREIGN KEY (`resource_id`) REFERENCES `resource` (`resource_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `permission_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `product`
---
-ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON DELETE SET NULL;
-
---
--- Constraints for table `sale_order`
---
-ALTER TABLE `sale_order`
-  ADD CONSTRAINT `fk_sale_order_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE SET NULL;
-
---
--- Constraints for table `sale_order_line`
---
-ALTER TABLE `sale_order_line`
-  ADD CONSTRAINT `fk_sale_order_line_order` FOREIGN KEY (`sale_order_id`) REFERENCES `sale_order` (`sale_order_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_sale_order_line_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
-
---
--- Constraints for table `user`
---
-ALTER TABLE `user`
-  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
