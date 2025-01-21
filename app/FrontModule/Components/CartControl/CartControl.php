@@ -197,4 +197,35 @@ class CartControl extends Control
         return $this->cart; // Vrátí aktuální košík
     }
 
+    public function handleUpdateQuantity(int $cartItemId, int $quantity)
+    {
+        // Ensure quantity is valid
+        if ($quantity < 1) {
+            $this->flashMessage("Quantity must be at least 1", "danger");
+            return;
+        }
+
+        // Try to find the cart item
+        try {
+            $cartItem = $this->cartFacade->getCartItem($cartItemId);
+            $cartItem->count = $quantity;
+            $this->cartFacade->saveCartItem($cartItem);
+        } catch (\Exception $e) {
+            $this->flashMessage("Item not found in cart", "danger");
+            return;
+        }
+
+        // Refresh cart contents
+        $this->cart->updateCartItems();
+
+        // Handle AJAX updates
+        if ($this->presenter->isAjax()) {
+            $this->presenter->redrawControl('content');
+            $this->presenter->redrawControl('cart');
+            $this->redrawControl();
+        } else {
+            $this->redirect('this');
+        }
+    }
+
 }

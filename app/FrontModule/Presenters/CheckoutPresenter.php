@@ -33,11 +33,32 @@ class CheckoutPresenter extends BasePresenter {
         $this->productsFacade = $productsFacade;
     }
 
-    protected function createComponentCheckoutForm(): Form {
-        $form = $this->checkoutFormFactory->create(); // Vytvoření formuláře pomocí factory
-        $form->onSuccess[] = [$this, 'processCheckoutForm']; // Připojení callbacku
-        return $form; // Vrácení formuláře
+//    protected function createComponentCheckoutForm(): Form {
+//        $form = $this->checkoutFormFactory->create(); // Vytvoření formuláře pomocí factory
+//        $form->onSuccess[] = [$this, 'processCheckoutForm']; // Připojení callbacku
+//        return $form; // Vrácení formuláře
+//    }
+
+    protected function createComponentCheckoutForm(): Form
+    {
+        $form = new Form;
+        $form->addText('firstName', 'Jméno')->setRequired();
+        $form->addText('lastName', 'Příjmení')->setRequired();
+        $form->addEmail('email', 'E-mail')->setRequired();
+        $form->addText('address', 'Adresa')->setRequired();
+        $form->addText('phone', 'Telefon')->setRequired();
+        $form->addRadioList('paymentMethod', 'Způsob platby', [
+            'credit' => 'Kreditní karta',
+            'debit' => 'Dobírka',
+            'paypal' => 'PayPal',
+        ])->setRequired();
+
+        $form->addSubmit('submit', 'Dokončit objednávku');
+        $form->onSuccess[] = [$this, 'processCheckoutForm'];
+
+        return $form;
     }
+
 
     public function renderDefault(): void {
         // Připravíme data pro šablonu

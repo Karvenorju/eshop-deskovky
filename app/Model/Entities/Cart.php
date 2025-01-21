@@ -13,30 +13,68 @@ use LeanMapper\Entity;
  * @property CartItem[] $items m:belongsToMany
  * @property DateTime|null $lastModified
  */
-class Cart extends Entity{
+class Cart extends Entity
+{
 
-  public function updateCartItems(){
-    $this->row->cleanReferencingRowsCache('cart_item'); //smažeme cache, aby se položky v košíku znovu načetly z DB bez nutnosti načtení celého košíku
-  }
+    private const SHIPPING_COST = 100;
+    private const TAX_RATE = 0.21; // 21%
 
-  public function getTotalCount():int {
-    $result = 0;
-    if (!empty($this->items)){
-      foreach ($this->items as $item){
-        $result+=$item->count;
-      }
+    public function updateCartItems()
+    {
+        $this->row->cleanReferencingRowsCache('cart_item'); //smažeme cache, aby se položky v košíku znovu načetly z DB bez nutnosti načtení celého košíku
     }
-    return $result;
-  }
 
-  public function getTotalPrice():float {
-    $result=0;
-    if (!empty($this->items)){
-      foreach ($this->items as $item){
-        $result+=$item->product->price*$item->count;
-      }
+    public function getTaxRate(): float {
+        return self::TAX_RATE;
     }
-    return $result;
-  }
+
+    /**
+     * Get the fixed shipping cost.
+     * @return int
+     */
+    public function getShippingCost(): int
+    {
+        return self::SHIPPING_COST;
+    }
+
+    /**
+     * Calculate tax based on subtotal.
+     * @return float
+     */
+    public function getTax(): float
+    {
+        return $this->getSubtotal() * $this->getTaxRate();
+    }
+
+    /**
+     * Calculate total price (subtotal + tax + shipping)
+     * @return float
+     */
+    public function getTotalPrice(): float
+    {
+        return $this->getSubtotal() + $this->getTax() + self::SHIPPING_COST;
+    }
+
+    public function getTotalCount(): int
+    {
+        $result = 0;
+        if (!empty($this->items)) {
+            foreach ($this->items as $item) {
+                $result += $item->count;
+            }
+        }
+        return $result;
+    }
+
+    public function getSubtotal(): float
+    {
+        $result = 0;
+        if (!empty($this->items)) {
+            foreach ($this->items as $item) {
+                $result += $item->product->price * $item->count;
+            }
+        }
+        return $result;
+    }
 
 }

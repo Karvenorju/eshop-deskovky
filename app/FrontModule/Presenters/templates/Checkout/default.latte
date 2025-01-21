@@ -1,44 +1,103 @@
 {block content}
-    <div class="container mt-4">
-        <!-- Celková karta -->
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <!-- Sekce: Obsah košíku -->
-                <div class="mb-4">
-                    <h3 class="card-title">Obsah košíku</h3>
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>Produkt</th>
-                            <th>Množství</th>
-                            <th>Cena</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {foreach $cart->items as $item}
-                            <tr>
-                                <td>{$item->product->title}</td>
-                                <td>{$item->count}</td>
-                                <td>{$item->product->price|number:2} Kč</td>
-                            </tr>
-                        {/foreach}
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <td colspan="2"><strong>Celková cena:</strong></td>
-                            <td>{$cart->getTotalPrice()|number:2} Kč</td>
-                        </tr>
-                        </tfoot>
-                    </table>
-                </div>
 
-                <hr> <!-- Oddělení sekcí -->
+    <style>
+        .cart-item {
+            background-color: #f8f9fa; /* Light gray background */
+        }
+    </style>
 
-                <!-- Sekce: Informace o objednávce -->
-                <div class="mt-4">
-                    <h3 class="card-title">Kontaktní údaje</h3>
-                    {control checkoutForm} <!-- Zde se zobrazí CheckoutForm -->
-                </div>
+    <div class="container">
+        <div class="py-5 text-center">
+            <!-- Tlačítko zpět do košíku -->
+            <div class="text-left mb-3">
+                <a n:href="Cart:default" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left"></i> Zpět do košíku
+                </a>
+            </div>
+
+            <h2>Objednávka</h2>
+            <p class="lead">Vyplňte své údaje pro dokončení objednávky.</p>
+        </div>
+
+        <div class="row">
+            <!-- Cart Summary First on Small Screens but Last on Large Screens -->
+            <div class="col-md-4 order-md-last mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Váš košík</span>
+                    <span class="badge badge-secondary badge-pill">{$cart->getTotalCount()}</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    {foreach $cart->items as $item}
+                        <li class="list-group-item d-flex justify-content-between cart-item">
+                            <div>
+                                <h6 class="my-0">{$item->product->title}</h6>
+                                <small class="text-muted">{$item->count} ks</small>
+                            </div>
+                            <span class="text-muted">{$item->product->price|number:2} Kč</span>
+                        </li>
+                    {/foreach}
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Daň ({$cart->getTaxRate() * 100} %)</span>
+                        <span>{$cart->getTax()|number:2} Kč</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Celkem (Kč)</span>
+                        <strong>{$cart->getTotalPrice()|number:2} Kč</strong>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Checkout Form Second on Small Screens but First on Large Screens -->
+            <div class="col-md-8 order-md-first">
+                <h4 class="mb-3">Fakturační údaje</h4>
+                <form n:name="checkoutForm">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName">Jméno</label>
+                            <input type="text" class="form-control" n:name="firstName" placeholder="Jan">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lastName">Příjmení</label>
+                            <input type="text" class="form-control" n:name="lastName" placeholder="Novák">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email">E-mail</label>
+                        <input type="email" class="form-control" n:name="email" placeholder="vas@email.cz">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="address">Adresa</label>
+                        <input type="text" class="form-control" n:name="address" placeholder="Hlavní 123, Praha">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="phone">Telefon</label>
+                        <input type="text" class="form-control" n:name="phone" placeholder="+420 123 456 789">
+                    </div>
+
+                    <hr class="mb-4">
+                    <h4 class="mb-3">Platba</h4>
+
+                    <div class="d-block my-3">
+                        <div class="custom-control custom-radio">
+                            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked>
+                            <label class="custom-control-label" for="credit">Kreditní karta</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input id="debit" name="paymentMethod" type="radio" class="custom-control-input">
+                            <label class="custom-control-label" for="debit">Dobírka</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input">
+                            <label class="custom-control-label" for="paypal">PayPal</label>
+                        </div>
+                    </div>
+
+                    <hr class="mb-4">
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Potvrdit objednávku</button>
+                </form>
             </div>
         </div>
     </div>
