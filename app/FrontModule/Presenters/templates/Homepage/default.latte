@@ -3,27 +3,6 @@
 
 <a href="{plink Product:list}">Pracovní výpis produktů</a>
 
-<div class="d-flex justify-content-center">
-    <div class="card border-0 p-4 w-50">
-        <div class="card-body">
-            <h4 class="card-title text-center text-primary mb-3">Najděte svou deskovou hru</h4>
-            <form action="{plink Product:list}" method="GET" class="input-group rounded">
-                <input type="search" name="search" class="form-control rounded-pill shadow-sm"
-                       placeholder="Kterou hru hledáte?" aria-label="Search" list="suggestions"
-                       autocomplete="off"/>
-                <datalist id="suggestions">
-                    {foreach $productNames as $productName}
-                        <option value="{$productName}"></option>
-                    {/foreach}
-                </datalist>
-                <button class="btn btn-primary shadow-sm ml-1" type="submit">
-                    <i class="bi bi-search"></i>
-                </button>
-            </form>
-        </div>
-    </div>
-</div>
-
 <h2 class="h3">Nejprodávanější stolní hry</h2>
 <div class="card mt-4 shadow-lg bordered-card">
     <div class="card-body">

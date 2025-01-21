@@ -6,8 +6,10 @@ use App\FrontModule\Components\CartControl\CartControl;
 use App\FrontModule\Components\CartControl\CartControlFactory;
 use App\FrontModule\Components\UserLoginControl\UserLoginControl;
 use App\FrontModule\Components\UserLoginControl\UserLoginControlFactory;
+use App\Model\Facades\ProductsFacade;
 use Nette\Application\AbortException;
 use Nette\Application\ForbiddenRequestException;
+use Nette\Forms\Form;
 
 /**
  * Class BasePresenter
@@ -16,6 +18,7 @@ use Nette\Application\ForbiddenRequestException;
 abstract class BasePresenter extends \Nette\Application\UI\Presenter {
     private UserLoginControlFactory $userLoginControlFactory;
     private CartControlFactory $cartControlFactory;
+    protected ProductsFacade $productsFacade;
 
     /**
      * @throws ForbiddenRequestException
@@ -23,11 +26,16 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
      */
     protected function startup(): void {
         parent::startup();
+        Form::initialize();
         $presenterName = $this->request->presenterName;
         $action = !empty($this->request->parameters['action']) ? $this->request->parameters['action'] : '';
 
-        $isAdmin = in_array('admin', $this->user?->roles ?? []);
-        $this->template->isAdmin = $isAdmin;
+        $allProducts = $this->productsFacade->getAllProducts();
+        $productNames = array_map(function ($product) {
+            return $product->title;
+        }, $allProducts);
+
+        $this->template->productNames = $productNames;
 
         if (!$this->user->isAllowed($presenterName, $action)) {
             if ($this->user->isLoggedIn()) {
@@ -63,6 +71,10 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter {
 
     public function injectCartControlFactory(CartControlFactory $cartControlFactory): void {
         $this->cartControlFactory = $cartControlFactory;
+    }
+
+    public function injectProductsFacade(ProductsFacade $productsFacade): void {
+        $this->productsFacade = $productsFacade;
     }
     #endregion injections
 }

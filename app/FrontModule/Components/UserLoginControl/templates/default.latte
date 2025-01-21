@@ -8,6 +8,11 @@
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    {if $isAdmin}
+                        <a class="dropdown-item bg-danger text-light" href="{plink :Admin:Dashboard:default}">
+                            <i class="bi bi-gear"></i> Administrace
+                        </a>
+                    {/if}
                     <a class="dropdown-item" href="{link profile!}">Uživatelský profil</a>
                     <a class="dropdown-item" href="{link saleOrders!}">Moje objednávky</a>
                     <a class="dropdown-item" href="{link logout!}">Odhlásit se</a>
