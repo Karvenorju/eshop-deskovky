@@ -4,23 +4,23 @@ namespace App\FrontModule\Presenters;
 
 use App\FrontModule\Components\CartControl\CartControl;
 use App\FrontModule\Components\CheckoutForm\CheckoutFormFactory;
+use App\FrontModule\Components\UserLoginControl\UserLoginControl;
 use App\Model\Entities\Cart;
 use App\Model\Facades\ProductsFacade;
 use App\Model\Facades\SaleOrderFacade;
 use App\Model\Facades\UsersFacade;
 use Nette\Application\UI\Form;
-class CheckoutPresenter extends BasePresenter {
 
-    private CheckoutFormFactory $checkoutFormFactory;
+class CheckoutPresenter extends BasePresenter
+{
+
     private SaleOrderFacade $saleOrderFacade;
     private ProductsFacade $productsFacade;
     private UsersFacade $usersFacade;
 
-    public function injectCheckoutFormFactory(CheckoutFormFactory $factory): void {
-        $this->checkoutFormFactory = $factory;
-    }
 
-    public function injectSaleOrderFacade(SaleOrderFacade $saleOrderFacade): void {
+    public function injectSaleOrderFacade(SaleOrderFacade $saleOrderFacade): void
+    {
         $this->saleOrderFacade = $saleOrderFacade;
     }
 
@@ -29,24 +29,31 @@ class CheckoutPresenter extends BasePresenter {
         $this->usersFacade = $usersFacade;
     }
 
-    public function injectProductFacade(ProductsFacade $productsFacade): void {
+    public function injectProductFacade(ProductsFacade $productsFacade): void
+    {
         $this->productsFacade = $productsFacade;
     }
 
-//    protected function createComponentCheckoutForm(): Form {
-//        $form = $this->checkoutFormFactory->create(); // Vytvoření formuláře pomocí factory
-//        $form->onSuccess[] = [$this, 'processCheckoutForm']; // Připojení callbacku
-//        return $form; // Vrácení formuláře
-//    }
-
     protected function createComponentCheckoutForm(): Form
     {
+        $loggedUserId = $this['userLogin']->getCurrentUser()->getId();
+        $user = Null;
+        if ($loggedUserId) {
+            $user = $this->usersFacade->getUser($loggedUserId);
+        }
+
         $form = new Form;
-        $form->addText('firstName', 'Jméno')->setRequired();
-        $form->addText('lastName', 'Příjmení')->setRequired();
-        $form->addEmail('email', 'E-mail')->setRequired();
-        $form->addText('address', 'Adresa')->setRequired();
-        $form->addText('phone', 'Telefon')->setRequired();
+        $form->addText('name', 'Jméno')
+            ->setRequired()->setDefaultValue($user?->name)
+            ->setHtmlAttribute('maxlength', 100)
+            ->addRule(Form::MAX_LENGTH, 'Jméno je příliš dlouhé, může mít maximálně 100 znaků.', 100);
+        $form->addEmail('email', 'E-mail')->setRequired()->setDefaultValue($user?->email);
+        $form->addText('address', 'Adresa')->setRequired()->setDefaultValue($user?->address);
+        $form->addText('phone', 'Telefon')
+            ->setRequired()
+            ->setDefaultValue($user?->phone)
+            ->setHtmlAttribute('maxlength', 15)
+            ->addRule(Form::PATTERN, 'Zadejte platné telefonní číslo.', '^[0-9+\s-]+$');;
         $form->addRadioList('paymentMethod', 'Způsob platby', [
             'credit' => 'Kreditní karta',
             'debit' => 'Dobírka',
@@ -60,17 +67,18 @@ class CheckoutPresenter extends BasePresenter {
     }
 
 
-    public function renderDefault(): void {
+    public function renderDefault(): void
+    {
         // Připravíme data pro šablonu
-        $cartControl = $this['cart'];
-        $cart = $cartControl->getCart();
+        $cart = $this['cart']->getCart();
         $this->template->cart = $cart;
 
         // Přesměrování, pokud je košík prázdný
         $this->checkCartIsNotEmpty($cart);
     }
 
-    public function processCheckoutForm(Form $form, array $values): void {
+    public function processCheckoutForm(Form $form, array $values): void
+    {
         try {
             // Check cart emptiness
             // Fetch the cart
@@ -110,7 +118,8 @@ class CheckoutPresenter extends BasePresenter {
         $this->redirect('Homepage:default');
     }
 
-    private function checkCartIsNotEmpty(Cart $cart): void {
+    private function checkCartIsNotEmpty(Cart $cart): void
+    {
         // Přesměrování, pokud je košík prázdný
         if (empty($cart->items)) {
             $this->flashMessage('Košík je prázdný. Přidejte produkty před pokračováním.', 'warning');

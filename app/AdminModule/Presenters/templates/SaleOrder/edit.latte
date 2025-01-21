@@ -1,0 +1,74 @@
+{block content}
+    <div class="container mt-4">
+        <h1>Detail objednávky</h1>
+
+        <!-- Order Details Section -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Informace o objednávce</strong>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Číslo objednávky:</strong> {$order->orderName}</p>
+                        <p><strong>Datum vytvoření:</strong> {$order->createdAt|date:'j.n.Y H:i'}</p>
+                        <p><strong>Zákazník:</strong> {$order->customerName}</p>
+                        <p><strong>E-mail:</strong> {$order->customerEmail}</p>
+                        <p><strong>Adresa:</strong> {$order->customerAddress}</p>
+                        <p><strong>Telefon:</strong> {$order->customerPhone}</p>
+                        <p><strong>Celková cena:</strong> {$order->totalPrice|number:2} Kč</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Změna stavu objednávky</strong>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="{link Order:updateStatus, orderId => $order->saleOrderId}">
+                            <div class="form-group">
+                                <label for="status">Stav objednávky</label>
+                                <select name="status" id="status" class="form-control">
+                                    <option value="pending" {if $order->status === 'pending'}selected{/if}>Čeká na vyřízení</option>
+                                    <option value="completed" {if $order->status === 'completed'}selected{/if}>Dokončené</option>
+                                    <option value="cancelled" {if $order->status === 'cancelled'}selected{/if}>Zrušené</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Uložit změny</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Items Section -->
+        <div class="card">
+            <div class="card-header">
+                <strong>Položky objednávky</strong>
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Název produktu</th>
+                        <th>Množství</th>
+                        <th>Cena za kus</th>
+                        <th>Celkem</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach $order->items as $line}
+                        <tr>
+                            <td>{$line->product->title}</td>
+                            <td>{$line->quantity}</td>
+                            <td>{$line->price|number:2} Kč</td>
+                            <td>{$line->price * $line->quantity|number:2} Kč</td>
+                        </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{/block}

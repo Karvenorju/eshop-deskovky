@@ -121,4 +121,40 @@ class SaleOrderFacade
     {
         return $this->saleOrderRepository->find($id);
     }
+
+    /**
+     * Metoda pro vyhledání objednávek
+     * @param array|null $params = null
+     * @param int $offset = null
+     * @param int $limit = null
+     * @return SaleOrder[]
+     */
+    public function findOrders(array $params = null, int $offset = null, int $limit = null): array {
+        $whereArr = [];
+        if (isset($params['status']) && $params['status'] !== '') {
+            $whereArr[] = ['LOWER(status) = LOWER(?)', $params['status']];
+        }
+        if (isset($params['orderName']) && $params['orderName'] !== '') {
+            $whereArr[] = ['LOWER(order_name) LIKE LOWER(?)', '%' . $params['orderName'] . '%'];
+        }
+        if (isset($params['customerEmail']) && $params['customerEmail'] !== '') {
+            $whereArr[] = ['LOWER(customer_email) LIKE LOWER(?)', '%' . $params['customerEmail'] . '%'];
+        }
+        if (isset($params['dateFrom']) && $params['dateFrom'] !== '') {
+            $whereArr[] = ['created_at >= ?', $params['dateFrom']];
+        }
+        if (isset($params['dateTo']) && $params['dateTo'] !== '') {
+            $whereArr[] = ['created_at <= ?', $params['dateTo']];
+        }
+
+        return $this->saleOrderRepository->findAllBy($whereArr, $offset, $limit);
+    }
+
+    public function updateOrderStatus(int $orderId, string $status): void {
+        $order = $this->saleOrderRepository->find($orderId);
+        if ($order) {
+            $order->status = $status;
+            $this->saleOrderRepository->persist($order);
+        }
+    }
 }

@@ -1,0 +1,47 @@
+{block content}
+    <div class="container mt-4">
+        <h1>Správa objednávek</h1>
+
+        <!-- Filter Section -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card shadow-sm">
+                    <div class="card-body bg-light rounded">
+                        <h5 class="card-title">Filtr</h5>
+                        {control saleOrderListFilterForm}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orders Table -->
+            <div class="col-md-9">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Číslo objednávky</th>
+                            <th>Datum vytvoření</th>
+                            <th>Stav</th>
+                            <th>Cena celkem</th>
+                            <th>Akce</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $orders as $order}
+                            <tr>
+                                <td>{$order->orderName}</td>
+                                <td>{$order->createdAt|date:'j.n.Y H:i'}</td>
+                                <td>{$order->status}</td>
+                                <td>{$order->totalPrice|number:2} Kč</td>
+                                <td>
+                                    <a href="{link SaleOrder:edit, orderId => $order->saleOrderId}" class="btn btn-primary btn-sm">Detail</a>
+                                </td>
+                            </tr>
+                        {/foreach}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}
