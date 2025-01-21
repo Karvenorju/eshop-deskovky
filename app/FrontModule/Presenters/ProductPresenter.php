@@ -7,8 +7,6 @@ use App\FrontModule\Components\ProductCartForm\ProductCartForm;
 use App\FrontModule\Components\ProductCartForm\ProductCartFormFactory;
 use App\FrontModule\Components\ProductListFilterForm\ProductListFilterForm;
 use App\FrontModule\Components\ProductListFilterForm\ProductListFilterFormFactory;
-use App\Model\Entities\Image;
-use App\Model\Facades\ImageFacade;
 use App\Model\Facades\ProductsFacade;
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\Multiplier;
@@ -48,7 +46,7 @@ class ProductPresenter extends BasePresenter {
         $filterParams = $this->getHttpRequest()->getPost();
         $search = $this->getHttpRequest()->getQuery('search');
         if (!empty($search)) {
-            $filterParams['search'] = $search;
+            $filterParams['search'] = trim($search);
         }
         $this->template->products = $this->productsFacade->findProducts($filterParams);
     }
