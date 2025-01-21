@@ -72,7 +72,10 @@ class ProductListFilterForm extends Form {
             ->setHtmlAttribute('id', 'playTimeSliderValue')
             ->setHtmlAttribute('readonly', true)
             ->setHtmlAttribute('value', $filterParams['playTime']['max']);
-
         $this->addSubmit('filter', 'Filtrovat');
+        $this->addButton('reset', 'Zrušit filtry')
+            ->setHtmlAttribute('type', 'reset')
+            ->setHtmlAttribute('onclick', 'window.location.href=window.location.pathname');
+
     }
 }
