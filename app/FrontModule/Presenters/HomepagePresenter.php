@@ -15,7 +15,12 @@ class HomepagePresenter extends BasePresenter {
 
     public function renderDefault(): void {
         $topProducts = $this->productsFacade->findTopProducts();
+        $allProducts = $this->productsFacade->getAllProducts();
+        $productNames = array_map(function ($product) {
+            return $product->title;
+        }, $allProducts);
 
+        $this->template->productNames = $productNames;
         $this->template->topProducts = $topProducts;
     }
 

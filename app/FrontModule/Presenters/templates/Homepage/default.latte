@@ -3,8 +3,29 @@
 
 <a href="{plink Product:list}">Pracovní výpis produktů</a>
 
+<div class="d-flex justify-content-center">
+    <div class="card border-0 p-4 w-50">
+        <div class="card-body">
+            <h4 class="card-title text-center text-primary mb-3">Najděte svou deskovou hru</h4>
+            <form action="{plink Product:list}" method="GET" class="input-group rounded">
+                <input type="search" name="query" class="form-control rounded-pill shadow-sm"
+                       placeholder="Kterou hru hledáte?" aria-label="Search" list="suggestions"
+                       autocomplete="off"/>
+                <datalist id="suggestions">
+                    {foreach $productNames as $productName}
+                        <option value="{$productName}"></option>
+                    {/foreach}
+                </datalist>
+                <button class="btn btn-primary shadow-sm ml-1" type="submit">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
 <h2 class="h3">Nejprodávanější stolní hry</h2>
-<div class="card mt-3 shadow-lg bordered-card">
+<div class="card mt-4 shadow-lg bordered-card">
     <div class="card-body">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
@@ -39,4 +60,19 @@
     </div>
 </div>
 
-<h2 class="h3 my-4">Populární kategorie</h2>
+<h2 class="h3 mt-4">Populární kategorie</h2>
+
+<a href="" class="container">
+    <div class="row">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            <div class="card">
+                <img class="card-img"
+                     src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/bologna-3.jpg"
+                     alt="Bologna">
+                <div class="card-img-overlay text-white d-flex flex-column justify-content-end ">
+                    <h4 class="card-title">Bologna</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</a>

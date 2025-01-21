@@ -24,6 +24,10 @@ class ProductsFacade {
         return $this->productRepository->find($id);
     }
 
+    public function getAllProducts(): array {
+        return $this->productRepository->findAll();
+    }
+
     /**
      * Metoda pro získání produktu podle URL
      * @param string $url
