@@ -7,6 +7,8 @@ use App\FrontModule\Components\ProductCartForm\ProductCartForm;
 use App\FrontModule\Components\ProductCartForm\ProductCartFormFactory;
 use App\FrontModule\Components\ProductListFilterForm\ProductListFilterForm;
 use App\FrontModule\Components\ProductListFilterForm\ProductListFilterFormFactory;
+use App\Model\Entities\Image;
+use App\Model\Facades\ImageFacade;
 use App\Model\Facades\ProductsFacade;
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\Multiplier;
@@ -18,6 +20,7 @@ use Nette\Application\UI\Multiplier;
  */
 class ProductPresenter extends BasePresenter {
     private ProductsFacade $productsFacade;
+    private ImageFacade $imageFacade;
     private ProductCartFormFactory $productCartFormFactory;
     private ProductListFilterFormFactory $productListFilterFormFactory;
 
@@ -36,7 +39,12 @@ class ProductPresenter extends BasePresenter {
             throw new BadRequestException('Produkt nebyl nalezen.');
         }
 
+        $images = $this->imageFacade->getImages($product);
+        $frontImage = $this->imageFacade->getFrontImage($product);
+
         $this->template->product = $product;
+        $this->template->images = $images;
+        $this->template->frontImage = $frontImage;
     }
 
     /**
@@ -68,7 +76,7 @@ class ProductPresenter extends BasePresenter {
                 /** @var CartControl $cart */
                 $cart = $this->getComponent('cart');
 //                $cart->addToCart($product, (int)$form->values->count);
-                $cart->addToCart($product,1);
+                $cart->addToCart($product, 1);
 
                 $this->flashMessage('Produkt přidán do košíku: ' . $product->title);
                 if ($this->isAjax()) {
@@ -95,6 +103,10 @@ class ProductPresenter extends BasePresenter {
     #region injections
     public function injectProductsFacade(ProductsFacade $productsFacade): void {
         $this->productsFacade = $productsFacade;
+    }
+
+    public function injectImageFacade(ImageFacade $imageFacade): void {
+        $this->imageFacade = $imageFacade;
     }
 
     public function injectProductCartFormFactory(ProductCartFormFactory $productCartFormFactory): void {
