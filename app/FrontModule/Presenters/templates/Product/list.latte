@@ -13,8 +13,10 @@
         <section class="row" n:if="!empty($products)">
             {foreach $products as $product}
                 <div class="col-md-6 col-lg-4 my-2 card">
-                    <a href="{plink Product:show url=>$product->url}" class="h4">{$product->title}</a>
-                    <div></div>
+                    <a href="{plink Product:show url=>$product->url}" class="h5 product-title">{$product->title}</a>
+                    <div class="image-container">
+                        <img src="{$basePath}/img/products/{$product->getFrontImageUrl()}" alt="{$product->title}" class="centered-image">
+                    </div>
                     <div class="d-flex justify-content-between">
                         <p>{$product->price} Kč</p>
                         {control "productCartForm-$product->productId"}
