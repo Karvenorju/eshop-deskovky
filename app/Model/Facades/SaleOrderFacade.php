@@ -17,19 +17,22 @@ class SaleOrderFacade {
     private CartRepository $cartRepository;
     private Connection $db;
     private ProductsFacade $productsFacade;
+    private CategoriesFacade $categoriesFacade;
 
     public function __construct(
         SaleOrderRepository     $saleOrderRepository,
         SaleOrderLineRepository $saleOrderLineRepository,
         CartRepository          $cartRepository,
         Connection              $db,
-        ProductsFacade          $productsFacade
+        ProductsFacade          $productsFacade,
+        CategoriesFacade        $categoriesFacade
     ) {
         $this->saleOrderRepository = $saleOrderRepository;
         $this->saleOrderLineRepository = $saleOrderLineRepository;
         $this->cartRepository = $cartRepository;
         $this->productsFacade = $productsFacade;
         $this->db = $db;
+        $this->categoriesFacade = $categoriesFacade;
     }
 
     /**
@@ -96,11 +99,19 @@ class SaleOrderFacade {
                 $orderItem->quantity = $cartItem->count;
                 $orderItem->price = $cartItem->product->price;
 
-                // Zvýšení počtu prodaných kusů u produktů
-                $orderedProductEntity = $this->productsFacade->getProduct($cartItem->product->productId);
+                // Zvýšení počtu prodaných kusů u produktu
                 $orderedQuantity = $cartItem->count;
+                $orderedProductEntity = $this->productsFacade->getProduct($cartItem->product->productId);
                 $orderedProductEntity->soldQuantity = $orderedProductEntity->soldQuantity + $orderedQuantity;
                 $this->productsFacade->saveProduct($orderedProductEntity);
+
+                $orderedProductCategoryId = $cartItem->product->category?->categoryId;
+                // Zvýšení počtu prodaných kusů u kategorie
+                if ($orderedProductCategoryId) {
+                    $orderedProductCategoryEntity = $this->categoriesFacade->getCategory($orderedProductCategoryId);
+                    $orderedProductCategoryEntity->soldQuantity = $orderedProductCategoryEntity->soldQuantity + $orderedQuantity;
+                    $this->categoriesFacade->saveCategory($orderedProductCategoryEntity);
+                }
 
                 // Ensure quantity and price are valid
                 if ($orderItem->quantity <= 0) {
