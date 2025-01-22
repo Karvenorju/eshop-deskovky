@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 22, 2025 at 11:57 AM
+-- Generation Time: Jan 22, 2025 at 08:25 PM
 -- Server version: 10.5.23-MariaDB-0+deb11u1
 -- PHP Version: 8.1.29
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `kovj19`
+-- Database: `bela08`
 --
 
 -- --------------------------------------------------------
@@ -47,7 +47,93 @@ INSERT INTO `cart` (`cart_id`, `user_id`, `last_modified`) VALUES
 (295, NULL, '2025-01-22 10:40:22'),
 (296, NULL, '2025-01-22 10:43:10'),
 (297, NULL, '2025-01-22 10:47:01'),
-(298, 4, '2025-01-22 10:54:12');
+(298, 4, '2025-01-22 10:54:12'),
+(299, NULL, '2025-01-22 12:39:58'),
+(300, NULL, '2025-01-22 12:40:02'),
+(301, NULL, '2025-01-22 12:40:04'),
+(302, NULL, '2025-01-22 12:40:05'),
+(303, NULL, '2025-01-22 12:42:08'),
+(304, NULL, '2025-01-22 12:42:09'),
+(305, NULL, '2025-01-22 12:42:12'),
+(306, NULL, '2025-01-22 12:42:13'),
+(307, NULL, '2025-01-22 12:42:15'),
+(308, NULL, '2025-01-22 12:51:28'),
+(309, NULL, '2025-01-22 12:52:13'),
+(310, NULL, '2025-01-22 12:54:34'),
+(311, NULL, '2025-01-22 12:54:41'),
+(312, NULL, '2025-01-22 12:54:47'),
+(313, NULL, '2025-01-22 12:57:11'),
+(314, NULL, '2025-01-22 13:00:45'),
+(315, NULL, '2025-01-22 13:00:47'),
+(316, NULL, '2025-01-22 13:02:25'),
+(317, NULL, '2025-01-22 13:03:12'),
+(318, NULL, '2025-01-22 13:03:14'),
+(319, NULL, '2025-01-22 13:03:23'),
+(320, NULL, '2025-01-22 13:03:33'),
+(321, NULL, '2025-01-22 13:04:49'),
+(322, NULL, '2025-01-22 13:05:42'),
+(323, NULL, '2025-01-22 13:05:56'),
+(324, NULL, '2025-01-22 13:06:41'),
+(325, NULL, '2025-01-22 13:07:09'),
+(326, NULL, '2025-01-22 13:07:29'),
+(327, NULL, '2025-01-22 13:07:37'),
+(328, NULL, '2025-01-22 13:07:58'),
+(329, NULL, '2025-01-22 13:08:02'),
+(330, NULL, '2025-01-22 13:22:41'),
+(331, NULL, '2025-01-22 13:22:42'),
+(332, NULL, '2025-01-22 13:22:53'),
+(333, NULL, '2025-01-22 13:23:01'),
+(334, NULL, '2025-01-22 13:23:02'),
+(335, NULL, '2025-01-22 13:23:16'),
+(336, NULL, '2025-01-22 13:23:21'),
+(337, NULL, '2025-01-22 13:23:52'),
+(338, NULL, '2025-01-22 13:24:00'),
+(339, NULL, '2025-01-22 13:24:02'),
+(340, NULL, '2025-01-22 13:25:48'),
+(341, NULL, '2025-01-22 13:30:02'),
+(342, NULL, '2025-01-22 13:30:04'),
+(343, NULL, '2025-01-22 13:30:05'),
+(344, NULL, '2025-01-22 13:32:10'),
+(345, NULL, '2025-01-22 13:32:34'),
+(346, NULL, '2025-01-22 13:34:40'),
+(347, NULL, '2025-01-22 13:34:48'),
+(348, NULL, '2025-01-22 13:35:07'),
+(349, NULL, '2025-01-22 13:35:29'),
+(350, NULL, '2025-01-22 13:35:52'),
+(351, NULL, '2025-01-22 13:36:24'),
+(352, NULL, '2025-01-22 13:42:56'),
+(353, NULL, '2025-01-22 13:43:11'),
+(354, NULL, '2025-01-22 13:44:12'),
+(355, NULL, '2025-01-22 13:45:00'),
+(356, NULL, '2025-01-22 13:48:46'),
+(357, NULL, '2025-01-22 13:48:57'),
+(358, NULL, '2025-01-22 13:51:26'),
+(359, NULL, '2025-01-22 13:51:30'),
+(360, NULL, '2025-01-22 13:51:47'),
+(361, NULL, '2025-01-22 13:52:41'),
+(362, NULL, '2025-01-22 13:55:09'),
+(363, NULL, '2025-01-22 13:56:56'),
+(364, NULL, '2025-01-22 13:57:16'),
+(365, NULL, '2025-01-22 13:58:07'),
+(366, NULL, '2025-01-22 13:58:27'),
+(367, NULL, '2025-01-22 13:58:34'),
+(368, NULL, '2025-01-22 14:00:09'),
+(369, NULL, '2025-01-22 14:00:15'),
+(370, NULL, '2025-01-22 15:17:41'),
+(371, NULL, '2025-01-22 15:17:44'),
+(372, NULL, '2025-01-22 15:17:45'),
+(373, 5, '2025-01-22 19:24:09'),
+(374, NULL, '2025-01-22 15:18:45'),
+(375, NULL, '2025-01-22 15:18:46'),
+(376, NULL, '2025-01-22 15:26:56'),
+(377, NULL, '2025-01-22 15:26:57'),
+(378, NULL, '2025-01-22 16:49:42'),
+(379, NULL, '2025-01-22 18:40:38'),
+(380, NULL, '2025-01-22 18:40:42'),
+(381, NULL, '2025-01-22 18:41:46'),
+(382, NULL, '2025-01-22 18:42:04'),
+(383, NULL, '2025-01-22 18:42:07'),
+(384, NULL, '2025-01-22 19:23:41');
 
 -- --------------------------------------------------------
 
@@ -61,6 +147,13 @@ CREATE TABLE `cart_item` (
   `cart_id` int(11) NOT NULL,
   `count` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
+
+--
+-- Dumping data for table `cart_item`
+--
+
+INSERT INTO `cart_item` (`cart_item_id`, `product_id`, `cart_id`, `count`) VALUES
+(36, 7, 369, 4);
 
 -- --------------------------------------------------------
 
@@ -186,6 +279,7 @@ CREATE TABLE `forgotten_password` (
 --
 
 CREATE TABLE `image` (
+  `image_id` int(11) NOT NULL,
   `url` varchar(100) NOT NULL,
   `product_id` int(11) NOT NULL,
   `type` enum('front','back','board','other') NOT NULL DEFAULT 'other'
@@ -195,25 +289,25 @@ CREATE TABLE `image` (
 -- Dumping data for table `image`
 --
 
-INSERT INTO `image` (`url`, `product_id`, `type`) VALUES
-('carcassonne-back.png', 8, 'back'),
-('carcassonne-board.png', 8, 'board'),
-('carcassonne-front.jpg', 8, 'front'),
-('clank-back.png', 10, 'back'),
-('clank-board.png', 10, 'board'),
-('clank-front.png', 10, 'front'),
-('feast-for-odin-back.png', 11, 'back'),
-('feast-for-odin-board.png', 11, 'board'),
-('feast-for-odin-front.png', 11, 'front'),
-('frosthaven-back.png', 12, 'back'),
-('frosthaven-board.png', 12, 'board'),
-('frosthaven-front.png', 12, 'front'),
-('monopoly-card-back.png', 9, 'back'),
-('monopoly-card-board.png', 9, 'board'),
-('monopoly-card-front.jpg', 9, 'front'),
-('risk-back.png', 7, 'back'),
-('risk-board.png', 7, 'board'),
-('risk-front.png', 7, 'front');
+INSERT INTO `image` (`image_id`, `url`, `product_id`, `type`) VALUES
+(2, 'carcassonne-back.png', 8, 'back'),
+(3, 'carcassonne-board.png', 8, 'board'),
+(4, 'carcassonne-front.jpg', 8, 'front'),
+(5, 'clank-back.png', 10, 'back'),
+(6, 'clank-board.png', 10, 'board'),
+(7, 'clank-front.png', 10, 'front'),
+(8, 'feast-for-odin-back.png', 11, 'back'),
+(9, 'feast-for-odin-board.png', 11, 'board'),
+(10, 'feast-for-odin-front.png', 11, 'front'),
+(11, 'frosthaven-back.png', 12, 'back'),
+(12, 'frosthaven-board.png', 12, 'board'),
+(13, 'frosthaven-front.png', 12, 'front'),
+(14, 'monopoly-card-back.png', 9, 'back'),
+(15, 'monopoly-card-board.png', 9, 'board'),
+(16, 'monopoly-card-front.jpg', 9, 'front'),
+(17, 'risk-back.png', 7, 'back'),
+(18, 'risk-board.png', 7, 'board'),
+(19, 'risk-front.png', 7, 'front');
 
 -- --------------------------------------------------------
 
@@ -293,7 +387,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `category_id`, `title`, `url`, `description`, `price`, `min_player`, `max_player`, `play_time`, `min_age`, `sold_quantity`) VALUES
-(7, 96, 'Risk', 'risk', 'Possibly the most popular, mass market war game. The goal is conquest of the world.\r\n\r\nEach player\'s turn consists of:\r\n- gaining reinforcements through number of territories held, control of every territory on each continent, and turning sets of bonus cards.\r\n- Attacking other players using a simple combat rule of comparing the highest dice rolled for each side. Players may attack as often as desired. If one enemy territory is successfully taken, the player is awarded with a bonus card.\r\n- Moving a group of armies to another adjacent territory.\r\n', '400.00', 1, 2, 6, 10, 15),
+(7, 96, 'Risk', 'risk', 'Possibly the most popular, mass market war game. The goal is conquest of the world.\n\nEach player\'s turn consists of:\n- gaining reinforcements through number of territories held, control of every territory on each continent, and turning sets of bonus cards.\n- Attacking other players using a simple combat rule of comparing the highest dice rolled for each side. Players may attack as often as desired. If one enemy territory is successfully taken, the player is awarded with a bonus card.\n- Moving a group of armies to another adjacent territory.\n', '400.00', 1, 2, 6, 10, 15),
 (8, 60, 'Carcassonne ', 'carcassonne', 'Carcassonne is a tile placement game in which the players draw and place a tile with a piece of southern French landscape represented on it. The tile might feature a city, a road, a cloister, grassland or some combination thereof, and it must be placed adjacent to tiles that have already been played, in such a way that cities are connected to cities, roads to roads, et cetera. Having placed a tile, the player can then decide to place one of his/her meeples in one of the areas on it: in the city as a knight, on the road as a robber, in the cloister as a monk, or in the field as a farmer. When that area is complete that meeple scores points for its owner.\r\n\r\nDuring a game of Carcassonne, players are faced with decisions like: \"Is it really worth putting my last meeple there?\" or \"Should I use this tile to expand my city, or should I place it near my opponent instead, giving him/her a hard time to complete his/her project and score points?\" Since players place only one tile and have the option to place one meeple on it, turns proceed quickly even if it is a game full of options and possibilities.\r\n\r\nFirst game in the Carcassonne series.', '300.00', 2, 5, 45, 7, 3),
 (9, 40, 'Monopoly: The Portable Property Trading Game', 'monopoly-card', 'A very small travel version of Monopoly which often comes in the shape of a red suitcase and plays very similarly to the original game. One difference is that it contains three dice. The Community Chest and Chance cards are replaced with tables. Three dice are rolled and the tables are referenced to find the result.\r\n\r\nThe Waddington\'s UK edition has different properties than the U.S. version, and also comes in a different sort of case with a magnetic board and magnetic hotels, houses, and movers.\r\n', '645.00', 2, 6, 120, 8, 10),
 (10, 47, 'Clank! Legacy: Acquisitions Incorporated', 'clank', 'Clank! Legacy: Acquisitions Incorporated extends the deck-building fun of Clank! with legacy-style gameplay! Found your own franchise of the legendary adventuring company, Acquisitions Incorporated, and shepherd your fledgling treasure-hunters to immortal corporate glory over the course of multiple games. Your game board, your deck, and your world change as you play to create a unique campaign tailored to your adventuring party. Be cunning, be bold, and most importantly, be ready...', '546.00', 2, 4, 120, 13, 0),
@@ -433,7 +527,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_id`, `name`, `email`, `facebook_id`, `role_id`, `password`, `phone`, `address`) VALUES
 (3, 'Petr Cafourek', 'cafourek2@gmail.com', NULL, 'admin', '$2y$10$0f8twanVO/ep33KiMsgQGumKVqQq/o6er3aWFF29fFQrHp5sarrGu', '+420 731730756', 'something 123'),
-(4, 'kovj19@vse.cz', 'kovj19@vse.cz', NULL, 'admin', '$2y$10$sHfEUGxZTuRpReLI62Qsmu5vRdyKD58YeRUtxnRa2KR.hZ7p5ylzu', NULL, NULL);
+(4, 'kovj19@vse.cz', 'kovj19@vse.cz', NULL, 'admin', '$2y$10$sHfEUGxZTuRpReLI62Qsmu5vRdyKD58YeRUtxnRa2KR.hZ7p5ylzu', NULL, NULL),
+(5, 'a@a.a', 'a@a.a', NULL, 'admin', '$2y$10$iJglqtaUzHIbcBOs7Jwv9eX.hCNrV.Z.rNfioXce74Ju2/Eiv5upW', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -471,7 +566,8 @@ ALTER TABLE `forgotten_password`
 -- Indexes for table `image`
 --
 ALTER TABLE `image`
-  ADD PRIMARY KEY (`url`),
+  ADD PRIMARY KEY (`image_id`),
+  ADD UNIQUE KEY `url` (`url`),
   ADD KEY `product_id` (`product_id`);
 
 --
@@ -534,13 +630,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=299;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=385;
 
 --
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -555,6 +651,12 @@ ALTER TABLE `forgotten_password`
   MODIFY `forgotten_password_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `image`
+--
+ALTER TABLE `image`
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
 -- AUTO_INCREMENT for table `permission`
 --
 ALTER TABLE `permission`
@@ -564,7 +666,7 @@ ALTER TABLE `permission`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `sale_order`
@@ -582,11 +684,17 @@ ALTER TABLE `sale_order_line`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `cart_item`
@@ -594,6 +702,50 @@ ALTER TABLE `user`
 ALTER TABLE `cart_item`
   ADD CONSTRAINT `cart_item_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `cart_item_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `forgotten_password`
+--
+ALTER TABLE `forgotten_password`
+  ADD CONSTRAINT `forgotten_password_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `image`
+--
+ALTER TABLE `image`
+  ADD CONSTRAINT `image_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `permission`
+--
+ALTER TABLE `permission`
+  ADD CONSTRAINT `permission_ibfk_1` FOREIGN KEY (`resource_id`) REFERENCES `resource` (`resource_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `permission_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `product`
+--
+ALTER TABLE `product`
+  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`);
+
+--
+-- Constraints for table `sale_order`
+--
+ALTER TABLE `sale_order`
+  ADD CONSTRAINT `sale_order_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+
+--
+-- Constraints for table `sale_order_line`
+--
+ALTER TABLE `sale_order_line`
+  ADD CONSTRAINT `sale_order_line_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`),
+  ADD CONSTRAINT `sale_order_line_ibfk_2` FOREIGN KEY (`sale_order_id`) REFERENCES `sale_order` (`sale_order_id`);
+
+--
+-- Constraints for table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE SET NULL ON UPDATE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
