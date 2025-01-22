@@ -10,10 +10,13 @@
     <div class="row">
         {if !empty($product->images)}
             <div class="col-md-6 mb-4">
-                <img src="{$basePath}/img/products/{$product->getFrontImageUrl()}" alt="Product" class="img-fluid rounded mb-3 product-image" id="mainImage">
+                <img src="{$basePath}/img/products/{$product->getFrontImageUrl()}" alt="Product"
+                     class="img-fluid rounded mb-3 product-image" id="mainImage">
                 <div class="d-flex justify-content-between">
                     {foreach $product->images as $image}
-                        <img src="{$basePath}/img/products/{$image->url}" alt="Thumbnail 1" class="thumbnail rounded {if $image->url === $frontImage->url}active{/if}" onclick="changeImage(event, this.src)">
+                        <img src="{$basePath}/img/products/{$image->url}" alt="Thumbnail 1"
+                             class="thumbnail rounded {if $image->url === $frontImage->url}active{/if}"
+                             onclick="changeImage(event, this.src)">
                     {/foreach}
                 </div>
             </div>
@@ -34,10 +37,6 @@
                 <span class="ms-2">4.5 (120 recenzí)</span>
             </div>
             <p class="mb-4">{$product->description}.</p>
-            <div class="mb-4">
-                <label for="quantity" class="form-label">Počet:</label>
-                <input type="number" class="form-control" id="quantity" value="1" min="1" style="width: 80px;">
-            </div>
             {control "productCartForm-$product->productId"}
             <div class="mt-4">
                 <h5>Atributy:</h5>
@@ -51,6 +50,48 @@
     </div>
 </div>
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Select the form element with an ID starting with 'frm-productCartForm-'
+        var form = document.querySelector('[id^="frm-productCartForm-"]');
+
+        if (form) {
+            // Remove the hidden input with name="count"
+            var hiddenInput = form.querySelector('input[type="hidden"][name="count"]');
+
+            if (hiddenInput) {
+                hiddenInput.remove();
+            }
+
+            var formGroup = form.querySelector('.form-group');
+            if (formGroup) {
+                // Clear the current contents of the form group
+                formGroup.innerHTML = '';
+
+                var row = document.createElement('div');
+                row.classList.add('row', 'justify-content-left');
+
+                // Create a number input
+                var numberInput = document.createElement('input');
+                numberInput.type = 'number';
+                numberInput.name = 'count';
+                numberInput.min = '1';
+                numberInput.value = '1';
+                numberInput.classList.add('form-control', 'col-3', 'ml-3');
+
+                // Create a submit button
+                var submitButton = document.createElement('button');
+                submitButton.type = 'submit';
+                submitButton.classList.add('btn', 'btn-primary', 'col-6');
+                submitButton.innerText = 'Přidat do košíku';
+
+                row.appendChild(numberInput);
+                row.appendChild(submitButton);
+                // Append the number input and submit button to the form group
+                formGroup.appendChild(row);
+            }
+        }
+    });
+
     function changeImage(event, src) {
         document.getElementById('mainImage').src = src;
         document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));

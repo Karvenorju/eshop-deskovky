@@ -40,8 +40,11 @@ class ProductCartForm extends Form {
     }
 
     private function createSubcomponents() {
+//        $this->setHtmlAttribute('id', 'productCartForm');
         $this->setHtmlAttribute('class', 'ajax'); //třída ajax zařídí, že se Naja pokusí odchytit využití tohoto formuláře
         $this->addHidden('productId');
+        $this->addHidden('count', 1)
+            ->setHtmlAttribute('id', 'count');
         $this->addSubmit('ok', Nette\Utils\Html::el('i')->setAttribute('class', 'bi bi-cart-plus-fill'));
     }
 
