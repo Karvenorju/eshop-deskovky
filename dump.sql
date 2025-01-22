@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 21, 2025 at 09:34 PM
+-- Generation Time: Jan 22, 2025 at 11:57 AM
 -- Server version: 10.5.23-MariaDB-0+deb11u1
 -- PHP Version: 8.1.29
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `cafp00`
+-- Database: `kovj19`
 --
 
 -- --------------------------------------------------------
@@ -32,6 +32,22 @@ CREATE TABLE `cart` (
   `user_id` int(11) DEFAULT NULL,
   `last_modified` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cart_id`, `user_id`, `last_modified`) VALUES
+(288, NULL, '2025-01-22 10:25:52'),
+(289, NULL, '2025-01-22 10:25:54'),
+(290, NULL, '2025-01-22 10:25:55'),
+(292, NULL, '2025-01-22 10:26:31'),
+(293, NULL, '2025-01-22 10:26:33'),
+(294, NULL, '2025-01-22 10:40:20'),
+(295, NULL, '2025-01-22 10:40:22'),
+(296, NULL, '2025-01-22 10:43:10'),
+(297, NULL, '2025-01-22 10:47:01'),
+(298, 4, '2025-01-22 10:54:12');
 
 -- --------------------------------------------------------
 
@@ -55,113 +71,100 @@ CREATE TABLE `cart_item` (
 CREATE TABLE `category` (
   `category_id` smallint(5) UNSIGNED NOT NULL,
   `title` varchar(100) NOT NULL,
-  `description` varchar(300) NOT NULL
+  `description` varchar(300) NOT NULL,
+  `sold_quantity` int(11) NOT NULL DEFAULT 0,
+  `image_url` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci COMMENT='Kategorie poznámek';
 
 --
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`category_id`, `title`, `description`) VALUES
-(2, 'Abstract Strategy', 'temp'),
-(3, 'Action / Dexterity', 'temp'),
-(4, 'Adventure', 'temp'),
-(5, 'Age of Reason', 'temp'),
-(6, 'American Civil War', 'temp'),
-(7, 'American Indian Wars', 'temp'),
-(8, 'American Revolutionary War', 'temp'),
-(9, 'American West', 'temp'),
-(10, 'Ancient', 'temp'),
-(11, 'Animals', 'temp'),
-(12, 'Arabian', 'temp'),
-(13, 'Aviation / Flight', 'temp'),
-(14, 'Bluffing', 'temp'),
-(15, 'Book', 'temp'),
-(16, 'Card Game', 'temp'),
-(17, 'Abstract Strategy', 'temp'),
-(18, 'Action / Dexterity', 'temp'),
-(19, 'Adventure', 'temp'),
-(20, 'Age of Reason', 'temp'),
-(21, 'American Civil War', 'temp'),
-(22, 'American Indian Wars', 'temp'),
-(23, 'American Revolutionary War', 'temp'),
-(24, 'American West', 'temp'),
-(25, 'Ancient', 'temp'),
-(26, 'Animals', 'temp'),
-(27, 'Arabian', 'temp'),
-(28, 'Aviation / Flight', 'temp'),
-(29, 'Bluffing', 'temp'),
-(30, 'Book', 'temp'),
-(31, 'Card Game', 'temp'),
-(32, 'Children\'s Game', 'temp'),
-(33, 'City Building', 'temp'),
-(34, 'Civil War', 'temp'),
-(35, 'Civilization', 'temp'),
-(36, 'Collectible Components', 'temp'),
-(37, 'Comic Book / Strip', 'temp'),
-(38, 'Deduction', 'temp'),
-(39, 'Dice', 'temp'),
-(40, 'Economic', 'temp'),
-(41, 'Educational', 'temp'),
-(42, 'Electronic', 'temp'),
-(43, 'Environmental', 'temp'),
-(44, 'Expansion for Base-game', 'temp'),
-(45, 'Exploration', 'temp'),
-(46, 'Fan Expansion', 'temp'),
-(47, 'Fantasy', 'temp'),
-(48, 'Farming', 'temp'),
-(49, 'Fighting', 'temp'),
-(50, 'Game System', 'temp'),
-(51, 'Horror', 'temp'),
-(52, 'Humor', 'temp'),
-(53, 'Industry / Manufacturing', 'temp'),
-(54, 'Korean War', 'temp'),
-(55, 'Mafia', 'temp'),
-(56, 'Math', 'temp'),
-(57, 'Mature / Adult', 'temp'),
-(58, 'Maze', 'temp'),
-(59, 'Medical', 'temp'),
-(60, 'Medieval', 'temp'),
-(61, 'Memory', 'temp'),
-(62, 'Miniatures', 'temp'),
-(63, 'Modern Warfare', 'temp'),
-(64, 'Movies / TV / Radio theme', 'temp'),
-(65, 'Murder / Mystery', 'temp'),
-(66, 'Music', 'temp'),
-(67, 'Mythology', 'temp'),
-(68, 'Napoleonic', 'temp'),
-(69, 'Nautical', 'temp'),
-(70, 'Negotiation', 'temp'),
-(71, 'Novel-based', 'temp'),
-(72, 'Number', 'temp'),
-(73, 'Party Game', 'temp'),
-(74, 'Pike and Shot', 'temp'),
-(75, 'Pirates', 'temp'),
-(76, 'Political', 'temp'),
-(77, 'Post-Napoleonic', 'temp'),
-(78, 'Prehistoric', 'temp'),
-(79, 'Print & Play', 'temp'),
-(80, 'Puzzle', 'temp'),
-(81, 'Racing', 'temp'),
-(82, 'Real-time', 'temp'),
-(83, 'Religious', 'temp'),
-(84, 'Renaissance', 'temp'),
-(85, 'Science Fiction', 'temp'),
-(86, 'Space Exploration', 'temp'),
-(87, 'Spies / Secret Agents', 'temp'),
-(88, 'Sports', 'temp'),
-(89, 'Territory Building', 'temp'),
-(90, 'Trains', 'temp'),
-(91, 'Transportation', 'temp'),
-(92, 'Travel', 'temp'),
-(93, 'Trivia', 'temp'),
-(94, 'Video Game Theme', 'temp'),
-(95, 'Vietnam War', 'temp'),
-(96, 'Wargame', 'temp'),
-(97, 'Word Game', 'temp'),
-(98, 'World War I', 'temp'),
-(99, 'World War II', 'temp'),
-(100, 'Zombies', 'temp');
+INSERT INTO `category` (`category_id`, `title`, `description`, `sold_quantity`, `image_url`) VALUES
+(2, 'Abstract Strategy', 'temp', 0, ''),
+(3, 'Action / Dexterity', 'temp', 0, ''),
+(4, 'Adventure', 'temp', 0, ''),
+(5, 'Age of Reason', 'temp', 0, ''),
+(6, 'American Civil War', 'temp', 0, ''),
+(7, 'American Indian Wars', 'temp', 0, ''),
+(8, 'American Revolutionary War', 'temp', 0, ''),
+(9, 'American West', 'temp', 0, ''),
+(10, 'Ancient', 'temp', 0, ''),
+(11, 'Animals', 'temp', 0, ''),
+(12, 'Arabian', 'temp', 0, ''),
+(13, 'Aviation / Flight', 'temp', 0, ''),
+(14, 'Bluffing', 'temp', 0, ''),
+(15, 'Book', 'temp', 0, ''),
+(16, 'Card Game', 'temp', 0, ''),
+(32, 'Children\'s Game', 'temp', 0, ''),
+(33, 'City Building', 'temp', 0, ''),
+(34, 'Civil War', 'temp', 0, ''),
+(35, 'Civilization', 'temp', 0, ''),
+(36, 'Collectible Components', 'temp', 0, ''),
+(37, 'Comic Book / Strip', 'temp', 0, ''),
+(38, 'Deduction', 'temp', 0, ''),
+(39, 'Dice', 'temp', 0, ''),
+(40, 'Economic', 'temp', 10, ''),
+(41, 'Educational', 'temp', 0, ''),
+(42, 'Electronic', 'temp', 0, ''),
+(43, 'Environmental', 'temp', 0, ''),
+(44, 'Expansion for Base-game', 'temp', 0, ''),
+(45, 'Exploration', 'temp', 0, ''),
+(46, 'Fan Expansion', 'temp', 0, ''),
+(47, 'Fantasy', 'temp', 0, ''),
+(48, 'Farming', 'temp', 0, ''),
+(49, 'Fighting', 'temp', 0, ''),
+(50, 'Game System', 'temp', 0, ''),
+(51, 'Horror', 'temp', 0, ''),
+(52, 'Humor', 'temp', 0, ''),
+(53, 'Industry / Manufacturing', 'temp', 0, ''),
+(54, 'Korean War', 'temp', 0, ''),
+(55, 'Mafia', 'temp', 0, ''),
+(56, 'Math', 'temp', 0, ''),
+(57, 'Mature / Adult', 'temp', 0, ''),
+(58, 'Maze', 'temp', 0, ''),
+(59, 'Medical', 'temp', 0, ''),
+(60, 'Medieval', 'temp', 0, ''),
+(61, 'Memory', 'temp', 0, ''),
+(62, 'Miniatures', 'temp', 0, ''),
+(63, 'Modern Warfare', 'temp', 0, ''),
+(64, 'Movies / TV / Radio theme', 'temp', 0, ''),
+(65, 'Murder / Mystery', 'temp', 0, ''),
+(66, 'Music', 'temp', 0, ''),
+(67, 'Mythology', 'temp', 0, ''),
+(68, 'Napoleonic', 'temp', 0, ''),
+(69, 'Nautical', 'temp', 0, ''),
+(70, 'Negotiation', 'temp', 0, ''),
+(71, 'Novel-based', 'temp', 0, ''),
+(72, 'Number', 'temp', 0, ''),
+(73, 'Party Game', 'temp', 0, ''),
+(74, 'Pike and Shot', 'temp', 0, ''),
+(75, 'Pirates', 'temp', 0, ''),
+(76, 'Political', 'temp', 0, ''),
+(77, 'Post-Napoleonic', 'temp', 0, ''),
+(78, 'Prehistoric', 'temp', 0, ''),
+(79, 'Print & Play', 'temp', 0, ''),
+(80, 'Puzzle', 'temp', 0, ''),
+(81, 'Racing', 'temp', 0, ''),
+(82, 'Real-time', 'temp', 0, ''),
+(83, 'Religious', 'temp', 0, ''),
+(84, 'Renaissance', 'temp', 0, ''),
+(85, 'Science Fiction', 'temp', 0, ''),
+(86, 'Space Exploration', 'temp', 0, ''),
+(87, 'Spies / Secret Agents', 'temp', 0, ''),
+(88, 'Sports', 'temp', 0, ''),
+(89, 'Territory Building', 'temp', 0, ''),
+(90, 'Trains', 'temp', 0, ''),
+(91, 'Transportation', 'temp', 0, ''),
+(92, 'Travel', 'temp', 0, ''),
+(93, 'Trivia', 'temp', 0, ''),
+(94, 'Video Game Theme', 'temp', 0, ''),
+(95, 'Vietnam War', 'temp', 0, ''),
+(96, 'Wargame', 'temp', 10, ''),
+(97, 'Word Game', 'temp', 0, ''),
+(98, 'World War I', 'temp', 0, ''),
+(99, 'World War II', 'temp', 0, ''),
+(100, 'Zombies', 'temp', 0, '');
 
 -- --------------------------------------------------------
 
@@ -290,9 +293,9 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `category_id`, `title`, `url`, `description`, `price`, `min_player`, `max_player`, `play_time`, `min_age`, `sold_quantity`) VALUES
-(7, 96, 'Risk', 'risk', 'Possibly the most popular, mass market war game. The goal is conquest of the world.\r\n\r\nEach player\'s turn consists of:\r\n- gaining reinforcements through number of territories held, control of every territory on each continent, and turning sets of bonus cards.\r\n- Attacking other players using a simple combat rule of comparing the highest dice rolled for each side. Players may attack as often as desired. If one enemy territory is successfully taken, the player is awarded with a bonus card.\r\n- Moving a group of armies to another adjacent territory.\r\n', '400.00', 1, 2, 6, 10, 5),
+(7, 96, 'Risk', 'risk', 'Possibly the most popular, mass market war game. The goal is conquest of the world.\r\n\r\nEach player\'s turn consists of:\r\n- gaining reinforcements through number of territories held, control of every territory on each continent, and turning sets of bonus cards.\r\n- Attacking other players using a simple combat rule of comparing the highest dice rolled for each side. Players may attack as often as desired. If one enemy territory is successfully taken, the player is awarded with a bonus card.\r\n- Moving a group of armies to another adjacent territory.\r\n', '400.00', 1, 2, 6, 10, 15),
 (8, 60, 'Carcassonne ', 'carcassonne', 'Carcassonne is a tile placement game in which the players draw and place a tile with a piece of southern French landscape represented on it. The tile might feature a city, a road, a cloister, grassland or some combination thereof, and it must be placed adjacent to tiles that have already been played, in such a way that cities are connected to cities, roads to roads, et cetera. Having placed a tile, the player can then decide to place one of his/her meeples in one of the areas on it: in the city as a knight, on the road as a robber, in the cloister as a monk, or in the field as a farmer. When that area is complete that meeple scores points for its owner.\r\n\r\nDuring a game of Carcassonne, players are faced with decisions like: \"Is it really worth putting my last meeple there?\" or \"Should I use this tile to expand my city, or should I place it near my opponent instead, giving him/her a hard time to complete his/her project and score points?\" Since players place only one tile and have the option to place one meeple on it, turns proceed quickly even if it is a game full of options and possibilities.\r\n\r\nFirst game in the Carcassonne series.', '300.00', 2, 5, 45, 7, 3),
-(9, 40, 'Monopoly: The Portable Property Trading Game', 'monopoly-card', 'A very small travel version of Monopoly which often comes in the shape of a red suitcase and plays very similarly to the original game. One difference is that it contains three dice. The Community Chest and Chance cards are replaced with tables. Three dice are rolled and the tables are referenced to find the result.\r\n\r\nThe Waddington\'s UK edition has different properties than the U.S. version, and also comes in a different sort of case with a magnetic board and magnetic hotels, houses, and movers.\r\n', '645.00', 2, 6, 120, 8, 0),
+(9, 40, 'Monopoly: The Portable Property Trading Game', 'monopoly-card', 'A very small travel version of Monopoly which often comes in the shape of a red suitcase and plays very similarly to the original game. One difference is that it contains three dice. The Community Chest and Chance cards are replaced with tables. Three dice are rolled and the tables are referenced to find the result.\r\n\r\nThe Waddington\'s UK edition has different properties than the U.S. version, and also comes in a different sort of case with a magnetic board and magnetic hotels, houses, and movers.\r\n', '645.00', 2, 6, 120, 8, 10),
 (10, 47, 'Clank! Legacy: Acquisitions Incorporated', 'clank', 'Clank! Legacy: Acquisitions Incorporated extends the deck-building fun of Clank! with legacy-style gameplay! Found your own franchise of the legendary adventuring company, Acquisitions Incorporated, and shepherd your fledgling treasure-hunters to immortal corporate glory over the course of multiple games. Your game board, your deck, and your world change as you play to create a unique campaign tailored to your adventuring party. Be cunning, be bold, and most importantly, be ready...', '546.00', 2, 4, 120, 13, 0),
 (11, 40, 'A Feast for Odin ', 'feast-for-odin', 'A Feast for Odin is a saga in the form of a board game. You are reliving the cultural achievements, mercantile expeditions, and pillages of those tribes we know as Viking today — a term that was used quite differently towards the end of the first millennium.\r\n\r\nWhen the northerners went out for a raid, they used to say they headed out for a viking. Their Scandinavian ancestors, however, were much more than just pirates. They were explorers and founders of states. Leif Eriksson is said to be the first European in America, long before Columbus.\r\nIn what is known today as Normandy, the intruders were not called Vikings but Normans. One of them is the famous William the Conqueror who invaded England in 1066. He managed to do what the king of Norway failed to do only a few years prior: conquer the Throne of England. The reason the people of these times became such strong seafarers was their unfortunate agricultural situation: crop shortfalls caused great distress.\r\n\r\nIn this game, you will raid and explore new territories. You will also engage in the day-to-day activity of collecting goods with which to achieve a financially secure position in society. In the end, the player whose possessions bear the greatest value will be declared the winner.', '875.00', 1, 4, 120, 12, 0),
 (12, 4, 'Frosthaven', 'frosthaven', 'Frosthaven is the story of a small outpost far to the north of the capital city of White Oak. It\'s an outpost barely surviving the harsh weather let alone invasions from forces both known and unknown. However, a group of mercenaries, at the end of their rope, will help bring this settlement back from the edge of destruction. Not only will they have to deal with the harsh elements, but with other, far more dangerous threats out in the unforgiving cold, as well. There are: Algox, the bigger, more yeti-like cousins of the Inox, attacking from the mountains; Lurkers flooding in from the northern sea; and rumors have it that there are machines that wander the frozen wastes of their own free will. The party of mercenaries must face all of these perils, and perhaps in doing so, make peace with these new races so they can work together against even more sinister forces.\r\n\r\nFrosthaven is a standalone adventure from the designer and publisher of Gloomhaven that features sixteen new characters, three new races, more than twenty new enemies, more than one hundred new items, and a new, 100-scenario campaign. Characters and items from Gloomhaven will be usable in Frosthaven, and vice versa.\r\n\r\nIn addition to using the well-known combat mechanisms of Gloomhaven, Frosthaven features other elements, such as mysteries to solve, a seasonal event system to live through, and player control over how the ramshackle village expands, with each new building offering new ways to progress.\r\n\r\nFrosthaven has a whole new set of items but there is a mechanism for bringing items over from \'Gloomhaven\'. However, as Frosthaven\'s outpost is a remote location, these products may be imported but are not present as standard items. Resources are much more valuable and you have to build items through a crafting system rather than just buying them.', '246.00', 1, 4, 180, 14, 0);
@@ -374,7 +377,8 @@ INSERT INTO `sale_order` (`sale_order_id`, `user_id`, `order_name`, `customer_na
 (3, 3, 'SO-20250121-000001', 'Petr Cafourek', 'cafourek2@gmail.com', '+420 731730756', 'something 123', '947.00', '2025-01-21 19:18:52', 'pending'),
 (4, 3, 'SO-20250121-000002', 'Petr Cafourek', 'cafourek2@gmail.com', '+420 731730756', 'something 123', '584.00', '2025-01-21 19:23:09', 'pending'),
 (5, 3, 'SO-20250121-000003', 'Petr Cafourek', 'cafourek2@gmail.com', '+420 731730756', 'something 123', '947.00', '2025-01-21 19:23:37', 'pending'),
-(6, 3, 'SO-20250121-000004', 'Petr Cafourek', 'cafourek2@gmail.com', '+420 731730756', 'something 123', '947.00', '2025-01-21 19:27:26', 'pending');
+(6, 3, 'SO-20250121-000004', 'Petr Cafourek', 'cafourek2@gmail.com', '+420 731730756', 'something 123', '947.00', '2025-01-21 19:27:26', 'pending'),
+(9, 4, 'SO-20250122-000001', 'kovj19@vse.cz', 'kovj19@vse.cz', '12', '12', '12744.50', '2025-01-22 11:54:12', 'pending');
 
 -- --------------------------------------------------------
 
@@ -402,7 +406,9 @@ INSERT INTO `sale_order_line` (`sale_order_line_id`, `sale_order_id`, `product_i
 (6, 5, 7, 1, '400.00'),
 (7, 5, 8, 1, '300.00'),
 (8, 6, 7, 1, '400.00'),
-(9, 6, 8, 1, '300.00');
+(9, 6, 8, 1, '300.00'),
+(10, 9, 7, 10, '400.00'),
+(11, 9, 9, 10, '645.00');
 
 -- --------------------------------------------------------
 
@@ -426,7 +432,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `name`, `email`, `facebook_id`, `role_id`, `password`, `phone`, `address`) VALUES
-(3, 'Petr Cafourek', 'cafourek2@gmail.com', NULL, 'admin', '$2y$10$0f8twanVO/ep33KiMsgQGumKVqQq/o6er3aWFF29fFQrHp5sarrGu', '+420 731730756', 'something 123');
+(3, 'Petr Cafourek', 'cafourek2@gmail.com', NULL, 'admin', '$2y$10$0f8twanVO/ep33KiMsgQGumKVqQq/o6er3aWFF29fFQrHp5sarrGu', '+420 731730756', 'something 123'),
+(4, 'kovj19@vse.cz', 'kovj19@vse.cz', NULL, 'admin', '$2y$10$sHfEUGxZTuRpReLI62Qsmu5vRdyKD58YeRUtxnRa2KR.hZ7p5ylzu', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -527,13 +534,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=288;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=299;
 
 --
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -563,19 +570,19 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `sale_order`
 --
 ALTER TABLE `sale_order`
-  MODIFY `sale_order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `sale_order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `sale_order_line`
 --
 ALTER TABLE `sale_order_line`
-  MODIFY `sale_order_line_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `sale_order_line_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables

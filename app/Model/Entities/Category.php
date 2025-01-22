@@ -10,13 +10,15 @@ use LeanMapper\Entity;
  * @property int $categoryId
  * @property string $title
  * @property string $description
+ * @property string $imageUrl
+ * @property int $soldQuantity
  */
-class Category extends Entity implements \Nette\Security\Resource{
+class Category extends Entity implements \Nette\Security\Resource {
 
-  /**
-   * @inheritDoc
-   */
-  function getResourceId():string{
-    return 'Category';
-  }
+    /**
+     * @inheritDoc
+     */
+    function getResourceId(): string {
+        return 'Category';
+    }
 }
