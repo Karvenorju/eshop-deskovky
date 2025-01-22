@@ -11,8 +11,7 @@ use App\Model\Facades\SaleOrderFacade;
  * Class SaleOrderPresenter
  * @package App\AdminModule\Presenters
  */
-class SaleOrderPresenter extends BasePresenter
-{
+class SaleOrderPresenter extends BasePresenter {
     private SaleOrderFacade $saleOrderFacade;
     private saleOrderListFilterFormFactory $saleOrderListFilterFormFactory;
 
@@ -21,7 +20,6 @@ class SaleOrderPresenter extends BasePresenter
      */
     public function renderDefault(): void {
         $filterParams = $this->getHttpRequest()->getPost(); // Retrieve GET parameters
-        bdump($filterParams, 'Filter Parameters');
         $this->template->orders = $this->saleOrderFacade->findOrders($filterParams);
         $this->template->filterParams = $filterParams; // Pass to template for pre-filling the form
     }
@@ -37,8 +35,7 @@ class SaleOrderPresenter extends BasePresenter
         $this->redirect('this', ['orderId' => $orderId]);
     }
 
-    protected function createComponentSaleOrderListFilterForm(): SaleOrderListFilterForm
-    {
+    protected function createComponentSaleOrderListFilterForm(): SaleOrderListFilterForm {
         $form = $this->saleOrderListFilterFormFactory->create();
         $form->onSubmit[] = function (SaleOrderListFilterForm $form) {
             $values = $form->getValues(true);
@@ -49,8 +46,7 @@ class SaleOrderPresenter extends BasePresenter
     }
 
     #region injections
-    public function injectSaleOrderFacade(SaleOrderFacade $saleOrderFacade): void
-    {
+    public function injectSaleOrderFacade(SaleOrderFacade $saleOrderFacade): void {
         $this->saleOrderFacade = $saleOrderFacade;
     }
 
