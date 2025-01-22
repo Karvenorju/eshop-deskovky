@@ -169,6 +169,11 @@ class ProductsFacade {
         ];
     }
 
+    public function deleteProduct(int $id): void {
+        $product = $this->getProduct($id);
+        $this->productRepository->delete($product);
+    }
+
     public function __construct(ProductRepository $productRepository) {
         $this->productRepository = $productRepository;
     }

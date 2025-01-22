@@ -21,6 +21,21 @@ class ProductPresenter extends BasePresenter{
     $this->template->products=$this->productsFacade->findProducts(['order'=>'title']);
   }
 
+    public function actionDelete(int $id): void {
+        try {
+            $product = $this->productsFacade->getProduct($id);
+            if (!$this->user->isAllowed($product, 'delete')) {
+                $this->flashMessage('Požadovaný produkt nemůžete smazat.', 'error');
+                $this->redirect('default');
+            }
+            $this->productsFacade->deleteProduct($id);
+            $this->flashMessage('Produkt byl úspěšně smazán.', 'success');
+        } catch (\Exception $e) {
+            $this->flashMessage('Při mazání produktu došlo k chybě.', 'error');
+        }
+        $this->redirect('default');
+    }
+
   /**
    * Akce pro úpravu jednoho produktu
    * @param int $id

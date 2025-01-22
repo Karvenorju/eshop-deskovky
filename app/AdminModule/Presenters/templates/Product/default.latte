@@ -16,6 +16,7 @@
                         <td>{$product->title}</td>
                         <td class="text-nowrap">
                             <a href="{link edit id=>$product->productId}" class="btn btn-sm btn-outline-primary">upravit</a>
+                            <a href="{link delete id=>$product->productId}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Opravdu chcete smazat tento produkt?');">smazat</a>
                         </td>
                     </tr>
                 {/foreach}
