@@ -26,17 +26,13 @@
                         <strong>Změna stavu objednávky</strong>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{link Order:updateStatus, orderId => $order->saleOrderId}">
+                        {form saleOrderStatusForm}
                             <div class="form-group">
                                 <label for="status">Stav objednávky</label>
-                                <select name="status" id="status" class="form-control">
-                                    <option value="pending" {if $order->status === 'pending'}selected{/if}>Čeká na vyřízení</option>
-                                    <option value="completed" {if $order->status === 'completed'}selected{/if}>Dokončené</option>
-                                    <option value="cancelled" {if $order->status === 'cancelled'}selected{/if}>Zrušené</option>
-                                </select>
+                                {input status, class=>"form-control"}
                             </div>
-                            <button type="submit" class="btn btn-primary">Uložit změny</button>
-                        </form>
+                            <button type="submit" class="btn btn-primary btn-sm">Uložit změny</button>
+                        {/form}
                     </div>
                 </div>
             </div>

@@ -31,7 +31,7 @@
                             <tr>
                                 <td>{$order->orderName}</td>
                                 <td>{$order->createdAt|date:'j.n.Y H:i'}</td>
-                                <td>{$order->status}</td>
+                                <td>{$order->getStatusLabel()}</td>
                                 <td>{$order->totalPrice|number:2} Kč</td>
                                 <td>
                                     <a href="{link SaleOrder:edit, orderId => $order->saleOrderId}" class="btn btn-primary btn-sm">Detail</a>

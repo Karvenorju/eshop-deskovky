@@ -24,7 +24,7 @@ class SaleOrderListFilterForm extends Form
         $this->addSelect('status', 'Stav objednávky:', [
             '' => 'Všechny',
             'pending' => 'Čeká na vyřízení',
-            'completed' => 'Dokončené',
+            'done' => 'Dokončené',
             'cancelled' => 'Zrušené',
         ]);
 

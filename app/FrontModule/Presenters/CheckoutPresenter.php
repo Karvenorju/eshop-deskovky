@@ -41,18 +41,21 @@ class CheckoutPresenter extends BasePresenter
             $this->checkCartIsNotEmpty($cart);
 
             $userLoginControl = $this['userLogin'];
-            $userEntity = $this->usersFacade->getUser($userLoginControl->getCurrentUser()->getId());
+            $user = $userLoginControl->getLoggedInUser();
 
             // Order data from form
             $orderData = [
-                'user' => $userEntity,
+                'user' => $user,
                 'customerName' => $values['name'],
                 'customerEmail' => $values['email'],
                 'customerPhone' => $values['phone'],
                 'customerAddress' => $values['address'],
             ];
             // Call SaleOrderFacade to create order
-            $this->saleOrderFacade->createOrder($orderData, $cart->cartId);
+            $order = $this->saleOrderFacade->createOrder($orderData, $cart->cartId);
+
+            // Send order confirmation email
+            $this->saleOrderFacade->sendOrderConfirmationEmail($order);
 
             // Show success message and redirect
             $this->flashMessage('Objednávka byla úspěšně vytvořena.', 'success');

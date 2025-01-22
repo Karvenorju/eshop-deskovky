@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Potvrzení objednávky - {$order->orderName}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .section {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #555;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            color: white;
+            font-weight: bold;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h2>Potvrzení objednávky</h2>
+    </div>
+
+    <!-- Order Information -->
+    <div class="section">
+        <h3>Objednávka</h3>
+        <p><strong>Číslo objednávky:</strong> {$order->orderName}</p>
+        <p><strong>Datum:</strong> {$order->createdAt|date:'j.n.Y H:i'}</p>
+    </div>
+
+    <!-- Customer Information -->
+    <div class="section">
+        <h3>Údaje zákazníka</h3>
+        <p><strong>Jméno:</strong> {$order->customerName}</p>
+        <p><strong>Email:</strong> {$order->customerEmail}</p>
+        <p><strong>Telefon:</strong> {$order->customerPhone}</p>
+    </div>
+
+    <!-- Address -->
+    <div class="section">
+        <h3>Adresa doručení</h3>
+        <p>{$order->customerAddress}</p>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="section">
+        <h4>Položky v košíku</h4>
+        <table>
+            <thead>
+            <tr>
+                <th>Produkt</th>
+                <th>Množství</th>
+                <th>Cena</th>
+            </tr>
+            </thead>
+            <tbody>
+            {foreach $order->items as $item}
+                <tr>
+                    <td>{$item->product->title}</td>
+                    <td>{$item->quantity}</td>
+                    <td>{$item->product->price|number:2} Kč</td>
+                </tr>
+            {/foreach}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Total Price -->
+    <div class="section">
+        <h3>Celková cena</h3>
+        <p><strong>{$order->totalPrice|number:2} Kč</strong></p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p><strong>Deskovky.cz</strong> – nejlepší výběr deskových her!</p>
+        <p>&copy; {date('Y')} Deskovky.cz</p>
+    </div>
+
+</div>
+
+</body>
+</html>

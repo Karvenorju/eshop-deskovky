@@ -90,4 +90,11 @@ class UserLoginControl extends Control {
         return $this->user;
     }
 
+    public function getLoggedInUser(): ?User {
+        if (!$this->user->isLoggedIn()) {
+            return null; // User is not logged in, return null
+        }
+        return $this->user;
+    }
+
 }

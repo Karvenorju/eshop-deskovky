@@ -10,30 +10,47 @@ use App\Model\Repositories\SaleOrderRepository;
 use Dibi\DateTime;
 use Exception;
 use LeanMapper\Connection;
+use Nette\Bridges\ApplicationLatte\LatteFactory;
+use Nette\InvalidArgumentException;
+use Nette\Mail\Message;
+use Nette\Mail\SendmailMailer;
 
-class SaleOrderFacade {
+class SaleOrderFacade
+{
     private SaleOrderRepository $saleOrderRepository;
     private SaleOrderLineRepository $saleOrderLineRepository;
     private CartRepository $cartRepository;
     private Connection $db;
     private ProductsFacade $productsFacade;
     private CategoriesFacade $categoriesFacade;
+    private LatteFactory $latteFactory;
+
+    private string $emailFrom; // from mailFrom config
+    private string $emailName; // from mailFrom config
 
     public function __construct(
+        string                  $email,
+        string                  $name,
         SaleOrderRepository     $saleOrderRepository,
         SaleOrderLineRepository $saleOrderLineRepository,
         CartRepository          $cartRepository,
         Connection              $db,
         ProductsFacade          $productsFacade,
-        CategoriesFacade        $categoriesFacade
-    ) {
+        CategoriesFacade        $categoriesFacade,
+        LatteFactory            $latteFactory,
+    )
+    {
         $this->saleOrderRepository = $saleOrderRepository;
         $this->saleOrderLineRepository = $saleOrderLineRepository;
         $this->cartRepository = $cartRepository;
         $this->productsFacade = $productsFacade;
         $this->db = $db;
         $this->categoriesFacade = $categoriesFacade;
+        $this->emailFrom = $email;
+        $this->emailName = $name;
+        $this->latteFactory = $latteFactory;
     }
+
 
     /**
      * Generates a unique sale order name.
@@ -41,7 +58,8 @@ class SaleOrderFacade {
      *
      * @return string
      */
-    public function generateOrderName(): string {
+    public function generateOrderName(): string
+    {
         // Get today's date
         $date = date('Ymd');
         // Fetch number of orders created today
@@ -51,9 +69,10 @@ class SaleOrderFacade {
         return "SO-{$date}-{$orderNumber}";
     }
 
-    public function getOrdersByUserId(int $userId): array {
-        $where = ['user_id => ?', $userId];
-        $orders = $this->saleOrderRepository->findAll();
+    public function getOrdersByUserId(int $userId): array
+    {
+        $where = ['user_id' => $userId, 'order' => 'created_at DESC'];
+        $orders = $this->saleOrderRepository->findAllBy($where);
         return $orders ?: []; // Ensure an array is always returned
     }
 
@@ -65,7 +84,8 @@ class SaleOrderFacade {
      * @return SaleOrder Created order
      * @throws Exception If the transaction fails
      */
-    public function createOrder(array $orderData, int $cartId): SaleOrder {
+    public function createOrder(array $orderData, int $cartId): SaleOrder
+    {
         try {
             $this->db->begin(); // Start transaction
 
@@ -135,7 +155,8 @@ class SaleOrderFacade {
         }
     }
 
-    public function getOrderById(int $id): ?SaleOrder {
+    public function getOrderById(int $id): ?SaleOrder
+    {
         return $this->saleOrderRepository->find($id);
     }
 
@@ -146,7 +167,8 @@ class SaleOrderFacade {
      * @param int $limit = null
      * @return SaleOrder[]
      */
-    public function findOrders(array $params = null, int $offset = null, int $limit = null): array {
+    public function findOrders(array $params = null, int $offset = null, int $limit = null): array
+    {
         $whereArr = [];
         if (isset($params['status']) && $params['status'] !== '') {
             $whereArr[] = ['LOWER(status) = LOWER(?)', $params['status']];
@@ -167,11 +189,39 @@ class SaleOrderFacade {
         return $this->saleOrderRepository->findAllBy($whereArr, $offset, $limit);
     }
 
-    public function updateOrderStatus(int $orderId, string $status): void {
-        $order = $this->saleOrderRepository->find($orderId);
-        if ($order) {
-            $order->status = $status;
-            $this->saleOrderRepository->persist($order);
+    public function updateOrderStatus(SaleOrder $order, string $newStatus): void
+    {
+        if (!in_array($newStatus, $order->getAllowedTransitions())) {
+            throw new InvalidArgumentException('Invalid order status transition.');
         }
+
+        $order->status = $newStatus;
+        $this->saleOrderRepository->persist($order);
+    }
+
+
+    public function sendOrderConfirmationEmail($order): void
+    {
+        $latte = $this->latteFactory->create();
+        $params = [
+            'order' => $order,
+            'mailFrom' => $this->emailFrom,
+        ];
+        $htmlBody = $latte->renderToString(__DIR__ . '/../Templates/emails/orderConfirmation.latte', $params);
+
+        // Create email
+        $mail = new Message();
+        $mail->setFrom($this->emailFrom, $this->emailName)
+            ->addTo($order->customerEmail, $order->customerName)
+            ->setSubject("Order {$order->orderName}")
+            ->setHtmlBody($htmlBody);
+        // Send email
+        $mailer = new SendmailMailer();
+        $mailer->send($mail);
+    }
+
+    public function injectLatteFactory(LatteFactory $latteFactory): void
+    {
+        $this->latteFactory = $latteFactory;
     }
 }

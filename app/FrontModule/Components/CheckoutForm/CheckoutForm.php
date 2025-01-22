@@ -22,12 +22,8 @@ class CheckoutForm extends Form
         parent::__construct($parent, $name);
         $this->setRenderer(new Bs4FormRenderer(FormLayout::VERTICAL));
         $this->usersFacade = $usersFacade;
-        $loggedUserId = $userLoginControl->getCurrentUser()->getId();
-        $userEntity = Null;
-        if ($loggedUserId) {
-            $userEntity = $this->usersFacade->getUser($loggedUserId);
-        }
-        $this->createSubcomponents($userEntity);
+        $user = $userLoginControl->getLoggedInUser();
+        $this->createSubcomponents($user);
     }
 
     private function createSubcomponents(?User $user): void

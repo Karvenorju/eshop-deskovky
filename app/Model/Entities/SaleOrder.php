@@ -29,6 +29,30 @@ class SaleOrder extends Entity
     const STATUS_DONE = 'done';
     const STATUS_CANCELLED = 'cancelled';
 
+    private const STATE_TRANSITIONS = [
+        self::STATUS_PENDING => [self::STATUS_SHIPPED, self::STATUS_CANCELLED],
+        self::STATUS_SHIPPED => [self::STATUS_DONE, self::STATUS_CANCELLED],
+        self::STATUS_DONE => [],
+        self::STATUS_CANCELLED => [],
+    ];
+
+    private static array $statusLabels = [
+        self::STATUS_PENDING => 'Čeká na vyřízení',
+        self::STATUS_SHIPPED => 'Odesláno',
+        self::STATUS_DONE => 'Dokončeno',
+        self::STATUS_CANCELLED => 'Zrušeno',
+    ];
+
+    public function getAllowedTransitions(): array
+    {
+        return self::STATE_TRANSITIONS[$this->status] ?? [];
+    }
+
+    public function getStatusLabel(): string
+    {
+        return self::$statusLabels[$this->status] ?? $this->status;
+    }
+
     /**
      * Returns all valid statuses.
      */
