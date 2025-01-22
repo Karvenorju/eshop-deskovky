@@ -16,8 +16,7 @@ use Nette\InvalidArgumentException;
  * Class SaleOrderPresenter
  * @package App\AdminModule\Presenters
  */
-class SaleOrderPresenter extends BasePresenter
-{
+class SaleOrderPresenter extends BasePresenter {
     private SaleOrderFacade $saleOrderFacade;
     private saleOrderListFilterFormFactory $saleOrderListFilterFormFactory;
 
@@ -54,8 +53,7 @@ class SaleOrderPresenter extends BasePresenter
         return $form;
     }
 
-    protected function createComponentSaleOrderListFilterForm(): SaleOrderListFilterForm
-    {
+    protected function createComponentSaleOrderListFilterForm(): SaleOrderListFilterForm {
         $form = $this->saleOrderListFilterFormFactory->create();
         $form->onSubmit[] = function (SaleOrderListFilterForm $form) {
             $values = $form->getValues(true);
@@ -80,8 +78,7 @@ class SaleOrderPresenter extends BasePresenter
     }
 
     #region injections
-    public function injectSaleOrderFacade(SaleOrderFacade $saleOrderFacade): void
-    {
+    public function injectSaleOrderFacade(SaleOrderFacade $saleOrderFacade): void {
         $this->saleOrderFacade = $saleOrderFacade;
     }
 

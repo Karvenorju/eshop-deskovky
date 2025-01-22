@@ -2,7 +2,9 @@
 
 namespace App\Model\Facades;
 
+use App\Model\Entities\Image;
 use App\Model\Entities\Product;
+use App\Model\Repositories\ImageRepository;
 use App\Model\Repositories\ProductRepository;
 use Nette\Http\FileUpload;
 use Nette\Utils\Strings;
@@ -13,7 +15,6 @@ use Nette\Utils\Strings;
  */
 class ProductsFacade {
     private ProductRepository $productRepository;
-
     /**
      * Metoda pro získání jednoho produktu
      * @param int $id
@@ -51,7 +52,7 @@ class ProductsFacade {
         if (isset($params['search'])) {
             $whereArr[] = ['title LIKE ?', '%' . $params['search'] . '%'];
         }
-        if (isset($params['category']) && is_array($params['category'])) {
+        if (isset($params['category'])) {
             $whereArr[] = ['category_id IN (?)', $params['category']];
         }
         if (isset($params['price'])) {
@@ -129,22 +130,6 @@ class ProductsFacade {
         #endregion URL produktu
 
         $this->productRepository->persist($product);
-    }
-
-    /**
-     * Metoda pro uložení fotky produktu
-     * @param FileUpload $fileUpload
-     * @param Product $product
-     * @throws \Exception
-     */
-    public function saveProductPhoto(FileUpload $fileUpload, Product &$product): void {
-        //TODO rework this for new photo architecture
-//        if ($fileUpload->isOk() && $fileUpload->isImage()) {
-//            $fileExtension = strtolower($fileUpload->getSuggestedExtension());
-//            $fileUpload->move(__DIR__ . '/../../../www/img/products/' . $product->productId . '.' . $fileExtension);
-//            $product->photoExtension = $fileExtension;
-//            $this->saveProduct($product);
-//        }
     }
 
     public function getFilterParams(): array {

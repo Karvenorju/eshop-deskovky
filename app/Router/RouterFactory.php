@@ -14,7 +14,7 @@ final class RouterFactory
     public static function createRouter(): RouteList
     {
         $adminRouter = new RouteList('Admin');
-        $adminRouter->addRoute('admin/<presenter=Dashboard>/<action=default>[/<id>]');
+        $adminRouter->addRoute('admin/<presenter=Product>/<action=default>[/<id>]');
 
         $frontRouter = new RouteList('Front');
         $frontRouter->addRoute('produkty[/kategorie-<category>]', 'Product:list');  //pokud je do adresy zakomponována také proměnná category, je doplněna do adresy
