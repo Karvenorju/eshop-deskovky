@@ -73,7 +73,7 @@ class CategoriesFacade {
      * @param int $limit počet vrácených kategorií
      * @return Category[]
      */
-    public function findTopCategories(int $limit = 5): array {
+    public function findTopCategories(int $limit = 8): array {
         $whereArr = [
             'order' => 'sold_quantity DESC'
         ];

@@ -11,8 +11,8 @@ use Nette\Http\FileUpload;
 class ImageFacade {
     private ImageRepository $imageRepository;
 
-    public function __construct(ImageRepository $imageRepository){
-        $this->imageRepository=$imageRepository;
+    public function __construct(ImageRepository $imageRepository) {
+        $this->imageRepository = $imageRepository;
     }
 
     public function getImages(Product $product): array {
@@ -20,7 +20,7 @@ class ImageFacade {
     }
 
     public function getFrontImage(Product $product): Image {
-        return $this->imageRepository->findBy(['product_id'=>$product->productId,'type'=>'front']);
+        return $this->imageRepository->findBy(['product_id' => $product->productId, 'type' => 'front']);
     }
 
     /**
@@ -29,8 +29,7 @@ class ImageFacade {
      * @param Product $product
      * @throws \Exception
      */
-    public function saveProductPhoto(FileUpload $fileUpload, Product &$product, ImageType $imageType = ImageType::OTHER): void {
-        //TODO rework this for new photo architecture
+    public function saveProductPhoto(FileUpload $fileUpload, Product $product, ImageType $imageType = ImageType::OTHER): void {
         if ($fileUpload->isOk() && $fileUpload->isImage()) {
             $image = new Image();
             $image->product = $product;
