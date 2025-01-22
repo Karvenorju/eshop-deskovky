@@ -39,27 +39,32 @@
     </div>
 </div>
 
-<h2 class="h3 mt-4">Populární kategorie</h2>
+<h2 class="h3 my-4">Populární kategorie</h2>
 
-{foreach $topCategories as $category}
-    <form action="{link Product:list}" method="POST" name="catForm">
-        <input type="hidden" name="category" value="{$category->categoryId}">
-        <a href="#" onclick="submitPostLink(event, this)">
-            <div class="row">
-                <div class="col-12 col-sm-8 col-md-6 col-lg-4">
-                    <div class="card">
-                        <img class="card-img"
-                             src="{$basePath}/img/categories/{$category->imageUrl}"
-                             alt="{$category->title}">
-                        <div class="card-img-overlay text-light d-flex flex-column justify-content-end">
-                            <h4 class="card-title text-decoration-none">{$category->title}</h4>
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+        {foreach $topCategories as $category}
+            <div class="col mb-4">
+                <form action="{link Product:list}" method="POST" name="catForm">
+                    <input type="hidden" name="category" value="{$category->categoryId}">
+                    <a href="#" onclick="submitPostLink(event, this)" class="d-block text-decoration-none">
+                        <div class="card bg-dark text-white h-100">
+                            <div class="image-container">
+                                <img class="card-img img-fluid"
+                                     src="{$basePath}/img/categories/{$category->imageUrl}"
+                                     alt="{$category->title}"
+                                     style="object-fit: contain; width: 100%; height: auto;">
+                            </div>
+                            <div class="card-header">
+                                <h5 class="card-title text-center">{$category->title}</h5>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </a>
+                </form>
             </div>
-        </a>
-    </form>
-{/foreach}
+        {/foreach}
+    </div>
+</div>
 
 <script language=javascript>
     function submitPostLink(event, element) {
