@@ -51,7 +51,7 @@ class ProductsFacade {
         if (isset($params['search'])) {
             $whereArr[] = ['title LIKE ?', '%' . $params['search'] . '%'];
         }
-        if (isset($params['category']) && is_array($params['category'])) {
+        if (isset($params['category'])) {
             $whereArr[] = ['category_id IN (?)', $params['category']];
         }
         if (isset($params['price'])) {

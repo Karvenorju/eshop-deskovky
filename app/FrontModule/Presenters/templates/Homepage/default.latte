@@ -13,7 +13,7 @@
                         <div class="carousel-image-container bg-img">
                             <img src="{$basePath}/img/products/{$product->getFrontImageUrl()}"
                                  class="d-block w-100" alt="{$product->title}"/>
-                            <<a href="{plink Product:show url=>$product->url}">
+                            <a href="{plink Product:show url=>$product->url}">
                                 <div id="image-overlay" class="position-absolute bottom-0 text-light w-100">
                                     <p class="pt-1 p-0 m-0 title">{$iterator->counter}. {$product->title}</p>
                                     <p class="m-0 p-0 pb-1">Cena: <span
@@ -39,19 +39,36 @@
     </div>
 </div>
 
-<h2 class="h3 mt-4">Populární kategorie</h2>
+<h2 class="h3 my-4">Populární kategorie</h2>
 
-<a href="" class="container">
-    <div class="row">
-        <div class="col-12 col-sm-8 col-md-6 col-lg-4">
-            <div class="card">
-                <img class="card-img"
-                     src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/bologna-3.jpg"
-                     alt="Bologna">
-                <div class="card-img-overlay text-white d-flex flex-column justify-content-end ">
-                    <h4 class="card-title">Bologna</h4>
-                </div>
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+        {foreach $topCategories as $category}
+            <div class="col mb-4">
+                <form action="{link Product:list}" method="POST" name="catForm">
+                    <input type="hidden" name="category" value="{$category->categoryId}">
+                    <a href="#" onclick="submitPostLink(event, this)" class="d-block text-decoration-none">
+                        <div class="card bg-dark text-white h-100">
+                            <div class="image-container">
+                                <img class="card-img img-fluid"
+                                     src="{$basePath}/img/categories/{$category->imageUrl}"
+                                     alt="{$category->title}"
+                                     style="object-fit: contain; width: 100%; height: auto;">
+                            </div>
+                            <div class="card-header">
+                                <h5 class="card-title text-center">{$category->title}</h5>
+                            </div>
+                        </div>
+                    </a>
+                </form>
             </div>
-        </div>
+        {/foreach}
     </div>
-</a>
+</div>
+
+<script language=javascript>
+    function submitPostLink(event, element) {
+        event.preventDefault();
+        element.closest('form').submit();
+    }
+</script>
