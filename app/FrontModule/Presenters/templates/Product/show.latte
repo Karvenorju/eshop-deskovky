@@ -10,8 +10,10 @@
     <div class="row">
         {if !empty($product->images)}
             <div class="col-md-6 mb-4">
-                <img src="{$basePath}/img/products/{$product->getFrontImageUrl()}" alt="Product"
-                     class="img-fluid rounded mb-3 product-image" id="mainImage">
+                <div class="image-container">
+                    <img src="{$basePath}/img/products/{$product->getFrontImageUrl()}" alt="Product"
+                         class="img-fluid rounded mb-3 centered-image" id="mainImage">
+                </div>
                 <div class="d-flex justify-content-between">
                     {foreach $product->images as $image}
                         <img src="{$basePath}/img/products/{$image->url}" alt="Thumbnail 1"
@@ -50,7 +52,7 @@
     </div>
 </div>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         // Select the form element with an ID starting with 'frm-productCartForm-'
         var form = document.querySelector('[id^="frm-productCartForm-"]');
 
