@@ -19,6 +19,7 @@ use LeanMapper\Entity;
  * @property int $playTime
  * @property int $minAge
  * @property int $soldQuantity
+ * @property int bggId = null
  * @property Image[] $images m:belongsToMany = []
  */
 class Product extends Entity implements \Nette\Security\Resource {
