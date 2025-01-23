@@ -11,6 +11,7 @@ use App\Model\Entities\SaleOrder;
 use App\Model\Facades\SaleOrderFacade;
 use Nette\Forms\Form;
 use Nette\InvalidArgumentException;
+use Nette\Utils\Paginator;
 
 /**
  * Class SaleOrderPresenter
@@ -25,10 +26,29 @@ class SaleOrderPresenter extends BasePresenter {
     /**
      * Akce pro vykreslení seznamu objednávek
      */
-    public function renderDefault(): void {
-        $filterParams = $this->getHttpRequest()->getPost(); // Retrieve GET parameters
-        $this->template->orders = $this->saleOrderFacade->findOrders($filterParams);
-        $this->template->filterParams = $filterParams; // Pass to template for pre-filling the form
+    public function renderDefault(int $page = 1): void
+    {
+        $httpRequest = $this->getHttpRequest();
+        $filterParams = $httpRequest->getPost(); // Retrieve filtering parameters
+        $itemsPerPage = 10; // Define how many orders per page
+        $totalOrders = $this->saleOrderFacade->countFilteredOrders($filterParams); // Get total count based on filter
+        // Initialize paginator
+        $paginator = new Paginator();
+        $paginator->setItemCount($totalOrders);
+        $paginator->setItemsPerPage($itemsPerPage);
+        $paginator->setPage($page);
+
+        // Fetch paginated and filtered orders
+        $orders = $this->saleOrderFacade->findOrders(
+            $filterParams,
+            $paginator->getOffset(),
+            $paginator->getLength()
+        );
+
+        // Assign data to template
+        $this->template->orders = $orders;
+        $this->template->filterParams = $filterParams;
+        $this->template->paginator = $paginator;
     }
 
     public function renderEdit(int $orderId): void {

@@ -69,11 +69,17 @@ class SaleOrderFacade
         return "SO-{$date}-{$orderNumber}";
     }
 
-    public function getOrdersByUserId(int $userId): array
+    public function getOrdersByUserId(int $userId, int $offset = null, int $limit = null): array
     {
         $where = ['user_id' => $userId, 'order' => 'created_at DESC'];
-        $orders = $this->saleOrderRepository->findAllBy($where);
+        $orders = $this->saleOrderRepository->findAllBy($where, $offset, $limit);
         return $orders ?: []; // Ensure an array is always returned
+    }
+
+    public function countOrdersByUserId(int $userId): int
+    {
+        $where = ['user_id' => $userId];
+        return $this->saleOrderRepository->findCountBy($where);
     }
 
     /**
@@ -160,33 +166,50 @@ class SaleOrderFacade
         return $this->saleOrderRepository->find($id);
     }
 
-    /**
-     * Metoda pro vyhledání objednávek
-     * @param array|null $params = null
-     * @param int $offset = null
-     * @param int $limit = null
-     * @return SaleOrder[]
-     */
-    public function findOrders(array $params = null, int $offset = null, int $limit = null): array
+    private function buildFilterConditions(array $params): array
     {
         $whereArr = [];
-        if (isset($params['status']) && $params['status'] !== '') {
+
+        if (!empty($params['status'])) {
             $whereArr[] = ['LOWER(status) = LOWER(?)', $params['status']];
         }
-        if (isset($params['orderName']) && $params['orderName'] !== '') {
+
+        if (!empty($params['orderName'])) {
             $whereArr[] = ['LOWER(order_name) LIKE LOWER(?)', '%' . $params['orderName'] . '%'];
         }
-        if (isset($params['customerEmail']) && $params['customerEmail'] !== '') {
+
+        if (!empty($params['customerEmail'])) {
             $whereArr[] = ['LOWER(customer_email) LIKE LOWER(?)', '%' . $params['customerEmail'] . '%'];
         }
-        if (isset($params['dateFrom']) && $params['dateFrom'] !== '') {
+
+        if (!empty($params['dateFrom'])) {
             $whereArr[] = ['created_at >= ?', $params['dateFrom']];
         }
-        if (isset($params['dateTo']) && $params['dateTo'] !== '') {
+
+        if (!empty($params['dateTo'])) {
             $whereArr[] = ['created_at <= ?', $params['dateTo']];
         }
 
+        // Add ordering only if present in the params
+        if (!empty($params['order'])) {
+            $whereArr['order'] = $params['order'];
+        }
+
+        return $whereArr;
+    }
+
+
+
+    public function findOrders(array $params = null, int $offset = null, int $limit = null): array
+    {
+        $whereArr = $this->buildFilterConditions($params);
         return $this->saleOrderRepository->findAllBy($whereArr, $offset, $limit);
+    }
+
+    public function countFilteredOrders(array $params = null): int
+    {
+        $whereArr = $this->buildFilterConditions($params);
+        return $this->saleOrderRepository->findCountBy($whereArr);
     }
 
     public function updateOrderStatus(SaleOrder $order, string $newStatus): void

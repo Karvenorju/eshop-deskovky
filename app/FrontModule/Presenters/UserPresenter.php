@@ -17,6 +17,7 @@ use App\Model\Facades\SaleOrderFacade;
 use App\Model\Facades\UsersFacade;
 use Nette;
 use Nette\Application\BadRequestException;
+use Nette\Utils\Paginator;
 
 /**
  * Class UserPresenter - presenter pro akce týkající se uživatelů
@@ -70,13 +71,33 @@ class UserPresenter extends BasePresenter {
         }
     }
 
-    public function renderSaleOrders(): void {
-        $userId = $this->user->getId(); // Get the logged-in user's ID
+    public function renderSaleOrders(int $page = 1): void
+    {
+        $userId = $this->user->getId(); // Get logged-in user ID
 
-        // Fetch user orders from the facade/repository
-        $userOrders = $this->orderFacade->getOrdersByUserId($userId);
-        // Pass the orders to the template
+        // Define number of orders per page
+        $itemsPerPage = 10;
+        // Get total count of user's orders for pagination
+        $where = ['user_id' => $userId];
+        $totalOrders = $this->orderFacade->countFilteredOrders($where);
+
+        // Initialize paginator
+        $paginator = new Paginator();
+        $paginator->setItemCount($totalOrders);
+        $paginator->setItemsPerPage($itemsPerPage);
+        $paginator->setPage($page);
+
+        // Fetch paginated orders
+        $where = ['user_id' => $userId, 'order' => 'created_at DESC'];
+        $userOrders = $this->orderFacade->findOrders(
+            $where,
+            $paginator->getOffset(),
+            $paginator->getLength()
+        );
+
+        // Pass data to template
         $this->template->userOrders = $userOrders;
+        $this->template->paginator = $paginator;
     }
 
     public function renderSaleOrder(int $id): void

@@ -10,7 +10,7 @@
                     <th>🔢 Číslo objednávky</th>
                     <th>💰 Celková cena</th>
                     <th>📌 Stav</th>
-                    <th> </th> <!-- Empty for Detail action button -->
+                    <th></th> <!-- Empty for Detail action button -->
                 </tr>
                 </thead>
                 <tbody>
@@ -33,7 +33,8 @@
                             {/if}
                         </td>
                         <td>
-                            <a href="{link saleOrder, id => $order->saleOrderId}" class="btn btn-outline-primary btn-sm" title="Zobrazit detail">
+                            <a href="{link saleOrder, id => $order->saleOrderId}" class="btn btn-outline-primary btn-sm"
+                               title="Zobrazit detail">
                                 <i class="bi bi-info-circle"></i> <!-- Bootstrap Info Icon -->
                             </a>
                         </td>
@@ -48,5 +49,29 @@
                 😕 Nemáte žádné objednávky.
             </div>
         {/if}
+        <!-- Centered Pagination -->
+        <div class="text-center mt-3">
+            <nav>
+                <ul class="pagination justify-content-center">
+                    {if $paginator->getPage() > 1}
+                        <li class="page-item">
+                            <a class="page-link" n:href="this page => $paginator->getPage() - 1">« Předchozí</a>
+                        </li>
+                    {/if}
+
+                            {for $i = 1; $i <= $paginator->getPageCount(); $i++}
+                        <li class="page-item {if $i === $paginator->getPage()}active{/if}">
+                            <a class="page-link" n:href="this page => $i">{$i}</a>
+                        </li>
+                    {/for}
+
+                            {if $paginator->getPage() < $paginator->getPageCount()}
+                        <li class="page-item">
+                            <a class="page-link" n:href="this page => $paginator->getPage() + 1">Další »</a>
+                        </li>
+                    {/if}
+                </ul>
+            </nav>
+        </div>
     </div>
 {/block}
