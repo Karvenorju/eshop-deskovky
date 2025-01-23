@@ -3,7 +3,6 @@
 namespace App\AdminModule\Presenters;
 
 use App\AdminModule\Components\UserEditForm\UserEditForm;
-use App\AdminModule\Components\UserEditForm\UserEditFormFactory;
 use App\Model\Facades\UsersFacade;
 
 /**
@@ -12,7 +11,7 @@ use App\Model\Facades\UsersFacade;
  */
 class UserPresenter extends BasePresenter {
     private UsersFacade $usersFacade;
-    private UserEditFormFactory $userEditFormFactory;
+    private ?int $editedUserId = null;
 
     /**
      * Akce pro vykreslení seznamu uživatelů
@@ -29,13 +28,13 @@ class UserPresenter extends BasePresenter {
     public function renderEdit(int $id): void {
         try {
             $user = $this->usersFacade->getUser($id);
+            $this->template->editedUserId = $id; // Pass user ID to the template
         } catch (\Exception $e) {
             $this->flashMessage('Požadovaný uživatel nebyl nalezen.', 'error');
             $this->redirect('default');
         }
-        $form = $this->getComponent('userEditForm');
-        $form->setDefaults($user);
     }
+
 
     /**
      * Akce pro smazání uživatele
@@ -64,36 +63,41 @@ class UserPresenter extends BasePresenter {
      * @return UserEditForm
      */
     public function createComponentUserEditForm(): UserEditForm {
-        $userEntity = $this->usersFacade->getUser($this->user->userId);
-        $form = $this->userEditFormFactory->create();
-        $form->values = ['userEntity' => $userEntity];
+        $form = new UserEditForm($this->usersFacade);
 
-        $form->onCancel[] = function () {
-            $this->redirect('default');
-        };
+        // Read user ID from HTTP request (if set, otherwise from template)
+        $userId = $this->getParameter('id') ?? $this->template->editedUserId ?? null;
+        if ($userId === null) {
+            throw new \Nette\Application\BadRequestException('Uživatelské ID není k dispozici.');
+        }
+
+        $userEntity = $this->usersFacade->getUser($userId);
+
+        $form->setDefaults([
+            'email' => $userEntity->getEmail(),
+            'userId' => $userId,  // Store the ID in a hidden field
+        ]);
+
         $form->onFinished[] = function ($message = null) {
             if (!empty($message)) {
                 $this->flashMessage($message);
             }
             $this->redirect('default');
         };
-        $form->onFailed[] = function ($message = null) {
-            if (!empty($message)) {
-                $this->flashMessage($message, 'error');
-            }
+
+        $form->onCancel[] = function () {
             $this->redirect('default');
         };
+
         return $form;
     }
+
 
     #region injections
     public function injectUsersFacade(UsersFacade $usersFacade): void {
         $this->usersFacade = $usersFacade;
     }
 
-    public function injectUserEditFormFactory(UserEditFormFactory $userEditFormFactory): void {
-        $this->userEditFormFactory = $userEditFormFactory;
-    }
     #endregion injections
 
 }

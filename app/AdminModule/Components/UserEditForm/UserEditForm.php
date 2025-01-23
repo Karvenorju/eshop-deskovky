@@ -42,14 +42,19 @@ class UserEditForm extends Form {
         parent::__construct($parent, $name);
         $this->setRenderer(new Bs4FormRenderer(FormLayout::VERTICAL));
         $this->usersFacade = $usersFacade;
-        $this->usersFacade = $this->values['userEntity'];
         $this->createSubcomponents();
+
+        // Set defaults after form is anchored
+        $this->onAnchor[] = function () {
+            if (isset($this->values['user'])) {
+                $this['email']->setDefaultValue($this->values['user']->getEmail());
+            }
+        };
     }
 
     private function createSubcomponents(): void {
         $userId = $this->addHidden('userId');
         $this->addEmail('email', 'E-mail:')
-            ->setDefaultValue($this->values['user']->getEmail())
             ->setRequired('Zadejte platný email')
             ->addRule(function (Nette\Forms\Controls\TextInput $input) {
                 try {
@@ -57,34 +62,25 @@ class UserEditForm extends Form {
                 } catch (\Exception $e) {
                     return true;
                 }
-                return $this->userEntity->email == $input->value;
+                return isset($this->userEntity) && $this->userEntity->email == $input->value;
             }, 'Uživatel s tímto e-mailem je již registrován.');
 
         $this->addSubmit('ok', 'uložit')
             ->onClick[] = function (SubmitButton $button) {
+            $values = $this->getValues('array');
+            $userId = $values['userId'];
+            $savedUserEntity = $this->usersFacade->getUser($userId);
 
+            $savedUserEntity->email = $values['email'];
+            $this->usersFacade->saveUser($savedUserEntity);
+
+            $this->onFinished('E-mail úspěšně změněn.');
         };
         $this->addSubmit('storno', 'zrušit')
             ->setValidationScope([$userId])
             ->onClick[] = function (SubmitButton $button) {
             $this->onCancel();
         };
-    }
-
-    /**
-     * Metoda pro nastavení výchozích hodnot formuláře
-     * @param User|array|object $values
-     * @param bool $erase = false
-     * @return $this
-     */
-    public function setDefaults($values, bool $erase = false): self {
-        if ($values instanceof User) {
-            $values = [
-                'user' => $values
-            ];
-        }
-        parent::setDefaults($values, $erase);
-        return $this;
     }
 
 }

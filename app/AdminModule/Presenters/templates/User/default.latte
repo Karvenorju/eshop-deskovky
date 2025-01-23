@@ -8,6 +8,7 @@
         <thead>
         <tr>
             <th scope="col">Jméno uživatele</th>
+            <th scope="col">E-mail</th>
             <th scope="col" class="col-xl-1 col-md-2">Akce</th>
         </tr>
         </thead>
@@ -15,6 +16,7 @@
         {foreach $users as $userEntity}
             <tr>
                 <td>{$userEntity->name}</td>
+                <td>{$userEntity->email}</td>
                 <td class="text-nowrap">
                     <a
                     <a href="{link User:edit, id=>$userEntity->userId}"
@@ -22,7 +24,6 @@
                     <a href="{link delete id=>$userEntity->userId}"
                        onclick="return confirm('Opravdu chcete smazat tohoto uživatele?');"
                        class="btn btn-sm btn-outline-danger">smazat</a>
-                   
                 </td>
             </tr>
         {/foreach}
