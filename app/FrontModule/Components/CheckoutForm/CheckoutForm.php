@@ -11,23 +11,21 @@ use Nette\SmartObject;
 use Nextras\FormsRendering\Renderers\Bs4FormRenderer;
 use Nextras\FormsRendering\Renderers\FormLayout;
 
-class CheckoutForm extends Form
-{
+class CheckoutForm extends Form {
     use SmartObject;
 
     private UsersFacade $usersFacade;
 
-    public function __construct(UserLoginControl $userLoginControl, UsersFacade $usersFacade, Nette\ComponentModel\IContainer $parent = null, string $name = null)
-    {
+    public function __construct(UserLoginControl $userLoginControl, UsersFacade $usersFacade, Nette\ComponentModel\IContainer $parent = null, string $name = null) {
         parent::__construct($parent, $name);
         $this->setRenderer(new Bs4FormRenderer(FormLayout::VERTICAL));
         $this->usersFacade = $usersFacade;
         $user = $userLoginControl->getLoggedInUser();
-        $this->createSubcomponents($user);
+        $userEntity = $this->usersFacade->getUser($user->getId());
+        $this->createSubcomponents($userEntity);
     }
 
-    private function createSubcomponents(?User $user): void
-    {
+    private function createSubcomponents(?User $user): void {
         // User Information
         $this->addText('name', 'Jméno a příjmení:')
             ->setDefaultValue($user?->name)

@@ -9,14 +9,12 @@ use App\Model\Facades\SaleOrderFacade;
 use App\Model\Facades\UsersFacade;
 use Nette\Application\UI\Form;
 
-class CheckoutPresenter extends BasePresenter
-{
+class CheckoutPresenter extends BasePresenter {
     private CheckoutFormFactory $checkoutFormFactory;
     private SaleOrderFacade $saleOrderFacade;
     private UsersFacade $usersFacade;
 
-    public function renderDefault(): void
-    {
+    public function renderDefault(): void {
         // Připravíme data pro šablonu
         $cart = $this['cart']->getCart();
         $this->template->cart = $cart;
@@ -31,8 +29,7 @@ class CheckoutPresenter extends BasePresenter
         return $form;
     }
 
-    public function processCheckoutForm(Form $form, array $values): void
-    {
+    public function processCheckoutForm(Form $form, array $values): void {
         try {
             // Check cart emptiness
             // Fetch the cart
@@ -42,10 +39,11 @@ class CheckoutPresenter extends BasePresenter
 
             $userLoginControl = $this['userLogin'];
             $user = $userLoginControl->getLoggedInUser();
+            $userEnity = $this->usersFacade->getUser($user->getId());
 
             // Order data from form
             $orderData = [
-                'user' => $user,
+                'user' => $userEnity,
                 'customerName' => $values['name'],
                 'customerEmail' => $values['email'],
                 'customerPhone' => $values['phone'],
@@ -66,8 +64,7 @@ class CheckoutPresenter extends BasePresenter
         $this->redirect('Homepage:default');
     }
 
-    private function checkCartIsNotEmpty(Cart $cart): void
-    {
+    private function checkCartIsNotEmpty(Cart $cart): void {
         // Přesměrování, pokud je košík prázdný
         if (empty($cart->items)) {
             $this->flashMessage('Košík je prázdný. Přidejte produkty před pokračováním.', 'warning');
@@ -75,13 +72,11 @@ class CheckoutPresenter extends BasePresenter
         }
     }
 
-    public function injectSaleOrderFacade(SaleOrderFacade $saleOrderFacade): void
-    {
+    public function injectSaleOrderFacade(SaleOrderFacade $saleOrderFacade): void {
         $this->saleOrderFacade = $saleOrderFacade;
     }
 
-    public function injectUsersFacade(UsersFacade $usersFacade): void
-    {
+    public function injectUsersFacade(UsersFacade $usersFacade): void {
         $this->usersFacade = $usersFacade;
     }
 
