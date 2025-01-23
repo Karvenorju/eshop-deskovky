@@ -16,6 +16,13 @@ use LeanMapper\Entity;
  * @property string|null $phone = null
  * @property string|null $address = null
  */
-class User extends Entity {
+class User extends Entity implements \Nette\Security\Resource {
+
+    /**
+     * @inheritDoc
+     */
+    function getResourceId(): string {
+        return 'User';
+    }
 
 }
