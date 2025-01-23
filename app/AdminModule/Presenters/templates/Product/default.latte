@@ -3,7 +3,7 @@
 
 
 <div class="d-flex justify-content-between align-items-center">
-    <h1 class="me-auto">Správa produktů</h1>
+    <h1 class="me-auto" n:block="title">Správa produktů</h1>
     <a href="{link add}" class="btn btn-primary">Nový produkt</a>
 </div>
 
@@ -21,7 +21,8 @@
                 <td>{$product->title}</td>
                 <td class="text-nowrap">
                     <a href="{link edit id=>$product->productId}" class="btn btn-sm btn-outline-primary">upravit</a>
-                    <a href="{link delete id=>$product->productId}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Opravdu chcete smazat tento produkt?');">smazat</a>
+                    <a href="{link delete id=>$product->productId}" class="btn btn-sm btn-outline-danger"
+                       onclick="return confirm('Opravdu chcete smazat tento produkt?');">smazat</a>
                 </td>
             </tr>
         {/foreach}
