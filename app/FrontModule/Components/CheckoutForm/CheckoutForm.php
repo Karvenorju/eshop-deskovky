@@ -21,7 +21,16 @@ class CheckoutForm extends Form {
         $this->setRenderer(new Bs4FormRenderer(FormLayout::VERTICAL));
         $this->usersFacade = $usersFacade;
         $user = $userLoginControl->getLoggedInUser();
-        $userEntity = $this->usersFacade->getUser($user->getId());
+        try {
+            if (!empty($user)){
+                $userEntity = $this->usersFacade->getUser($user->getId());
+
+            } else {
+                $userEntity = null;
+
+            }
+        } catch (\Exception $e) {
+        }
         $this->createSubcomponents($userEntity);
     }
 

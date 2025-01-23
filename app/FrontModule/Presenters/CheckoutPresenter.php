@@ -39,7 +39,11 @@ class CheckoutPresenter extends BasePresenter {
 
             $userLoginControl = $this['userLogin'];
             $user = $userLoginControl->getLoggedInUser();
-            $userEnity = $this->usersFacade->getUser($user->getId());
+            if (!empty($user)) {
+                $userEnity = $this->usersFacade->getUser($user->getId());
+            } else {
+                $userEnity = null;
+            }
 
             // Order data from form
             $orderData = [
