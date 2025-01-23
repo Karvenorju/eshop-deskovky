@@ -10,12 +10,13 @@
     <div class="col-9 pl-4">
         <h1 n:block="title">Nabízené produkty</h1>
 
-        <section class="row" n:if="!empty($products)">
+        <section class="row justify-content-center" n:if="!empty($products)">
             {foreach $products as $product}
                 <div class="col-md-6 col-lg-3    my-1 mx-1 card">
                     <a href="{plink Product:show url=>$product->url}" class="h5 product-title">{$product->title}</a>
                     <div class="image-container">
-                        <img src="{$basePath}/img/products/{$product->getFrontImageUrl()}" alt="{$product->title}" class="centered-image">
+                        <img src="{$basePath}/img/products/{$product->getFrontImageUrl()}" alt="{$product->title}"
+                             class="centered-image">
                     </div>
                     <div class="d-flex justify-content-between">
                         <p>{$product->price} Kč</p>
@@ -24,6 +25,29 @@
                 </div>
             {/foreach}
         </section>
+        <div class="text-center mt-3">
+            <nav>
+                <ul class="pagination justify-content-center">
+                    {if $paginator->getPage() > 1}
+                        <li class="page-item">
+                            <a class="page-link" n:href="this page => $paginator->getPage() - 1">« Předchozí</a>
+                        </li>
+                    {/if}
+
+                            {for $i = 1; $i <= $paginator->getPageCount(); $i++}
+                        <li class="page-item {if $i === $paginator->getPage()}active{/if}">
+                            <a class="page-link" n:href="this page => $i">{$i}</a>
+                        </li>
+                    {/for}
+
+                            {if $paginator->getPage() < $paginator->getPageCount()}
+                        <li class="page-item">
+                            <a class="page-link" n:href="this page => $paginator->getPage() + 1">Další »</a>
+                        </li>
+                    {/if}
+                </ul>
+            </nav>
+        </div>
     </div>
 </div>
 

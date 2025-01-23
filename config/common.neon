@@ -24,6 +24,7 @@ services:
 	- App\Model\Authorizator\Authorizator
 
 	- App\Model\Api\Facebook\FacebookApi(%facebook.appId%, %facebook.secret%)
+	- App\Model\Api\Bgg\BggApi
 
 	- App\AdminModule\Components\CategoryEditForm\CategoryEditFormFactory
 	- App\AdminModule\Components\ProductEditForm\ProductEditFormFactory

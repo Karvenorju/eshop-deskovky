@@ -32,14 +32,26 @@
             <div class="mb-3">
                 <span class="h4 me-2">{$product->price} CZK</span>
             </div>
-            <div class="mb-3">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-half text-warning"></i>
-                <span class="ms-2">4.5 (120 recenzí)</span>
-            </div>
+            {if !empty($rating)}
+                <div class="row mb-3 justify-content-left">
+                    <div class="col-3">
+                    {for $i = 1; $i <= 10; $i = $i+2}
+                        {if $i <= $rating}
+                            <i class="bi bi-star-fill text-warning"></i>
+                        {else}
+                            {if $i - 1 <= $rating}
+                                <i class="bi bi-star-half text-warning"></i>
+                            {else}
+                                <i class="bi bi-star text-warning"></i>
+                            {/if}
+                        {/if}
+                    {/for}
+                    </div>
+                    <div class="col-2">
+                        <img class="img-fluid bgg-image" src="{$basePath}/img/bgg.png" alt="bgg logo">
+                    </div>
+                </div>
+            {/if}
             <p class="mb-4">{$product->description}.</p>
             {control "productCartForm-$product->productId"}
             <div class="mt-4">

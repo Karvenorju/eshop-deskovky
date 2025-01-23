@@ -94,4 +94,9 @@
     text-overflow: ellipsis;
 }
 
+.bgg-image {
+    height: 20px;
+    width: auto;
+}
+
 
