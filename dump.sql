@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 22, 2025 at 08:25 PM
+-- Generation Time: Jan 23, 2025 at 01:11 AM
 -- Server version: 10.5.23-MariaDB-0+deb11u1
 -- PHP Version: 8.1.29
 
@@ -174,9 +174,9 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`category_id`, `title`, `description`, `sold_quantity`, `image_url`) VALUES
-(2, 'Abstract Strategy', 'temp', 0, ''),
+(2, 'Abstract Strategy', 'temp', 0, 'abstract-strategy-games-cover.jpeg'),
 (3, 'Action / Dexterity', 'temp', 0, ''),
-(4, 'Adventure', 'temp', 0, ''),
+(4, 'Adventure', 'temp', 2, 'adventure.png'),
 (5, 'Age of Reason', 'temp', 0, ''),
 (6, 'American Civil War', 'temp', 0, ''),
 (7, 'American Indian Wars', 'temp', 0, ''),
@@ -197,14 +197,14 @@ INSERT INTO `category` (`category_id`, `title`, `description`, `sold_quantity`, 
 (37, 'Comic Book / Strip', 'temp', 0, ''),
 (38, 'Deduction', 'temp', 0, ''),
 (39, 'Dice', 'temp', 0, ''),
-(40, 'Economic', 'temp', 10, ''),
+(40, 'Economic', 'temp', 15, 'economy-min.png'),
 (41, 'Educational', 'temp', 0, ''),
 (42, 'Electronic', 'temp', 0, ''),
 (43, 'Environmental', 'temp', 0, ''),
 (44, 'Expansion for Base-game', 'temp', 0, ''),
 (45, 'Exploration', 'temp', 0, ''),
 (46, 'Fan Expansion', 'temp', 0, ''),
-(47, 'Fantasy', 'temp', 0, ''),
+(47, 'Fantasy', 'temp', 2, 'fantasy.png'),
 (48, 'Farming', 'temp', 0, ''),
 (49, 'Fighting', 'temp', 0, ''),
 (50, 'Game System', 'temp', 0, ''),
@@ -217,7 +217,7 @@ INSERT INTO `category` (`category_id`, `title`, `description`, `sold_quantity`, 
 (57, 'Mature / Adult', 'temp', 0, ''),
 (58, 'Maze', 'temp', 0, ''),
 (59, 'Medical', 'temp', 0, ''),
-(60, 'Medieval', 'temp', 0, ''),
+(60, 'Medieval', 'temp', 2, 'Era-Medieval-Age.jpeg'),
 (61, 'Memory', 'temp', 0, ''),
 (62, 'Miniatures', 'temp', 0, ''),
 (63, 'Modern Warfare', 'temp', 0, ''),
@@ -253,7 +253,7 @@ INSERT INTO `category` (`category_id`, `title`, `description`, `sold_quantity`, 
 (93, 'Trivia', 'temp', 0, ''),
 (94, 'Video Game Theme', 'temp', 0, ''),
 (95, 'Vietnam War', 'temp', 0, ''),
-(96, 'Wargame', 'temp', 10, ''),
+(96, 'Wargame', 'temp', 13, 'wargame.jpeg'),
 (97, 'Word Game', 'temp', 0, ''),
 (98, 'World War I', 'temp', 0, ''),
 (99, 'World War II', 'temp', 0, ''),
@@ -332,6 +332,7 @@ INSERT INTO `permission` (`permission_id`, `role_id`, `resource_id`, `action`, `
 (21, 'admin', 'Admin:Dashboard', '', 'allow'),
 (24, 'admin', 'Admin:Product', '', 'allow'),
 (45, 'admin', 'Admin:SaleOrder', '', 'allow'),
+(46, 'admin', 'Admin:User', '', 'allow'),
 (12, 'admin', 'Category', '', 'allow'),
 (23, 'admin', 'Product', '', 'allow'),
 (28, 'authenticated', 'Admin:Product', '', 'allow'),
@@ -379,20 +380,21 @@ CREATE TABLE `product` (
   `max_player` int(11) NOT NULL,
   `play_time` int(11) NOT NULL,
   `min_age` int(11) NOT NULL DEFAULT 0,
-  `sold_quantity` int(11) NOT NULL DEFAULT 0
+  `sold_quantity` int(11) NOT NULL DEFAULT 0,
+  `bgg_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_czech_ci COMMENT='Tabulka s nabízenými produkty';
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`product_id`, `category_id`, `title`, `url`, `description`, `price`, `min_player`, `max_player`, `play_time`, `min_age`, `sold_quantity`) VALUES
-(7, 96, 'Risk', 'risk', 'Possibly the most popular, mass market war game. The goal is conquest of the world.\n\nEach player\'s turn consists of:\n- gaining reinforcements through number of territories held, control of every territory on each continent, and turning sets of bonus cards.\n- Attacking other players using a simple combat rule of comparing the highest dice rolled for each side. Players may attack as often as desired. If one enemy territory is successfully taken, the player is awarded with a bonus card.\n- Moving a group of armies to another adjacent territory.\n', '400.00', 1, 2, 6, 10, 15),
-(8, 60, 'Carcassonne ', 'carcassonne', 'Carcassonne is a tile placement game in which the players draw and place a tile with a piece of southern French landscape represented on it. The tile might feature a city, a road, a cloister, grassland or some combination thereof, and it must be placed adjacent to tiles that have already been played, in such a way that cities are connected to cities, roads to roads, et cetera. Having placed a tile, the player can then decide to place one of his/her meeples in one of the areas on it: in the city as a knight, on the road as a robber, in the cloister as a monk, or in the field as a farmer. When that area is complete that meeple scores points for its owner.\r\n\r\nDuring a game of Carcassonne, players are faced with decisions like: \"Is it really worth putting my last meeple there?\" or \"Should I use this tile to expand my city, or should I place it near my opponent instead, giving him/her a hard time to complete his/her project and score points?\" Since players place only one tile and have the option to place one meeple on it, turns proceed quickly even if it is a game full of options and possibilities.\r\n\r\nFirst game in the Carcassonne series.', '300.00', 2, 5, 45, 7, 3),
-(9, 40, 'Monopoly: The Portable Property Trading Game', 'monopoly-card', 'A very small travel version of Monopoly which often comes in the shape of a red suitcase and plays very similarly to the original game. One difference is that it contains three dice. The Community Chest and Chance cards are replaced with tables. Three dice are rolled and the tables are referenced to find the result.\r\n\r\nThe Waddington\'s UK edition has different properties than the U.S. version, and also comes in a different sort of case with a magnetic board and magnetic hotels, houses, and movers.\r\n', '645.00', 2, 6, 120, 8, 10),
-(10, 47, 'Clank! Legacy: Acquisitions Incorporated', 'clank', 'Clank! Legacy: Acquisitions Incorporated extends the deck-building fun of Clank! with legacy-style gameplay! Found your own franchise of the legendary adventuring company, Acquisitions Incorporated, and shepherd your fledgling treasure-hunters to immortal corporate glory over the course of multiple games. Your game board, your deck, and your world change as you play to create a unique campaign tailored to your adventuring party. Be cunning, be bold, and most importantly, be ready...', '546.00', 2, 4, 120, 13, 0),
-(11, 40, 'A Feast for Odin ', 'feast-for-odin', 'A Feast for Odin is a saga in the form of a board game. You are reliving the cultural achievements, mercantile expeditions, and pillages of those tribes we know as Viking today — a term that was used quite differently towards the end of the first millennium.\r\n\r\nWhen the northerners went out for a raid, they used to say they headed out for a viking. Their Scandinavian ancestors, however, were much more than just pirates. They were explorers and founders of states. Leif Eriksson is said to be the first European in America, long before Columbus.\r\nIn what is known today as Normandy, the intruders were not called Vikings but Normans. One of them is the famous William the Conqueror who invaded England in 1066. He managed to do what the king of Norway failed to do only a few years prior: conquer the Throne of England. The reason the people of these times became such strong seafarers was their unfortunate agricultural situation: crop shortfalls caused great distress.\r\n\r\nIn this game, you will raid and explore new territories. You will also engage in the day-to-day activity of collecting goods with which to achieve a financially secure position in society. In the end, the player whose possessions bear the greatest value will be declared the winner.', '875.00', 1, 4, 120, 12, 0),
-(12, 4, 'Frosthaven', 'frosthaven', 'Frosthaven is the story of a small outpost far to the north of the capital city of White Oak. It\'s an outpost barely surviving the harsh weather let alone invasions from forces both known and unknown. However, a group of mercenaries, at the end of their rope, will help bring this settlement back from the edge of destruction. Not only will they have to deal with the harsh elements, but with other, far more dangerous threats out in the unforgiving cold, as well. There are: Algox, the bigger, more yeti-like cousins of the Inox, attacking from the mountains; Lurkers flooding in from the northern sea; and rumors have it that there are machines that wander the frozen wastes of their own free will. The party of mercenaries must face all of these perils, and perhaps in doing so, make peace with these new races so they can work together against even more sinister forces.\r\n\r\nFrosthaven is a standalone adventure from the designer and publisher of Gloomhaven that features sixteen new characters, three new races, more than twenty new enemies, more than one hundred new items, and a new, 100-scenario campaign. Characters and items from Gloomhaven will be usable in Frosthaven, and vice versa.\r\n\r\nIn addition to using the well-known combat mechanisms of Gloomhaven, Frosthaven features other elements, such as mysteries to solve, a seasonal event system to live through, and player control over how the ramshackle village expands, with each new building offering new ways to progress.\r\n\r\nFrosthaven has a whole new set of items but there is a mechanism for bringing items over from \'Gloomhaven\'. However, as Frosthaven\'s outpost is a remote location, these products may be imported but are not present as standard items. Resources are much more valuable and you have to build items through a crafting system rather than just buying them.', '246.00', 1, 4, 180, 14, 0);
+INSERT INTO `product` (`product_id`, `category_id`, `title`, `url`, `description`, `price`, `min_player`, `max_player`, `play_time`, `min_age`, `sold_quantity`, `bgg_id`) VALUES
+(7, 96, 'Risk', 'risk', 'Possibly the most popular,\r\n        mass market war game. The goal is conquest of the world.\n\nEach player\'s turn consists of:\n- gaining reinforcements through number of territories held, control of every territory on each continent, and turning sets of bonus cards.\n- Attacking other players using a simple combat rule of comparing the highest dice rolled for each side. Players may attack as often as desired. If one enemy territory is successfully taken, the player is awarded with a bonus card.\n- Moving a group of armies to another adjacent territory.\n', '400.00', 1, 2, 6, 10, 15, NULL),
+(8, 60, 'Carcassonne ', 'carcassonne', 'Carcassonne is a tile placement game in which the players draw and place a tile with a piece of southern French landscape represented on it. The tile might feature a city, a road, a cloister, grassland or some combination thereof, and it must be placed adjacent to tiles that have already been played, in such a way that cities are connected to cities, roads to roads, et cetera. Having placed a tile, the player can then decide to place one of his/her meeples in one of the areas on it: in the city as a knight, on the road as a robber, in the cloister as a monk, or in the field as a farmer. When that area is complete that meeple scores points for its owner.\r\n\r\nDuring a game of Carcassonne, players are faced with decisions like: \"Is it really worth putting my last meeple there?\" or \"Should I use this tile to expand my city, or should I place it near my opponent instead, giving him/her a hard time to complete his/her project and score points?\" Since players place only one tile and have the option to place one meeple on it, turns proceed quickly even if it is a game full of options and possibilities.\r\n\r\nFirst game in the Carcassonne series.', '300.00', 2, 5, 45, 7, 3, NULL),
+(9, 40, 'Monopoly: The Portable Property Trading Game', 'monopoly-card', 'A very small travel version of Monopoly which often comes in the shape of a red suitcase and plays very similarly to the original game. One difference is that it contains three dice. The Community Chest and Chance cards are replaced with tables. Three dice are rolled and the tables are referenced to find the result.\r\n\r\nThe Waddington\'s UK edition has different properties than the U.S. version, and\r\n        also comes in a different sort of case with a magnetic board and magnetic hotels, houses, and movers\r\n        .\r\n', '645.00', 2, 6, 120, 8, 10, NULL),
+(10, 47, ' Clank ! Legacy : Acquisitions Incorporated ', ' clank ', ' Clank ! Legacy : Acquisitions Incorporated extends\r\n        the deck - building fun of Clank ! with legacy - style gameplay ! Found your own franchise of the legendary\r\n        adventuring company, Acquisitions Incorporated, and shepherd your fledgling treasure - hunters to immortal\r\n        corporate glory over the course of multiple games.Your game board, your deck, and your world change as you play\r\n        to create a unique campaign tailored to your adventuring party.Be cunning, be bold, and most importantly,\r\n        be ready...', '546.00', 2, 4, 120, 13, 0, NULL),
+(11, 40, 'A Feast for Odin ', 'feast-for-odin', 'A Feast for Odin is a saga in the form of a board game. You are reliving the cultural achievements,\r\n        mercantile expeditions, and pillages of those tribes we know as Viking today — a term that was used quite\r\n        differently towards the end of the first millennium.\r\n\r\nWhen the northerners went out for a raid,\r\n        they used to say they headed out for a viking. Their Scandinavian ancestors, however,\r\n        were much more than just pirates. They were explorers and founders of states. Leif Eriksson is said to be the first European in America,\r\n        long before Columbus.\r\nIn what is known today as Normandy,\r\n        the intruders were not called Vikings but Normans. One of them is the famous William the Conqueror who invaded England in 1066. He managed to do what the king of Norway failed to do only a few years prior: conquer the Throne of England. The reason the people of these times became such strong seafarers was their unfortunate agricultural situation: crop shortfalls caused great distress.\r\n\r\nIn this game,\r\n        you will raid and explore new territories. You will also engage in the day-to-day activity of collecting goods with which to achieve a financially secure position in society. In the end,\r\n        the player whose possessions bear the greatest value will be declared the winner.', '875.00', 1, 4, 120, 12, 0, NULL),
+(12, 4, 'Frosthaven', 'frosthaven', 'Frosthaven is the story of a small outpost far to the north of the capital city of White Oak. It\'s an outpost barely surviving the harsh weather let alone invasions from forces both known and unknown. However, a group of mercenaries, at the end of their rope, will help bring this settlement back from the edge of destruction. Not only will they have to deal with the harsh elements, but with other, far more dangerous threats out in the unforgiving cold, as well. There are: Algox, the bigger, more yeti-like cousins of the Inox, attacking from the mountains; Lurkers flooding in from the northern sea; and rumors have it that there are machines that wander the frozen wastes of their own free will. The party of mercenaries must face all of these perils, and perhaps in doing so, make peace with these new races so they can work together against even more sinister forces.\r\n\r\nFrosthaven is a standalone adventure from the designer and publisher of Gloomhaven that features sixteen new characters, three new races, more than twenty new enemies, more than one hundred new items, and a new, 100-scenario campaign. Characters and items from Gloomhaven will be usable in Frosthaven, and vice versa.\r\n\r\nIn addition to using the well-known combat mechanisms of Gloomhaven, Frosthaven features other elements, such as mysteries to solve, a seasonal event system to live through, and player control over how the ramshackle village expands, with each new building offering new ways to progress.\r\n\r\nFrosthaven has a whole new set of items but there is a mechanism for bringing items over from \'Gloomhaven\'. However, as Frosthaven\'s outpost is a remote location,\r\n        these products may be imported but are not present as standard items. Resources are much more valuable and you have to build items through a crafting system rather than just buying them.', '246.00', 1, 4, 180, 14, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -414,6 +416,7 @@ INSERT INTO `resource` (`resource_id`) VALUES
 ('Admin:Error4xx'),
 ('Admin:Product'),
 ('Admin:SaleOrder'),
+('Admin:User'),
 ('Category'),
 ('Front:Cart'),
 ('Front:Error'),
@@ -660,7 +663,7 @@ ALTER TABLE `image`
 -- AUTO_INCREMENT for table `permission`
 --
 ALTER TABLE `permission`
-  MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `product`

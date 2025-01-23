@@ -1,32 +1,33 @@
 {varType App\Model\Entities\Category[] $categories}
 {block content}
 
-    <h1 n:block="title">Správa kategorií</h1>
-    {if !empty($categories)}
-        <table class="table table-hover mt-4">
-            <thead>
-                <tr>
-                    <th scope="col">Název kategorie</th>
-                    <th scope="col" class="col-xl-1 col-md-2">Akce</th>
-                </tr>
-            </thead>
-            <tbody>
-                {foreach $categories as $category}
-                    <tr>
-                        <td>{$category->title}</td>
-                        <td class="text-nowrap">
-                            <a href="{link edit id=>$category->categoryId}" class="btn btn-sm btn-outline-primary">upravit</a>
-                            <a href="{link delete id=>$category->categoryId}" class="btn btn-sm btn-outline-danger {if !$user->isAllowed($category,'delete')}disabled{/if}">smazat</a>
-                        </td>
-                    </tr>
-                {/foreach}
-            </tbody>
-        </table>
+<div class="d-flex justify-content-between align-items-center">
+    <h1 class="me-auto">Správa kategorií</h1>
+    <a href="{link add}" class="btn btn-primary">Nová kategorie</a>
+</div>
 
-    {else}
-        <p class="text-muted">Nebyly nalezeny žádné kategorie</p>
-    {/if}
+{if !empty($categories)}
+    <table class="table table-hover mt-4">
+        <thead>
+        <tr>
+            <th scope="col">Název kategorie</th>
+            <th scope="col" class="col-xl-1 col-md-2">Akce</th>
+        </tr>
+        </thead>
+        <tbody>
+        {foreach $categories as $category}
+            <tr>
+                <td>{$category->title}</td>
+                <td class="text-nowrap">
+                    <a href="{link edit id=>$category->categoryId}" class="btn btn-sm btn-outline-primary">upravit</a>
+                    <a href="{link delete id=>$category->categoryId}"
+                       class="btn btn-sm btn-outline-danger {if !$user->isAllowed($category,'delete')}disabled{/if}">smazat</a>
+                </td>
+            </tr>
+        {/foreach}
+        </tbody>
+    </table>
 
-    <div class="my-4">
-        <a href="{link add}" class="btn btn-primary">nová kategorie</a>
-    </div>
+{else}
+    <p class="text-muted">Nebyly nalezeny žádné kategorie</p>
+{/if}

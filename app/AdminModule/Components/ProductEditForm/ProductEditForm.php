@@ -118,10 +118,14 @@ class ProductEditForm extends Form {
                 ->setRequired('Pro uložení nového produktu je nutné nahrát všechny fotky.');
 
         }
-        foreach ($photoUpload as $photo) {
-            $photo //limit pro velikost nahrávaného souboru
-            ->addRule(Form::MAX_FILE_SIZE, 'Nahraný soubor je příliš velký', 1000000);
-        }
+
+        $photoUpload[0] //limit pro velikost nahrávaného souboru
+        ->addRule(Form::MAX_FILE_SIZE, 'Nahraný soubor přední strany příliš velký', 1000000);
+        $photoUpload[1] //limit pro velikost nahrávaného souboru
+        ->addRule(Form::MAX_FILE_SIZE, 'Nahraný soubor zadní strany příliš velký', 1000000);
+        $photoUpload[2] //limit pro velikost nahrávaného souboru
+        ->addRule(Form::MAX_FILE_SIZE, 'Nahraný soubor rozebraného produktu příliš velký', 1000000);
+
 
         foreach ($photoUpload as $photo) {
             $photo //kontrola typu nahraného souboru, pokud je nahraný
@@ -171,7 +175,8 @@ class ProductEditForm extends Form {
                 try {
                     $this->imageFacade->saveProductPhoto($values['photoFront'], $product, ImageType::FRONT);
                 } catch (\Exception $e) {
-                    $this->onFailed('Produkt byl uložen, ale nepodařilo se uložit jeho přední fotku.');
+                    $this->onFailed($e->getMessage());
+//                    $this->onFailed('Produkt byl uložen, ale nepodařilo se uložit jeho přední fotku.');
                 }
             }
             if (($values['photoBack'] instanceof Nette\Http\FileUpload) && ($values['photoBack']->isOk())) {
