@@ -99,4 +99,9 @@
     width: auto;
 }
 
-
+.thumbnail {
+    width: 80px; /* Adjust the width as needed */
+    height: auto;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+}
